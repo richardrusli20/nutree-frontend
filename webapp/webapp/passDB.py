@@ -1,0 +1,1 @@
+PRIVATE_DABASE_PASS='admin123'

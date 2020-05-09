@@ -1,0 +1,84 @@
+{% extends 'base/navbar.html' %}
+
+{% block body %}
+
+{% comment %} <ul>
+    {% for vendor in object_list %}
+        <li><a href="{% url 'vendor:detail' vendor.id %}"> {{ vendor.vendor_name }} </a></li>
+    {% endfor %}
+</ul> {% endcomment %}
+{% comment %} 
+<br>
+<hr>
+<br> {% endcomment %}
+<h2>Vendor</h2>
+
+<a href="{% url 'vendor:vendor-add' %}"><button class="btn btn-success"> Add Vendor </button></a>
+
+<div class="container">
+<div class="row">
+    <div class="table-responsive">
+    <table class="" id="myTable">
+    <thead>
+    <th>ID</th>
+    <th>Logo</th>
+    <th>Name</th>
+    <th>Location</th>
+    <th>Actions</th>
+    </thead>
+    <tbody>
+        <tr>
+        {% for v in object_list%}
+            {% if v.active != "False" %}
+            <TD>{{v.id}}</TD>
+            <TD><img src="{{v.vendor_logo}}" class="image_table"/></TD>
+            <TD>{{v.vendor_name}}</TD>
+            <TD>{{v.vendor_location}}</TD>
+            <TD>
+            <div class="table-actions">
+            <a href="{% url 'vendor:vendor-update' v.id %}"><button type="submit" class="btn btn-link"> Edit </button></a>
+                <a href="{% url 'vendor:detail' v.id%}"><button type="submit" class="btn btn-success"> View </button></a>
+                <form action="{% url 'vendor:vendor-delete' v.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="vendor_id" value="{{ v.id }}" />
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                </div>
+                </TD>
+
+            {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody> 
+    </table>
+    </div>
+</div>
+</div>
+
+
+{% comment %} 
+<table  class="table table-bordered"  id="myTable">
+<thead>
+<th>
+Vendor
+</th>
+<th>
+Name
+</th>
+<th>
+Vendor
+</th>
+<th>
+Vendor
+</th>
+<th>
+Actions
+</th>
+</thead>
+<tbody>
+</tbody>
+</table> {% endcomment %}
+
+
+
+{% endblock %}

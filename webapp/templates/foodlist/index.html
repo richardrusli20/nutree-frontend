@@ -1,0 +1,51 @@
+{% extends 'base/navbar.html' %}
+
+{% block body %}
+<div class="container">
+<div class="row">
+<h2>Food List</h2>
+
+<div class="table-responsive">
+<table class="table-admin" id="myTable">
+<thead>
+<th>ID</th>
+<th>Photo</th>
+<th>Name</th>
+<th>Made by Vendor</th>
+<th>Availability</th>
+<th>Actions</th>
+</thead>
+<tbody>
+    <tr>
+    {% for v in object_list %}
+        {% if v.active != "False" %}
+        <TD>{{v.id}}</TD>
+         <TD><img src="{{v.foodlist_logo}}" style="width:100px;height:auto;"/></TD>
+          <TD>{{v.foodlist_name}}</TD>
+           <TD>{{v.vendor.vendor_name}}</TD>
+            <TD>{{v.available_date}}</TD>
+           <TD>
+            {% comment %} <div class="table-actions">
+                <a href="{% url 'vendor:index' v.id %}">
+                    <button type="submit" class="btn btn-success"> View </button>
+                </a>
+                <form action="{% url 'adminaccount:vendor-delete' v.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="vendor_id" value="{{ v.id }}" />
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                </div> {% endcomment %}
+            </TD>
+
+        {% endif %}
+    </tr>
+    {% endfor %}
+    </tbody> 
+</table>
+</div>
+</div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base/navbar.html' %}
+{% block title %} {{vendor.vendor_name}} {% endblock %}
+{% block body %}
+{% comment %} {{ request.user.groups.all.values_list }} {% endcomment %}
+{% comment %} {% if request.user.groups.all.0.name == 'admin' %}
+    <h1>Hello Admin</h1>
+{% elif request.user.groups.all.0.name == 'vendor' %}
+    <h1>Hello Vendor</h1>
+{% else %}
+    <h1>Hello Customer</h1>
+{% endif %} {% endcomment %}
+
+
+
+{% if request.user.groups.all.0.name == 'vendor' %}
+    <h1>Dashboard - {{ vendor.vendor_name }}</h1>
+    <hr>
+    <h3>Welcome {{user.get_username}} </h3>
+{% elif request.user.groups.all.0.name == 'admin' %}
+    <h3>Manage - {{user.get_username}} </h3>
+    <hr>
+    <li><a href="{% url 'vendor:vendor-food-view' vendor_pk %}">
+        <button type="submit" class="btn btn-success"> Food </button>
+    </a></li>
+    <br>
+    <li><a href="{% url 'vendor:vendor-foodlist-view' vendor_pk %}">
+        <button type="submit" class="btn btn-success"> Foodlist </button>
+    </a></li>
+    <br>
+    <li><a href="#">
+        <button type="submit" class="btn btn-success"> Orders </button>
+    </a></li>
+    <br>
+    <li><a href="#">
+        <button type="submit" class="btn btn-success"> Delivery </button>
+    </a></li>
+    <br>
+        <li><a href="#">
+        <button type="submit" class="btn btn-success"> Reports </button>
+    </a></li>
+
+{% else %}
+    <h1>Hello Customer</h1>
+{% endif %}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endblock %}

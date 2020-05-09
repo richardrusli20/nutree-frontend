@@ -1,0 +1,409 @@
+<!doctype html>
+{% load static %}
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    {% comment %} <title>Nutree</title> {% endcomment %}
+    <title> {% block title %} Nutree {% endblock %} </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static "welcome/img/nutree-logo-mini.png" %}">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" type="text/css" href="{% static 'welcome/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'welcome/owl.carousel.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'welcome/magnific-popup.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'welcome/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'welcome/themify-icons.css' %}">
+    {% comment %}
+    <link rel="stylesheet" type="text/css" href="{% static 'welcome/nice-select.css' %}"> {% endcomment %}
+    <link rel="stylesheet" type="text/css" href="{% static 'welcome/flaticon.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'welcome/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'welcome/slicknav.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'welcome/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-flash-1.6.1/datatables.min.css"/>
+
+
+<body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+    <!-- Vendor-->
+    {% if request.user.groups.all.0.name == 'vendor'%}    
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                {% comment %} <div class="container"> {% endcomment %}
+                    <div class="row align-items-center">
+                        <div class="col-xl-10 col-lg-10">
+                            <div class="main-menu d-none d-lg-block">
+                                <nav>
+                                    <ul class="mein_menu_list" id="navigation">
+                                        {% comment %} <li><a href="{% url 'welcome:about' %}">About</a></li>
+                                        {% endcomment %}
+                                        {% comment %} <li><a href="{% url 'welcome:dietprogram' %}">Diet Program</a>
+                                        </li> {% endcomment %}
+                                        {% comment %} <li><a href="{% url 'welcome:gallery' %}">gallery</a></li>
+                                        {% endcomment %}
+                                        <div class="logo-img d-none d-lg-block">
+                                            <a href="{% url 'vendor:index' vendor_pk %}">
+                                                <img src="{% static "welcome/img/nutree-logo.png" %}"
+                                                    style="width : 100px;height : 100px" alt="">
+                                            </a>
+                                        </div>
+                                        <li><a href="{% url 'vendor:vendor-food-view' vendor_pk %}">Food</a></li>
+                                        <li><a href="{% url 'vendor:vendor-foodlist-view' vendor_pk %}">Foodlist</a></li>
+                                        <li><a href="{% url 'vendor:vendor-order-view' vendor_pk %}">Orders</a></li>
+                                        <li>Delivery</li>
+                                        <li>Reports</li>
+                                        <li><a href="{% url 'vendor:vendor-profile' vendor_pk %}">My Profile</a></li>
+                                        <li><a href="#"> {{user.get_username}} <i class="fa fa-angle-down"></i></a>
+                                            <ul class="submenu">
+                                                <li><a href="{% url 'logout' %}">Logout</a></li>
+                                                <li></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        {% comment %} <div class="col-xl-2 col-lg-2 d-none d-lg-block">
+                            <div class="custom_order">
+                                <a href="#" class="boxed_btn_white">Custom Order</a>
+                            </div>
+                        </div> {% endcomment %}
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                        <div class="logo-img-small d-sm-block d-md-block d-lg-none">
+                            <a href="{% url 'welcome:index' %}">
+                                <img src="{% static "img/logo.png" %}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                {% comment %} </div> {% endcomment %}
+            </div>
+        </div>
+    </header>
+
+    <!--admin-->
+    {% elif request.user.groups.all.0.name == 'admin'%}
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-10 col-lg-10">
+                            <div class="main-menu d-none d-lg-block">
+                                <nav>
+                                    <ul class="mein_menu_list" id="navigation">
+                                        {% comment %} <li><a href="{% url 'welcome:about' %}">About</a></li>
+                                        {% endcomment %}
+                                        {% comment %} <li><a href="{% url 'welcome:dietprogram' %}">Diet Program</a>
+                                        </li> {% endcomment %}
+                                        {% comment %} <li><a href="{% url 'welcome:gallery' %}">gallery</a></li>
+                                        {% endcomment %}
+                                        <div class="logo-img d-none d-lg-block">
+                                            <a href="{% url 'adminaccount:index' %}">
+                                                <img src="{% static "welcome/img/nutree-logo.png" %}"
+                                                    style="width : 100px;height : 100px" alt="">
+                                            </a>
+                                        </div>
+                                        <li><a href="{% url 'adminaccount:vendor-view' %}">Vendor</a></li>
+                                        <li><a href="{% url 'adminaccount:customer-view' %}">Customer</a></li>
+                                        <li><a href="{% url 'adminaccount:dietprogram-view' %}">Diet Program</a></li>
+                                        {% comment %} <li><a href="{% url 'food:index' %}">Foods</a></li>
+                                        {% endcomment %}
+                                        <li><a href="{% url 'foodlist:foodlist-index' %}">Food List</a></li>
+                                        <li><a href="{% url 'adminaccount:order-view' %}">Order List</a></li>
+                                        <li><a href="#"> {{user.get_username}} <i class="fa fa-angle-down"></i></a>
+                                            <ul class="submenu">
+                                                <li><a href="{% url 'logout' %}">Logout</a></li>
+                                                <li></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        {% comment %} <div class="col-xl-2 col-lg-2 d-none d-lg-block">
+                            <div class="custom_order">
+                                <a href="#" class="boxed_btn_white">Custom Order</a>
+                            </div>
+                        </div> {% endcomment %}
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                        <div class="logo-img-small d-sm-block d-md-block d-lg-none">
+                            <a href="{% url 'welcome:index' %}">
+                                <img src="{% static "img/logo.png" %}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!--Customer-->
+    {% elif request.user.groups.all.0.name == 'customer' %}
+
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-10 col-lg-10">
+                            <div class="main-menu d-none d-lg-block">
+                                <nav>
+                                    <ul class="mein_menu_list" id="navigation">
+                                        {% comment %} <li><a href="{% url 'welcome:about' %}">About</a></li>
+                                        {% endcomment %}
+                                        {% comment %} <li><a href="{% url 'welcome:dietprogram' %}">Diet Program</a>
+                                        </li> {% endcomment %}
+                                        {% comment %} <li><a href="{% url 'welcome:gallery' %}">gallery</a></li>
+                                        {% endcomment %}
+                                        <div class="logo-img d-none d-lg-block">
+                                            <a href="{% url 'welcome:index'%}">
+                                                <img src="{% static "welcome/img/nutree-logo.png" %}"
+                                                    style="width : 100px;height : 100px" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="search-container">
+                                            <form action="/action_page.php">
+                                                <input type="text" placeholder="Search your Program" name="search">
+                                                <button type="submit"><i style="color:white"
+                                                        class="fa fa-search"></i></button>
+                                            </form>
+                                        </div>
+                                        {% comment %} <li><a href="#">blog <i class="ti-angle-down"></i></a>
+                                            <ul class="submenu">
+                                                <li><a href="{% url 'welcome:blog' %}">blog</a></li>
+                                                <li><a href="single-blog.html">single-blog</a></li>
+                                            </ul>
+                                        </li> {% endcomment %}
+                                        {% comment %} <li><a href="#">pages <i class="ti-angle-down"></i></a>
+                                            {% endcomment %}
+                                            {% comment %} <ul class="submenu"> {% endcomment %}
+                                                {% comment %} <li><a href="elements.html">elements</a></li>
+                                                {% endcomment %}
+                                                {% comment %} </ul> {% endcomment %}
+                                            {% comment %} </li> {% endcomment %}
+                                        <li><a href="{% url 'customer:mybag' customer_pk %}"><i style="font-size:20px"class="fa fa-shopping-basket" ></i> My Bag</a></li>
+                                        <li> {{user.get_username}}<i class="fa fa-angle-down"></i>
+                                            <ul class="submenu">
+                                                <li>
+                                                <li><a href="{% url 'customer:profile' customer_pk %}">My Profile</a>
+                                                </li>
+                                                <li><a href="{% url 'logout' %}">Logout</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                        <div class="logo-img-small d-sm-block d-md-block d-lg-none">
+                         <a href="{% url 'welcome:index'%}">
+                                <img src="{% static "welcome/img/nutree-logo.png" %}" class="m_navbar_logo" alt="">
+                            </a> 
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Customer and django admin Navbar View-->
+    {% else %}
+     <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-10 col-lg-10">
+                            <div class="main-menu d-none d-lg-block">
+                                <nav>
+                                    <ul class="mein_menu_list" id="navigation">
+                                        {% comment %} <li><a href="{% url 'welcome:about' %}">About</a></li>
+                                        {% endcomment %}
+                                        {% comment %} <li><a href="{% url 'welcome:dietprogram' %}">Diet Program</a>
+                                        </li> {% endcomment %}
+                                        {% comment %} <li><a href="{% url 'welcome:gallery' %}">gallery</a></li>
+                                        {% endcomment %}
+                                        <div class="logo-img d-none d-lg-block">
+                                            <a href="{% url 'adminaccount:index' %}">
+                                                <img src="{% static "welcome/img/nutree-logo.png" %}"
+                                                    style="width : 100px;height : 100px" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="search-container">
+                                            <form action="/action_page.php">
+                                                <input type="text" placeholder="Search your Program" name="search">
+                                                <button type="submit"><i style="color:white"
+                                                        class="fa fa-search"></i></button>
+                                            </form>
+                                        </div>
+                                        <li><a href="{% url 'register' %}">Register</a></li>
+                                        <li><a href="{% url 'login' %}">Login</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        {% comment %} <div class="col-xl-2 col-lg-2 d-none d-lg-block">
+                            <div class="custom_order">
+                                <a href="#" class="boxed_btn_white">Custom Order</a>
+                            </div>
+                        </div> {% endcomment %}
+                        {% comment %} <button class="go back" onclick="goBack()"><i style="font-size:20px"class="fa fa-arrow-left"></i></button> {% endcomment %}
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                        <div class="logo-img-small d-sm-block d-md-block d-lg-none">
+                        
+                              <a href="{% url 'welcome:index'%}">
+                                <img src="{% static "welcome/img/nutree-logo.png" %}" alt="">
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    {% endif %}
+
+    <div class="extend-navbar">
+    </div>
+
+
+
+    <!-- header-end -->
+    {% block body %}
+    {% endblock %}
+
+
+    <!-- footer-start -->
+     <footer class="footer_area footer-bg zigzag_bg_1">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                {% comment %} <div class="col-md-2 col-md-6 col-lg-2">
+                        <div class="footer_widget">
+                            <h3 class="heading">
+                                Navigation
+                            </h3>
+                            <ul>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Gallery</a></li>
+                                <li><a href="#">Contact US</a></li>
+                                <li><a href="#"></a></li>
+                            </ul>
+                        </div>
+                    </div> {% endcomment %}
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xl-7 col-md-12 col-lg-8">
+                        <div class="copyright">
+                            <p class="footer-text">
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Nutree &copy;
+                                <script>document.write(new Date().getFullYear());</script> All rights reserved
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-md-12 col-lg-4">
+                        <div class="social_links">
+                            <ul>
+                                 <li><a href="#"> <i class="fa fa-facebook"></i> </a></li>
+                                <li><a href="#"> <i class="fa fa-twitter"></i> </a></li>
+                                <li><a href="#"> <i class="fa fa-dribbble"></i> </a></li>
+                                <li><a href="#"> <i class="fa fa-behance"></i> </a></li> 
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer> 
+
+
+    <!-- footer-end -->
+
+
+    <script src="{% static 'js/vendor/modernizr-3.5.0.min.js' %}"></script>
+    <script src="{% static 'js/vendor/jquery-1.8.3.min.js' %}"></script>
+
+    {% comment %} <script src="{% static 'js/popper.min.js' %}"></script> {% endcomment %}
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    {% comment %} <script src="{% static 'js/isotope.pkgd.min.js' %}"></script> {% endcomment %}
+    {% comment %} <script src="{% static 'js/ajax-form.js' %}"></script> {% endcomment %}
+    {% comment %} <script src="{% static 'js/waypoints.min.js' %}"></script> {% endcomment %}
+    {% comment %} <script src="{% static 'js/jquery.counterup.min.js' %}"></script> {% endcomment %}
+    <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+    {% comment %} <script src="{% static 'js/scrollIt.js' %}"></script> {% endcomment %}
+    {% comment %} <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script> {% endcomment %}
+    {% comment %} <script src="{% static 'js/wow.min.js' %}"></script> {% endcomment %}
+    {% comment %} <script src="{% static 'js/nice-select.min.js' %}"></script> {% endcomment %}
+    {% comment %} <script src="{% static 'js/jquery.slicknav.min.js'%}"></script> {% endcomment %}
+    {% comment %} <script src="{% static 'js/jquery.magnific-popup.min.js'%}"></script> {% endcomment %}
+    {% comment %} <script src="{% static 'js/plugins.js'%}"></script> {% endcomment %}
+    {% comment %} <script src="{% static 'js/script.js'%}"></script> {% endcomment %}
+    {% comment %} <script src="{% static 'js/jquery.payform.min.js'%}"></script> {% endcomment %}
+    <script src="https://use.fontawesome.com/88530876b9.js"></script>   
+ 
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-flash-1.6.1/datatables.min.js"></script>
+
+    <!--contact js-->
+    <script src="{% static 'js/contact.js' %}"></script>
+    <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+    <script src="{% static 'js/jquery.form.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/mail-script.js' %}"></script>
+
+    <script src="{% static 'js/main.js'%}"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("#owl-banner").owlCarousel({
+
+                navigation: false, // Show next and prev buttons
+                slideSpeed: 300,
+                paginationSpeed: 400,
+                items: 1,
+                autoplay: 5000,
+                margin: 10,
+                loop: true,
+                autoheight: true,
+            });
+
+            $('#myTable').DataTable({
+                "order": [[ 0, "desc" ]]
+            });
+
+        });
+    </script>
+    <script>
+        function goBack() {
+        window.history.back();
+        }
+    </script>
+    
+
+</body>
+
+</html>

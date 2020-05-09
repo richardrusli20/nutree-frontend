@@ -1,0 +1,58 @@
+{% extends 'base/navbar.html' %}
+{% block title %} Manage Vendor {% endblock %}
+{% block body %}
+
+
+<div class="container">
+    <div class="row">
+        <h2>Admin - Vendor</h2>
+        <a class="btn btn-success" href="{% url 'adminaccount:vendor-add' %}"> New Vendor </button></a>
+        <div class="table-responsive">
+            <table class="table-admin" id="myTable">
+                <thead>
+                    <th>ID</th>
+                    <th>Logo</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Username</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for v in object_list%}
+                        {% if v.active != "False" %}
+                        <TD>{{v.id}}</TD>
+                        <TD><img src="{{v.vendor_logo}}" class="image_table" /></TD>
+                        <TD>{{v.vendor_name}}</TD>
+                        <TD>{{v.vendor_location}}</TD>
+                        <TD>{{v.user}}</TD>
+                        <TD>
+                            <div class="table-actions">
+                                <a href="{% url 'vendor:index' v.id %}">
+                                    <button type="submit" class="btn btn-success"> View </button>
+                                </a>
+                                <form action="{% url 'adminaccount:vendor-delete' v.id %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="vendor_id" value="{{ v.id }}" />
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                                <form action="{% url 'adminaccount:index' %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Test</button>
+                                </form>
+                            </div>
+                        </TD>
+
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

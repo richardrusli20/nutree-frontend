@@ -1,0 +1,16 @@
+{% extends 'base/navbar.html' %}
+{% block title %}  Payment Failed {% endblock %}
+{% block body %}
+
+<div class="container">
+<div class="payment-success-failed">
+<i style="font-size:80px;color:red;" class="fa fa-times "></i>
+    <h1>FAILED</h1>
+    <img src=""/>
+    <a href="{% url 'customer:checkout' customer_pk %}" class="btn btn-success"> Back to Review Order</a>
+</div>
+<div>
+
+
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base/navbar.html' %}
+{% block title %}Food-{{vendor.vendor_name}} {% endblock %}
+{% block body %}
+
+
+<h1>{{ vendor.vendor_name }} - {{ vendor.vendor_location }}</h1>
+
+
+<h3>Foods:</h3>
+<ul>
+    {% for food in vendor.food_set.all %} 
+        <li><a href="{% url 'food:detail' food.id %}"> {{ food.food_name }} </a></li>
+    {% endfor %}
+</ul>
+
+<br>
+<hr>
+<br>
+{% if request.user.groups.all.0.name == 'vendor' %}
+    <a href="{% url 'vendor:vendor-food-add' vendor.id %}">
+        <button type="submit" class="btn btn-success"> Add Food </button>
+    </a>
+{% elif request.user.groups.all.0.name == 'admin' %}
+    <a href="{% url 'vendor:vendor-food-add' vendor.id %}">
+        <button type="submit" class="btn btn-success"> Add Food </button>
+    </a>
+{% endif %}
+
+<br>
+<br>
+
+
+{% endblock %}

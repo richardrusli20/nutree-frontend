@@ -1,0 +1,53 @@
+{% extends 'base/navbar.html' %}
+
+{% block title %} Manage Customer {% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h2>Admin - Customer</h2>
+
+        <div class="table-responsive">
+            <table class="table-admin" id="myTable">
+                <thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for v in object_list %}
+                        {% if v.active != "False" %}
+                        <TD>{{v.id}}</TD>
+                        <TD>{{v.customer_name}}</TD>
+                        <TD>{{v.customer_location}}</TD>
+                        <TD>{{v.customer_email}}</TD>
+                        <TD>
+                            <div class="table-actions">
+                                {% comment %} <a href="{% url 'vendor:vendor-update' v.id %}"><button type="submit"
+                                        class="btn btn-link"> Edit </button></a>
+                                <a href="{% url 'vendor:detail' v.id%}"><button type="submit" class="btn btn-success">
+                                        View </button></a>
+                                <form action="{% url 'vendor:vendor-delete' v.id %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="vendor_id" value="{{ v.id }}" />
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>{% endcomment %}
+                            </div>
+                        </TD>
+
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

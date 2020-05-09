@@ -1,0 +1,23 @@
+{% extends 'base/navbar.html' %}
+{% block title %} Manage Diet Program {% endblock %}
+{% block body %}
+
+<h1>Diet Program</h1>
+<ul>
+    {% for dietProgram in object_list %}
+        <li><a href="{% url 'dietprogram:detail' dietProgram.id %}"> {{ dietProgram.dietProgram_name }} </a></li>
+    {% endfor %}
+</ul>
+
+<hr>
+
+<a href="{% url 'adminaccount:dietprogram-add' %}"> 
+    <button type="submit" class="btn btn-success">Add New Program </button>
+</a>
+
+<br>
+<br>
+<br>
+<br>
+
+{% endblock %}

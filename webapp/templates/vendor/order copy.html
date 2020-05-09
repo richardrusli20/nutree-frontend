@@ -1,0 +1,85 @@
+{% extends 'base/navbar.html' %}
+{% block title %}Order-{{vendor.vendor_name}} {% endblock %}
+{% block body %}
+
+{% comment %} {% for v in object_list %}
+    {% for foodlist in v.item.all %}
+        {{foodlist}}
+    {% endfor %}
+{% endfor %} {% endcomment %}
+<div class="container">
+    <div class="row">
+            <div class="order-item-wrap">
+            
+            <div class="order-card">
+                <table class="table table-hover order-item" id="myTable">
+                    <thead class="">
+                        <tr>
+                            <th scope="col">Order ID: {{v.order_id}} </th>
+                            <th scope="col" width="250">{{v.order_date}}</th>
+                            <th scope="col" width="120">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody> 
+                    {% for v in object_list %}
+                    <div class="card">
+                        <tr>
+                            <td>
+                                <figure class="media">
+                                    <div class="img-wrap"><img
+                                            src="{{v.foodlist.foodlist_logo}}"
+                                            class="img-thumbnail img-sm"></div>
+                                    <figcaption class="media-body">
+                                        {% comment %} <h6 class="title text-truncate"> {{v.foodlist}} </h6> {% endcomment %}
+                                        <dl class="param param-inline small">
+                                        <h3> {{v.foodlist}}</h3>
+                                        <h4>{{v.quantity}} Paket </h4>
+                                        <h4>{{v.customer.customer_location}} </h4>
+                                            {% comment %} <dt>Delivery Date : </dt> {% endcomment %}
+                                            {% comment %} <dd>13 April 2020</dd> {% endcomment %}
+                                        </dl>
+                                        {% comment %} <hr> {% endcomment %}
+                                        <dl class="param param-inline small">
+                                            {% comment %} <dt> Customer: </dt> {% endcomment %}
+                                            {% comment %} <dd> {{v.customer.customer_name}} </dd> {% endcomment %}
+                                            {% comment %} <br> {% endcomment %}
+                                            {% comment %} <dt> Email: </dt> {% endcomment %}
+                                            {% comment %} <dd> {{v.customer.customer_email}} </dd> {% endcomment %}
+                                            {% comment %} <br> {% endcomment %}
+                                            {% comment %} <dt> Address: </dt> {% endcomment %}
+     
+                                            {% comment %} <dd><h4>{{v.customer.customer_location}} </h4></dd>   {% endcomment %}
+                                        </dl>                                     
+                                    </figcaption>
+                                </figure>
+                            </td>
+                            <td>
+                                <dl class="param param-inline small">
+                                    <dt> <h4> Customer: </h4></dt><br>
+                                    <dd> <h3>{{v.customer.customer_name}}</h3> </dd>
+                                </dl>
+                                <div class="quantity-wrap">
+                                    {% comment %} <var class="quantity">{{v.quantity}}</var>                 {% endcomment %}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="price-wrap">
+                                    <var class="price"><h2>Rp {{v.total_price}}<h2></var> 
+                                </div>
+                            </td>                            
+                        </tr>      
+                        </div>
+                        {% endfor %}
+                    </tbody>
+                    
+                </table>
+                </div>
+                </div>
+            </div> <!-- card.// -->
+        <!--row end-->
+    </div>
+    <!--container end.//-->
+
+
+
+    {% endblock %}
