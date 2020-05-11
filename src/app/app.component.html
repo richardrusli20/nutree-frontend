@@ -1,58 +1,46 @@
-<h2>list of dietprogram</h2>
-<ul>
-
-    <li *ngFor="let dietprogram of dietprograms">
-        
-        <script>
-            console.log('{{dietprogram.dietProgram_name}}');
-        </script>
-        <h2>{{dietprogram.dietProgram_name}}</h2>
-    </li>
-</ul>
-    <!-- slider_area-start -->
-    <div class="container">
-    <div class="row">
- 
-    </div>
-    </div>
-
-
-
-    <!-- order_area_start -->
-    <div class="order_area">
-        <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="section_title mb-70">
-                            <h3>Our Programs</h3>
-                        </div>
-                    </div>
-                </div>
-            <div class="row">
-                <div class="col-xl-4 col-md-6">
-                    <div class="single_order">
-                        <div class="order_thumb">
-                            <img src= "" alt="">
-                            <div class="order_prise">
-                                <span>Starts from Rp 15,000</span>
+     <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-10 col-lg-10">
+                            <div class="main-menu d-none d-lg-block">
+                                <nav>
+                                    <ul class="mein_menu_list" id="navigation">
+           
+                                        <div class="logo-img d-none d-lg-block">
+                                            <a href="">
+                                                <img src=""
+                                                    style="width : 100px;height : 100px" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="search-container">
+                                            <form action="/action_page.php">
+                                                <input type="text" placeholder="Search your Program" name="search">
+                                                <button type="submit"><fa-icon [icon]="faSearch"></fa-icon></button>
+                                            </form>
+                                        </div>
+                                        <li><a routerLink="/register" routerlinkActive="active">Register</a></li>
+                                        <li><a href="">Login</a></li>
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
-                        <div class="order_info">
-                            <div *ngFor="let dietprogram of dietprograms">
-                                <h3>{{dietprogram.title}}</h3>
-                            <p>Help you to buff your body</p>
+                       
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
                         </div>
+                        <div class="logo-img-small d-sm-block d-md-block d-lg-none">
+                        
+                              <a href="">
+                                <img src="" alt="">
+                            </a>
+                            
                         </div>
-                    </div>  
-                </div>
-    
-                    <div class="load_more_button text-center">
-                        <a href="" class="load_more_btn">See More Program</a>
                     </div>
+                </div>
+            </div>
         </div>
-    </div>
- 
 
-
-    
+<router-outlet></router-outlet>
 

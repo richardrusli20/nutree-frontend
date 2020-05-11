@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DietprogramComponent } from './dietprogram/dietprogram.component';
+import { RegisterComponent } from './register/register.component';
 
 
 const routes: Routes = [
-  { path: 'dietprogram', component:DietprogramComponent }
+  { path: 'dietprogram', component:DietprogramComponent },
+  { path: 'register', component:RegisterComponent }
 
 ];
 
@@ -13,4 +15,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents = [DietprogramComponent]
+export const routingComponents = [DietprogramComponent,RegisterComponent]
