@@ -1,46 +1,4 @@
-     <header>
-        <div class="header-area ">
-            <div id="sticky-header" class="main-header-area">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-xl-10 col-lg-10">
-                            <div class="main-menu d-none d-lg-block">
-                                <nav>
-                                    <ul class="mein_menu_list" id="navigation">
-           
-                                        <div class="logo-img d-none d-lg-block">
-                                            <a href="">
-                                                <img src=""
-                                                    style="width : 100px;height : 100px" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="search-container">
-                                            <form action="/action_page.php">
-                                                <input type="text" placeholder="Search your Program" name="search">
-                                                <button type="submit"><fa-icon [icon]="faSearch"></fa-icon></button>
-                                            </form>
-                                        </div>
-                                        <li><a routerLink="/register" routerlinkActive="active">Register</a></li>
-                                        <li><a href="">Login</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                       
-                        <div class="col-12">
-                            <div class="mobile_menu d-block d-lg-none"></div>
-                        </div>
-                        <div class="logo-img-small d-sm-block d-md-block d-lg-none">
-                        
-                              <a href="">
-                                <img src="" alt="">
-                            </a>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+<app-navigation></app-navigation>
 <router-outlet></router-outlet>
-
+<app-banner-carousel></app-banner-carousel>
+<app-dietprogram></app-dietprogram>

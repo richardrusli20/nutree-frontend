@@ -5,10 +5,12 @@ import { AppRoutingModule,routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { HeaderComponent } from './header/header.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { WelcomeComponent } from './welcome/welcome.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { BannerCarouselComponent } from './banner-carousel/banner-carousel.component';
 
 
 
@@ -16,8 +18,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
   declarations: [
     AppComponent,
     routingComponents,
-    HeaderComponent,
-    WelcomeComponent,
+    NavigationComponent,
+    BannerCarouselComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,9 @@ import { WelcomeComponent } from './welcome/welcome.component';
     HttpClientModule,
     FormsModule,
     NgbModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserAnimationsModule,
+    CarouselModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
