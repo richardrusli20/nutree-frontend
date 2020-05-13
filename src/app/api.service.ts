@@ -22,4 +22,9 @@ export class ApiService {
     return this.http.post(this.baseurl + '/api/register/customer/', body,
     {headers: this.httpHeaders});
   }
+  login(loginData): Observable<any> {
+    const body = {username: loginData.username , password: loginData.password };
+    return this.http.post(this.baseurl + '/api/login/', body,
+    {headers: this.httpHeaders});
+  }
 }

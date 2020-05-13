@@ -1,0 +1,43 @@
+<div *ngIf="login.login_success == false; else success" class="container">
+	<div class="sub-container">
+			 <!-- <form class="login-form" method="POST" action="">  -->
+				<div class="input-fields">
+					<label class="label">Username</label>
+					<div class="input-group mb-3">
+						<div class="input-group-append">
+							<span class="input-group-text"><i class="fa fa-envelope"></i></span>
+						</div>
+						<input  type="text" placeholder="please input username" [(ngModel)]="loginCustomer.username" >
+					</div>
+					<label class="label">Password</label>
+					<div class="input-group mb-3">
+						<div class="input-group-append">
+							<span class="input-group-text"><i class="fa fa-user"></i></span>
+						</div>
+						<input type="text" placeholder="please input password " [(ngModel)]="loginCustomer.password" >
+					</div>
+				
+
+
+					<div class="mt-4">
+						<div class="d-flex justify-content-center links">
+							Don't have account? <a routerLink="/register" routerLinkActive="active" class="ml-2">Sign Up</a>
+						</div>
+					</div>
+
+				</div>
+				<!--  <input class="btn" type="submit" value="Sign Up">  -->
+			<button (click)="customerLogin()">Login</button>
+			 <!-- </form>  -->
+
+</div>
+</div>
+
+<ng-template #success>
+	<div *ngIf="login.login_success" class="container">
+		
+			Customer Login Success
+	</div>
+</ng-template>
+
+

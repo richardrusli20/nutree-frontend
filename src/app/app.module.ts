@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { BannerCarouselComponent } from './banner-carousel/banner-carousel.component';
 import { DietprogramDetailComponent } from './dietprogram-detail/dietprogram-detail.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -22,6 +23,7 @@ import { DietprogramDetailComponent } from './dietprogram-detail/dietprogram-det
     NavigationComponent,
     BannerCarouselComponent,
     DietprogramDetailComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
