@@ -11,6 +11,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { BannerCarouselComponent } from './banner-carousel/banner-carousel.component';
+import { DietprogramDetailComponent } from './dietprogram-detail/dietprogram-detail.component';
 
 
 
@@ -20,6 +21,7 @@ import { BannerCarouselComponent } from './banner-carousel/banner-carousel.compo
     routingComponents,
     NavigationComponent,
     BannerCarouselComponent,
+    DietprogramDetailComponent,
   ],
   imports: [
     BrowserModule,

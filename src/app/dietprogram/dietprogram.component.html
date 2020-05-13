@@ -8,20 +8,21 @@
                     </div>
                 </div>
             <div class="row">
-                <div class="col-xl-4 col-md-6" *ngFor="let dietprogram of dietprograms">
-                    <div class="single_order">
+                <div  class="col-xl-4 col-md-6"  *ngFor="let dietprogram of dietprograms">
+                    <div (click)="onSelect(dietprogram)" class="single_order">
                         <div class="order_thumb">
-                            <img src= "" alt="">
+                            <img src= "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
                             <div class="order_prise">
                                 <span>Starts from Rp 15,000</span>
                             </div>
                         </div>
                         <div class="order_info">
-                            <h3><a href="">{{dietprogram.dietProgram_name}}</a></h3>
+                            <h3><a>{{dietprogram.dietProgram_name}}</a></h3>
                             <p>{{dietprogram.description}}</p>
                         </div>
                     </div>  
                 </div>
             </div>
+           
         </div>
 </div>
