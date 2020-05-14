@@ -4,7 +4,8 @@ import { ApiService } from '../api.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  providers: [ApiService]
 })
 export class LoginComponent implements OnInit {
 
@@ -23,6 +24,8 @@ export class LoginComponent implements OnInit {
       data => {
         this.login = data;
         console.log(this.login);
+        localStorage.setItem('token',data.token);
+        this.router.navigate(['**']);
       },
       error => {
         console.log(error);
