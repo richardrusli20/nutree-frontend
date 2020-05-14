@@ -13,7 +13,7 @@ export class NavigationComponent implements OnInit {
 
   faSearch = faSearch;
   
-  constructor(private authService: ApiService) { 
+  constructor(public authService: ApiService) { 
 
   }
 

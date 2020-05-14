@@ -30,7 +30,7 @@ export class ApiService {
   }
   logoutUser() {
     localStorage.removeItem('token')
-    this.router.navigate(['**'])
+    this.router.navigate(['/'])
   }
   getToken(){
     return localStorage.getItem('token')
