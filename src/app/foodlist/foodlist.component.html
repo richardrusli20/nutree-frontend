@@ -1,0 +1,18 @@
+
+        <div class="container">
+        <h1> My Foods</h1>
+        <button (click)="onAdd()" class="btn btn-success">Add Foods</button>
+            <div class="row">
+                <div  class="col-xl-4 col-md-6"  *ngFor="let food of foods">
+                    <div (click)="onSelect(food)" class="single_order">
+                        <div class="order_thumb">
+                            <img src= "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+                        </div>
+                        <div class="order_info">
+                            <h3>{{food.food_name}}</h3>
+                            <p>Description : {{food.food_description}}</p>
+                            <p>Calories : {{food.calories}}</p>
+                        </div>
+                    </div>  
+                </div>
+                </div>

@@ -1,0 +1,36 @@
+<div  class="container">
+	<div class="sub-container">
+			 <!-- <form class="login-form" method="POST" action="">  -->
+				<div class="input-fields">
+					<label class="label">Food Name</label>
+					<div class="input-group mb-3">
+						<div class="input-group-append">
+							<span class="input-group-text"><i class="fa fa-envelope"></i></span>
+						</div>
+						<input  type="text" placeholder="please input customer name" [(ngModel)]="selectedFoods.food_name" >
+					</div>
+					<label class="label">Description</label>
+					<div class="input-group mb-3">
+						<div class="input-group-append">
+							<span class="input-group-text"><i class="fa fa-user"></i></span>
+						</div>
+						<input type="text" placeholder="please input customer email" [(ngModel)]="selectedFoods.description" >
+					</div>
+					<div class="input-fields">
+						<label class="label">Calories</label>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fa fa-key"></i></span>
+							</div>
+							<input type="number"   placeholder="password" [(ngModel)]="selectedFoods.calories" >
+						</div>
+					</div>
+		
+
+				</div>
+				<!--  <input class="btn" type="submit" value="Sign Up">  -->
+			<button (click)="createVendorFoods()">Submit</button>
+			 <!-- </form>  -->
+
+</div>
+</div>

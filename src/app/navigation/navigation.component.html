@@ -1,4 +1,4 @@
-    <header>
+<header *ngIf="authService.getRole() == 'customer'">
         <div class="header-area ">
             <div id="sticky-header" class="main-header-area">
                 <div class="container">
@@ -9,7 +9,7 @@
                                     <ul class="mein_menu_list" id="navigation">
                                         <div class="logo-img d-none d-lg-block">
                                             <a href="">
-                                                <img src=""
+                                                <img src="assets/img/nutree-logo.png"
                                                     style="width : 100px;height : 100px" alt="">
                                             </a>
                                         </div>
@@ -19,9 +19,11 @@
                                                 <button type="submit"><fa-icon [icon]="faSearch"></fa-icon></button>
                                             </form>
                                         </div>
+                                        <!-- <li><a *ngIf="!authService.loggedIn()" routerLink="/cart" routerLinkActive="active"> My Bag </a></li> -->
                                         <li><a *ngIf="!authService.loggedIn()" routerLink="/register" routerLinkActive="active"> Register </a></li>
                                         <li><a *ngIf="!authService.loggedIn()" routerLink="/login" routerLinkActive="active"> Login</a></li>
                                         <li><a *ngIf="authService.loggedIn()" (click)="authService.logoutUser()" > Log Out</a></li>
+
                                         <!-- <li><a href=""> My Bag</a></li>
                                         <li>
                                             <ul class="submenu">
@@ -41,7 +43,59 @@
                         </div>
                         <div class="logo-img-small d-sm-block d-md-block d-lg-none">
                          <a href="">
-                                <img src="" class="m_navbar_logo" alt="">
+                                <img src="assets/img/nutree-logo.png" class="m_navbar_logo" alt="">
+                         </a> 
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+<br><br>
+    
+<header *ngIf="authService.getRole() == 'vendor';else customeranon">
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-10 col-lg-10">
+                            <div class="main-menu d-none d-lg-block">
+                                <nav>
+                                    <ul class="mein_menu_list" id="navigation">
+                                        <div class="logo-img d-none d-lg-block">
+                                            <a href="">
+                                                <img src="assets/img/nutree-logo.png"
+                                                    style="width : 100px;height : 100px" alt="">
+                                            </a>
+                                        </div>
+               
+                                        <li><a routerLink="/foods" routerLinkActive="active">Foods</a></li>
+                                        <li><a routerLink="/foodlist" routerLinkActive="active">FoodList</a></li>
+                                        <li><a *ngIf="!authService.loggedIn()" routerLink="/register" routerLinkActive="active"> Register </a></li>
+                                        <li><a *ngIf="!authService.loggedIn()" routerLink="/login" routerLinkActive="active"> Login</a></li>
+                                        <li><a *ngIf="authService.loggedIn()" (click)="authService.logoutUser()" > Log Out</a></li>
+
+                                        <!-- <li><a href=""> My Bag</a></li>
+                                        <li>
+                                            <ul class="submenu">
+                                                <li>
+                                                <li><a href="">My Profile</a>
+                                                </li>
+                                                <li><a href="">Logout</a></li>
+                                            </ul>
+                                        </li> -->
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                        <div class="logo-img-small d-sm-block d-md-block d-lg-none">
+                         <a href="">
+                                <img src="assets/img/nutree-logo.png" class="m_navbar_logo" alt="">
                             </a> 
                             
                         </div>
@@ -50,3 +104,64 @@
             </div>
         </div>
     </header>
+
+
+<br><br>
+
+<ng-template #customeranon>
+<header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-10 col-lg-10">
+                            <div class="main-menu d-none d-lg-block">
+                                <nav>
+                                    <ul class="mein_menu_list" id="navigation">
+                                        <div class="logo-img d-none d-lg-block">
+                                            <a href="">
+                                                <img src="assets/img/nutree-logo.png"
+                                                    style="width : 100px;height : 100px" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="search-container">
+                                            <form action="/action_page.php">
+                                                <input type="text" placeholder="Search your Program" name="search">
+                                                <button type="submit"><fa-icon [icon]="faSearch"></fa-icon></button>
+                                            </form>
+                                        </div>
+                                        <!-- <li><a *ngIf="!authService.loggedIn()" routerLink="/cart" routerLinkActive="active"> My Bag </a></li> -->
+                                        <li><a *ngIf="!authService.loggedIn()" routerLink="/register" routerLinkActive="active"> Register </a></li>
+                                        <li><a *ngIf="!authService.loggedIn()" routerLink="/login" routerLinkActive="active"> Login</a></li>
+                                        <li><a *ngIf="authService.loggedIn()" (click)="authService.logoutUser()" > Log Out</a></li>
+
+                                        <!-- <li><a href=""> My Bag</a></li>
+                                        <li>
+                                            <ul class="submenu">
+                                                <li>
+                                                <li><a href="">My Profile</a>
+                                                </li>
+                                                <li><a href="">Logout</a></li>
+                                            </ul>
+                                        </li> -->
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                        <div class="logo-img-small d-sm-block d-md-block d-lg-none">
+                         <a href="">
+                                <img src="assets/img/nutree-logo.png" class="m_navbar_logo" alt="">
+                         </a> 
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+<br><br>
+</ng-template>

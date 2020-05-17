@@ -10,7 +10,7 @@ export class BannerCarouselComponent implements OnInit {
 
   customOptions: OwlOptions = {
     items: 1,
-    autoHeight:true,
+    autoWidth:true,
     autoplay: true,
     loop:true,
     mouseDrag: true,
