@@ -1,0 +1,44 @@
+<!-- order_area_start -->
+<div class="order_area_foodlist">
+
+    <div class="container">
+        <!--Manual Breadcrumbs-->
+        <ul class='breadcrumb'>
+            <li></li>
+            <li>Diet Program</li>
+        </ul>
+        <!--End of Manual Breadcrumbs-->
+
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="section_title mb-70">
+                    <h1>{{dietprogram_name}} </h1>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-xl-4 col-md-6" *ngFor="let f of foodlist">
+                <div class="single_order_foodlist" (click)="onSelect(f)">
+                    <div class="order_thumb_foodlist">
+                        <img style="height:100px"src="https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/healthy-eating-ingredients-1296x728-header.jpg?w=1155&h=1528" alt="">
+                    </div>
+                    <div class="order_info">
+                        <h3>
+                                {{f.foodlist_name}}
+                        </h3>
+
+                        <!-- <p> By:  </p> -->
+
+                        <div class="order_prise_foodlist">
+                            <!-- <li><span>Available on: {{f.available_date}} </span></li> -->
+                            <li><span>Rp {{f.price}} </span></li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

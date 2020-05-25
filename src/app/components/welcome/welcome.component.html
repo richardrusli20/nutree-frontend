@@ -1,0 +1,9 @@
+<app-banner-carousel *ngIf="authService.getRole()=='customer'"></app-banner-carousel>
+<app-dietprogram *ngIf="authService.getRole()=='customer'"></app-dietprogram>
+
+<app-banner-carousel *ngIf="!authService.getRole()"></app-banner-carousel>
+<app-dietprogram *ngIf="!authService.getRole()"></app-dietprogram>
+
+
+
+<app-dashboard *ngIf="authService.getRole()=='vendor'"></app-dashboard>

@@ -17,13 +17,22 @@ export class ApiService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
+  // Get all diet Program
   getAllDietProgram():Observable<any>{
     return this.http.get(this.baseurl + '/api/dietprogram/', 
     {headers: this.httpHeaders});
   }  
-  getVendorFoods(vendor):Observable<any>{
-    const body = { role: vendor.role , role_pk: vendor.role_pk };
-    return this.http.post(this.baseurl + '/api/vendor/food/', body, 
+
+  // Get all dietprogram Foodlist
+  getDietProgramFoodlist(pk):Observable<any>{
+    return this.http.get(this.baseurl + '/api/dietprogram/' + pk  + '/',
+    {headers:this.httpHeaders});
+  }
+
+  // Get All Vendor Foods
+  getVendorFoods():Observable<any>{
+    // const body = { role: vendor.role , role_pk: vendor.role_pk };
+    return this.http.get(this.baseurl + '/api/vendor/food/',
     {headers: this.httpHeadersAuth});
   } 
   createVendorFoods(food):Observable<any>{
@@ -31,10 +40,72 @@ export class ApiService {
     return this.http.post(this.baseurl + '/api/vendor/add/', body, 
     {headers: this.httpHeadersAuth});
   } 
-  getAllFoodLists():Observable<any>{
-    return this.http.get(this.baseurl + '/api/foodlist/',
+
+  getFoodDetail(foodid):Observable<any>{
+    return this.http.get( this.baseurl + '/api/food/' + foodid +'/',
     {headers: this.httpHeaders});
   }
+
+  getFoodlistDetail(foodlistid):Observable<any>{
+    return this.http.get( this.baseurl + '/api/foodlist/' + foodlistid + '/')
+  }
+
+  createFoodlist(foodList,foods_id):Observable<any>{
+    const body = { dietprogram_pk: foodList.dietprogram_pk,foodlist_name:foodList.foodlist_name,food:foods_id,description:foodList.description,price:foodList.price, calories:foodList.calories, available_date:foodList.available_date };
+    return this.http.post(this.baseurl + '/api/foodlist/create/', body,
+    {headers: this.httpHeadersAuth});
+  }
+
+  // for admin
+  getVendorFoodLists(foodList):Observable<any>{
+    const body = { role:foodList.role, role_pk: foodList.role_pk };
+    return this.http.post(this.baseurl + '/api/vendor/foodlist/', body,
+    {headers: this.httpHeadersAuth});
+  }
+  // for customer
+  getFoodlist(foodList):Observable<any>{
+    return this.http.get(this.baseurl + '/api/vendor/foodlist/',
+    {headers: this.httpHeadersAuth});
+  }
+
+  getVendorFoodListAdd(vendor):Observable<any>{
+    // const body = { vendor_pk: vendor.vendor_pk };
+    return this.http.get(this.baseurl + '/api/vendor/foodlist/add/',
+    {headers: this.httpHeadersAuth});
+  }
+
+  // Cart Handler Service
+  addToCart(foodlistid,qty):Observable<any>{
+    const body = {foodlist_pk:foodlistid,quantity:qty}
+    return this.http.post(this.baseurl + '/api/foodlist/add-to-bag/', body,
+    {headers: this.httpHeadersAuth})
+  }
+  
+  // customer bag
+  getCustomerBag():Observable<any>{
+    return this.http.get(this.baseurl + '/api/customer/bag/',
+    {headers:this.httpHeadersAuth})
+  }
+
+  
+  getCustomerProfile():Observable<any>{
+    // const body = { vendor_pk: vendor.vendor_pk };
+    return this.http.get(this.baseurl + '/api/customer/profile/',
+    {headers: this.httpHeadersAuth});
+  }
+  
+  updateCustomerProfile(customer):Observable<any>{
+    const body = { customer_name:customer.customer_name,customer_phone:customer.customer_phone }
+    return this.http.post(this.baseurl + '/api/customer/profile/update/', body,
+    {headers:this.httpHeadersAuth});
+  }
+
+  updateCustomerAddress(address):Observable<any>{
+    const body = { street:address.street,postal_code:address.postal_code,city:address.city,province:address.province}
+    return this.http.post(this.baseurl + '/api/customer/address/update/', body,
+    {headers:this.httpHeadersAuth});
+  }
+  // Customer
 
 
   createCustomer(customer): Observable<any> {
@@ -56,6 +127,9 @@ export class ApiService {
 
   logoutUser() {
     localStorage.removeItem('token')
+    localStorage.removeItem('role')
+    localStorage.removeItem('role_pk')
+    localStorage.removeItem('username')
     this.router.navigate(['/'])
   }
   getToken(){
@@ -69,6 +143,9 @@ export class ApiService {
   }
   getRolePK(){
     return localStorage.getItem('role_pk')
+  }
+  getUsername(){
+    return localStorage.getItem('username')
   }
 
   // messenger

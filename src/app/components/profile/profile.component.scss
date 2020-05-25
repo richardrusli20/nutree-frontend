@@ -1,0 +1,70 @@
+.profile-card{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  }
+ 
+ /* line 24, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_accordion.scss */
+  #accordion .card .card-body {
+    font-size: 16px;
+    line-height: 28px;
+    color: #5c5c5c;
+    padding: 0px 30px 32px;
+    font-family: "Josefin Sans", sans-serif;
+    line-height: 28px;
+  }
+  /* line 48, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_blog_part.scss */
+  .blog_part .single-home-blog .card .card-body {
+    padding: 25px 10px 29px 40px;
+    background-color: #fff;
+    position: absolute;
+    left: 20px;
+    bottom: -140px;
+    box-shadow: -7.552px 9.326px 20px 0px rgba(1, 84, 85, 0.1);
+    border-radius: 10px;
+  }
+  
+  @media (max-width: 576px) {
+    /* line 48, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_blog_part.scss */
+    .blog_part .single-home-blog .card .card-body {
+      padding: 15px;
+      left: 10px;
+      bottom: -140px;
+    }
+  }
+  
+  @media only screen and (min-width: 480px) and (max-width: 767px) {
+    /* line 48, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_blog_part.scss */
+    .blog_part .single-home-blog .card .card-body {
+      padding: 15px;
+      left: 10px;
+      bottom: -140px;
+    }
+  }
+  
+  @media only screen and (min-width: 992px) and (max-width: 1200px) {
+    /* line 48, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_blog_part.scss */
+    .blog_part .single-home-blog .card .card-body {
+      padding: 20px;
+    }
+  }
+  
+  /* line 72, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_blog_part.scss */
+  .blog_part .single-home-blog .card .card-body a {
+    color: #78b454;
+    text-transform: uppercase;
+    -webkit-transition: 0.8s;
+    transition: 0.8s;
+  }
+  
+  /* line 76, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_blog_part.scss */
+  .blog_part .single-home-blog .card .card-body a:hover {
+    background: -webkit-linear-gradient(131deg, #ff7e5f 0%, #feb47b 99%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+   /* line 76, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_blog_part.scss */
+   .blog_part .single-home-blog .card .card-body a:hover {
+    background: -webkit-linear-gradient(131deg, #ff7e5f 0%, #feb47b 99%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }

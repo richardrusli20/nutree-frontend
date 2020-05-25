@@ -1,0 +1,62 @@
+<!-- order_area_start -->
+<div class="order_area"  >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+
+                <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" style="width:100%" />
+
+                </div>
+                <div class="col-md-6">
+                    <h1>{{foodListDetail.foodlist_name}} </h1>
+                    <p> By: </p>
+                    <p> Desc:  {{foodListDetail.description}}</p>
+                    <p>  </p>
+                    <p> Available Date: {{foodListDetail.availdate}}</p>
+
+                   <h3>  </h3>
+                    <p> Price:</p>
+                    <h3> Rp  {{foodListDetail.price}}</h3>
+
+                    <div class="">
+                        <!--Foods in Foodlist-->
+                     
+                            <img src="" style="width:100px;height:auto">
+                            <a href="">  </a>
+                        
+
+
+                        
+                        <div class="action">
+                            <!-- <a href="">
+                                <button type="submit" class="btn btn-success">Update</button>
+                            </a> -->
+                            <!-- Vendor -->
+                            <!-- <form action="" method="post">
+    
+                                <input type="hidden" name="food_id" value="" />
+                                <button type="submit" class="btn btn-danger">Delete Foodlist</button>
+                            </form> -->
+                            <!-- Vendor -->
+                            <!-- Customer -->
+                            <form class="form-inline" method='POST' action="" >
+                                <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-light active">
+                                        <input type="radio" name="options" checked="" value="1"> Single
+                                    </label>
+                                    <label class="btn btn-light">
+                                        <input type="radio" name="options" value="2"> Couple
+                                    </label>
+                                    <label class="btn btn-light">
+                                        <input type="radio" name="options" value="3"> Family
+                                    </label>
+                                    <input (click)="addToCart()" class="boxed_btn" type="submit" value="Add to Cart"/>
+                                </div>
+                            </form>
+                            <!-- Customer -->
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>

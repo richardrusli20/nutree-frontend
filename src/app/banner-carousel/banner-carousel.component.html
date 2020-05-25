@@ -1,8 +1,0 @@
-<owl-carousel-o [options]="customOptions"
-(dragging)="startDragging($event.dragging)">
- 
-    <ng-template carouselSlide *ngFor="let slide of slidesStore" [id]="slide.id">
-      <img [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
-    </ng-template>
-   
-</owl-carousel-o>

@@ -1,0 +1,90 @@
+<div  class="container">
+	<div class="sub-container">
+			<form [formGroup]="form" (ngSubmit)="submit()"> 
+				<div class="input-fields">
+					<label class="label">Foodlist Name : </label>
+					<div class="input-group mb-3">
+						<div class="input-group-append">
+							<span class="input-group-text"><i class="fa fa-envelope"></i></span>
+						</div>
+						<input formControlName="foodlist_name" type="text" placeholder="please input Foodlist name"  >
+						<span *ngIf="form.controls.foodlist_name.hasError('pattern')">
+							Oops, please provide a foodlist name!
+						</span>
+					</div>
+					<label class="label">Diet Program : </label>
+					<div class="input-group mb-3">
+						<div class="input-group-append">
+							<span class="input-group-text"><i class="fa fa-user"></i></span>
+						</div>
+						<select formControlName="dietprogram_pk" id="dietprogram">
+							<option  [value]="dietPrograms[i].id" *ngFor="let dietprogram of dietPrograms;let i = index">{{dietPrograms[i].dietProgram_name}}</option >
+						</select>
+					</div>
+					<div class="input-fields">
+						<label class="label">Foods : </label>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text"></span>
+							</div>
+							<div formArrayName="foods" *ngFor="let food of form.controls.foods['controls']; let i = index">
+								<input type="checkbox" [formControlName]="i"  >{{foods[i].food_name}}
+							</div>
+						</div>
+					</div>
+					<div class="input-fields">
+						<label class="label">Calories : </label>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text"></span>
+							</div>
+								<input type="number" formControlName="calories"  >
+						</div>
+					</div>
+					<div class="input-fields">
+						<label class="label">Description : </label>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text"></span>
+							</div>
+								<input type="text" formControlName="description"  >
+				
+						</div>
+					</div>
+					<div class="input-fields">
+						<label class="label">Available Date : </label>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fa fa-key"></i></span>
+							</div>
+							<input formControlName="available_date" type="date"   placeholder="Available date" >
+						</div>
+					</div>
+
+					<div class="input-fields">
+						<label class="label">Price</label>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fa fa-key" ></i></span>
+							</div>
+							<input formControlName="price" type="number"  placeholder="Price" >
+						</div>
+					</div>
+					<div class="input-fields">
+						<label class="label">Foodlist logo : </label>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fa fa-key"></i></span>
+							</div>
+							<input formControlName="logo" type="text"   placeholder="logo"   >
+						</div>
+					</div>
+		
+
+				</div>
+				<!--  <input class="btn" type="submit" value="Sign Up">  -->
+				<button >Submit</button>
+			</form> 
+
+</div>
+</div>

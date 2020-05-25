@@ -1,0 +1,220 @@
+  /* line 1, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_order.scss */
+  .order_area {
+    /* padding-top: 150px;
+    padding-bottom: 90px; */
+  }
+  
+  @media (max-width: 767px) {
+    /* line 1, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_order.scss */
+    .order_area {
+      padding-top: 60px;
+      padding-bottom: 0px;
+  
+    }
+  }
+  
+  /* addition to foodlist */
+  .order_area_foodlist {
+    /* padding-top: 150px;
+    padding-bottom: 90px; */
+  }
+  
+  .order_area_foodlist .single_order_foodlist {
+    /* margin-bottom: 60px; */
+    margin-bottom:150px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+  }
+  
+  .order_area_foodlist .single_order_foodlist .order_thumb_foodlist {
+    position: relative;
+    
+  }
+  
+  .order_area_foodlist .single_order_foodlist .order_thumb_foodlist img {
+    width: 100%;
+    /* filter: brightness(50%); */
+  }
+  .order_info .order_prise_foodlist {
+    position: relative;
+    padding:10px;
+    /* right: 10px; */
+    /* bottom: 0px; */
+    /* background: #fff; */
+    color: black;
+    /* padding: 20px 21px 20px 24px; */
+    border-radius: 5px;
+    /* font-weight: 600; */
+    font-size: 18px;
+    margin-bottom: 0;
+    /* line-height: 18px; */
+  }
+  
+  .order_area_foodlist .single_order_foodlist .order_thumb_foodlist .order_prise_foodlist span {
+    position: relative;
+  }
+  
+  .order_area_foodlist .single_order_foodlist .order_thumb_foodlist .order_prise_foodlist span::before {
+    position: absolute;
+    /* content: "Rp "; */
+    /* left: -20px; */
+    /* top: -1px; */
+    color: #78b454;
+    font-size: 15px;
+  }
+  
+  .order_area_foodlist .single_order_foodlist .order_info h3 a {
+    position: relative;
+    font-size: 24px;
+    color: black;
+    font-family: "Josefin Sans", sans-serif;
+    /* font-weight: 600; */
+    padding:10px;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 16px;
+    text-align:left;
+  }
+  
+  /* index dietprogram */
+  
+  
+  /* line 8, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_order.scss */
+  .order_area .single_order {
+    /* margin-bottom: 60px; */
+    margin-bottom:150px;
+  }
+  
+  /* line 10, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_order.scss */
+  .order_area .single_order .order_thumb {
+    position: relative;
+    
+  }
+  
+  /* line 12, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_order.scss */
+  .order_area .single_order .order_thumb img {
+    width: 100%;
+    filter: brightness(50%);
+  }
+  
+  /* line 15, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_order.scss */
+  .order_area .single_order .order_thumb .order_prise {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    background: #fff;
+    color: #78b454;
+    padding: 17px 21px 13px 24px;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 0;
+    line-height: 18px;
+  }
+  
+  /* line 27, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_order.scss */
+  .order_area .single_order .order_thumb .order_prise span {
+    position: relative;
+  }
+  
+  /* line 29, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_order.scss */
+  .order_area .single_order .order_thumb .order_prise span::before {
+    position: absolute;
+    /* content: "Rp "; */
+    /* left: -20px; */
+    /* top: -1px; */
+    color: #78b454;
+    font-size: 15px;
+  }
+  
+  /* line 42, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_order.scss */
+  .order_area .single_order .order_info h3 a {
+    position: relative;
+    font-size: 24px;
+    color: white;
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 600;
+    display: block;
+    margin-top: -150px;
+    margin-bottom: 16px;
+    text-align:center;
+  
+  }
+  
+  /* line 52, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_order.scss */
+  .order_area .single_order .order_info p {
+    position: relative;
+    font-size: 16px;
+    line-height: 28px;
+    /* color: #777777; */
+    color:#d4d4d4;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+   /* line 1, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_btn.scss */
+   .boxed_btn {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    display: inline-block;
+    padding: 18px 39px;
+    margin-top:30px;
+    background-color: #78b454;
+    /* border: 2px solid #78b454; */
+    text-transform: capitalize;
+    width:100%;
+    text-align:center;
+  }
+  
+  /* line 9, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_btn.scss */
+  .boxed_btn:hover {
+    background: #78b454;
+    color: #fff;
+  }
+  
+  /* line 15, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_btn.scss */
+  .boxed-btn {
+    color: #78b454 !important;
+    font-size: 15px;
+    font-weight: 600;
+    display: inline-block;
+    margin-top:30px;
+    padding: 18px 39px;
+    border: 2px solid #78b454;
+    text-transform: capitalize;
+    cursor: pointer;
+    background: #fff;
+  }
+  
+  /* line 25, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_btn.scss */
+  .boxed-btn:hover {
+    background: #78b454;
+    color: #fff !important;
+  }
+  
+  /* line 32, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_btn.scss */
+  .boxed_btn_white {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    display: inline-block;
+    padding: 16px 29px;
+    border: 2px solid #fff;
+    text-transform: capitalize;
+  }
+  
+  @media (min-width: 992px) and (max-width: 1200px) {
+    /* line 32, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_btn.scss */
+    .boxed_btn_white {
+      padding: 13px 13px;
+    }
+  }
+  
+  /* line 43, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_btn.scss */
+  .boxed_btn_white:hover {
+    background: #fff;
+    color: #000;
+  }

@@ -1,0 +1,49 @@
+ /* MYBAG-CHECKOUT-PAYMENT */
+ .btn-footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color:white;
+    z-index:9999;
+    padding:10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    height:80px;
+  }
+  
+  .card-checkout{
+    display:inline-block;
+    flex:both;
+    padding:15px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width:100%;
+    margin-top:10px;
+    margin-bottom:10px;
+    height:auto;
+  }
+  .foodlist-info{
+    display:inline-block;
+    margin-left:20px;
+    padding:0px;
+  }
+  
+  .img-checkout{
+    width:20%;
+    height:auto;
+    float:left;
+  }
+  
+  .price-wrap{
+    float:right;
+     top:0;
+     right:0;
+     margin-left:150px;
+  }
+  
+  .remove-btn{
+    float:right;
+     top:0;
+     right:0;
+     margin:20px;
+  }
