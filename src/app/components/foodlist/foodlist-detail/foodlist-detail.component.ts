@@ -14,19 +14,25 @@ export class FoodlistDetailComponent implements OnInit {
   foodListDetail={foodlist_name:"",description:"", available_date:"",price:0,diet_program:{id:0,dietProgram_name:''},foods:[{id:0,food_name:''}],vendor:{vendor_name:''}};
   foodListId=0;
   foods=[];
+  cartItems=[{quantity:0,foodlist:{id:0}}];
+  matchQuantity={quantity:0};
+  foodlistQuantity=0;
+  totalQty;
 
   constructor(private api:ApiService,private activeRoute: ActivatedRoute, private router:Router) {
     let id = parseInt(this.activeRoute.snapshot.paramMap.get('id'))
     this.foodListId = id
     this.getFoodlistDetail()
+    this.getCustomerBag()
+    // this.addToCart()
   }
   getFoodlistDetail = () => {
     this.api.getFoodlistDetail(this.foodListId).subscribe(
       data => {
         this.foodListDetail = data;
-        console.log(this.foodListDetail);
+        // console.log(this.foodListDetail);
         this.foods = data.foods;
-        console.log(this.foods);
+        // console.log(this.foods);
       },
       error => {
         console.log(error);
@@ -34,19 +40,116 @@ export class FoodlistDetailComponent implements OnInit {
     );
   }
 
-  addToCart(){
+  getCustomerBag=() => {
+    this.api.getCustomerBag().subscribe(
+      data => {
+        console.log(data)
+        this.cartItems = data.customer_bag;
+        this.matchQuantity = this.cartItems.find(x => x.foodlist.id === this.foodListId)
+        if(this.matchQuantity != null){
+          this.foodlistQuantity = this.matchQuantity.quantity
+        }
+        
+      }
+    );
+  }
+
+  addToCart = () => {
     if(!this.api.loggedIn()){
       this.router.navigate(['/login']);
     }
-    this.api.addToCart(this.foodListId,1).subscribe(
-      data=> {
-        console.log(data)
-      },
-      error=>{
-        console.log(error)
-      }
-    )
+    this.api.getCustomerBag().subscribe(
+      data => {
+        this.cartItems = data.customer_bag;
+        // this.foodlist = data.foodlist;
+        // console.log(this.cartItems.find(x => x.foodlist.id === this.foodListId));
+            this.matchQuantity = this.cartItems.find(x => x.foodlist.id === this.foodListId)
+            console.log(this.matchQuantity)
+            // call api addtocart with total quantity
+            this.totalQty = 1;
+            if(this.matchQuantity != null){
+              this.totalQty = this.matchQuantity.quantity + 1;
+            }
+
+            this.api.addToCart(this.foodListId,this.totalQty).subscribe(
+              data=>{
+                console.log(data)
+                this.cartItems = data.customer_bag;
+                this.matchQuantity = this.cartItems.find(x => x.foodlist.id === this.foodListId)
+                if(this.matchQuantity != null){
+                  this.foodlistQuantity = this.matchQuantity.quantity
+                }
+              },
+              error=>{
+                console.log(error)
+              }
+            )
+          },
+          error => {
+            console.log(error);
+          }
+        );
   }
+
+  minusToCart = () => {
+    if(!this.api.loggedIn()){
+      this.router.navigate(['/login']);
+    }
+    this.api.getCustomerBag().subscribe(
+      data => {
+        this.cartItems = data.customer_bag;
+        // this.foodlist = data.foodlist;
+        // console.log(this.cartItems.find(x => x.foodlist.id === this.foodListId));
+      
+        this.matchQuantity = this.cartItems.find(x => x.foodlist.id === this.foodListId)
+        console.log(this.matchQuantity)
+        // call api addtocart with total quantity
+      if(this.matchQuantity.quantity != 0){
+        this.totalQty = this.matchQuantity.quantity - 1;
+      }
+
+        this.api.addToCart(this.foodListId,this.totalQty).subscribe(
+          data=>{
+            console.log(data)
+            this.cartItems = data.customer_bag;
+            this.matchQuantity = this.cartItems.find(x => x.foodlist.id === this.foodListId)
+            if(this.matchQuantity != null){
+              this.foodlistQuantity = this.matchQuantity.quantity
+            }
+          },
+          error=>{
+            console.log(error)
+          }
+        )
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+
+
+  addButton(){
+    this.addToCart()
+  }
+  minusButton(){
+    this.minusToCart()
+  }
+  // addToCart(){
+  //   if(!this.api.loggedIn()){
+  //     this.router.navigate(['/login']);
+  //   }
+  //   this.totalQty = this.matchQuantity + 1;
+  //   this.api.addToCart(this.foodListId,this.totalQty).subscribe(
+  //     data=> {
+  //       // console.log(data)
+  //     },
+  //     error=>{
+  //       console.log(error)
+  //     }
+  //   )
+  //   }
 
   ngOnInit(): void {
   }
