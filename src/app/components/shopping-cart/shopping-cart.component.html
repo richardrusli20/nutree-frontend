@@ -1,7 +1,4 @@
-<p>shopping-cart works!</p>
-
-
-<div class="container" >
+<div class="container" *ngIf="cartItems.length > 0; else emptyCart" >
     <!--Manual Breadcrumbs-->
     <ul class='breadcrumb'>
         <li><a href=""><i class="fa fa-home"></i></a></li>
@@ -15,11 +12,12 @@
     
             <div class="card-checkout" *ngFor="let custBag of cartItems">
                     <div class="remove-btn">
-                        <a href="" class="btn btn-outline-danger">×</a>
+                        <a (click)="deleteCartItem(custBag.foodlist.id)" class="btn btn-outline-danger">×</a>
                     </div>  
                 <img src="assets/img/slimfitphoto.jpg"
                     class="img-checkout">
                 <div class="foodlist-info" >
+                        <h4>ID {{custBag.foodlist.id}}</h4>
                         <h3 >{{custBag.foodlist.foodlist_name}}</h3>
                     <p>Available date:  {{custBag.foodlist.available_date}}</p>
                     <p>Qty : {{custBag.quantity}}</p>
@@ -77,3 +75,6 @@
     </div>
     <!--container end.//-->
 
+<ng-template #emptyCart>
+    nonexists
+</ng-template>

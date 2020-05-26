@@ -1,2 +1,168 @@
-<app-navigation></app-navigation>
-<router-outlet></router-outlet>
+
+<div *ngIf="api.getRole() == 'customer'">
+  <mat-toolbar class="toolbar">
+          <div class="menu-bar" fxShow="true" fxHide.gt-sm="true">
+              <!-- <button class="menu-bar" > -->
+                  <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+              <!-- </button> -->
+            </div>
+          <a routerLink="/" routerLinkActive="active">
+              <img class="logo" src="assets/img/nutree-logo.png"
+                  style="width : 100px;height : 100px" alt="">
+          </a>
+          <span class="example-spacer"></span>
+        <div class="menu" fxShow="true" fxHide.lt-md="true">
+          <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+          <a mat-flat-button routerLink="/profile" routerLinkActive="active">My Profile</a>
+          <a mat-flat-button *ngIf="api.loggedIn()" (click)="loggedOut()" routerLink="/" routerLinkActive="active"> logout</a>
+          
+          <!-- <mat-menu #appMenu="matMenu">
+              <button mat-menu-item>Settings</button>
+              <button mat-menu-item>Help</button>
+            </mat-menu>
+            
+            <button mat-icon-button [matMenuTriggerFor]="appMenu">
+              <mat-icon>more_vert</mat-icon>
+            </button> -->
+            
+        </div>
+
+        <div class="shopping-cart" fxShow="true" fxHide.gt-sm="true">
+            <mat-icon routerLink="/cart" routerLinkActive="active">shopping_cart</mat-icon>
+
+        </div>
+
+
+      </mat-toolbar>
+    
+      <mat-sidenav-container fxFlexFill class="example-container">
+        <mat-sidenav #sidenav fxLayout="column">
+          <div fxLayout="column">
+            <!-- <a (click)="sidenav.toggle()" mat-button>X</a> -->
+            <ul class="side-menu">
+              <li><a (click)="sidenav.toggle()" mat-flat-button routerLink="" routerLinkActive="active">Home</a></li>
+              <li><a (click)="sidenav.toggle()" mat-flat-button routerLink="/profile" routerLinkActive="active">My Profile</a></li>
+              <li><a (click)="sidenav.toggle()"  mat-flat-button *ngIf="api.loggedIn()" (click)="loggedOut()" routerLink="/" routerLinkActive="active"> logout</a></li>
+            </ul>
+          </div>
+        </mat-sidenav>
+        <mat-sidenav-content>
+          <!-- Router Outlet -->
+          <router-outlet></router-outlet>
+          <!-- Router Outlet -->
+        </mat-sidenav-content>
+        
+
+  </mat-sidenav-container>
+</div>
+
+
+<div *ngIf="api.getRole() == 'vendor'">
+  <mat-toolbar class="toolbar">
+    <div fxShow="true" fxHide.gt-sm="true">
+        <button (click)="sidenav.toggle()" >
+            <mat-icon> menu</mat-icon>
+        </button>
+      </div>
+    <a routerLink="/" routerLinkActive="active">
+        <img src="assets/img/nutree-logo.png"
+            style="width : 100px;height : 100px" alt="">
+    </a>
+    <span class="example-spacer"></span>
+  <div class="menu" fxShow="true" fxHide.lt-md="true">
+    <a routerLink="/foods" routerLinkActive="active">Foods</a>
+    <a routerLink="/foodlist" routerLinkActive="active">FoodList</a>
+    <a *ngIf="api.loggedIn()" (click)="loggedOut()" routerLink="" routerLinkActive="active"> logout</a>
+    <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+    
+    <mat-menu #appMenu="matMenu">
+        <button mat-menu-item>Settings</button>
+        <button mat-menu-item>Help</button>
+      </mat-menu>
+      
+      <button mat-icon-button [matMenuTriggerFor]="appMenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      
+  </div>
+
+
+  </mat-toolbar>
+
+  <mat-sidenav-container fxFlexFill class="example-container">
+  <mat-sidenav #sidenav fxLayout="column">
+    <div fxLayout="column">
+      <a (click)="sidenav.toggle()" mat-button>X</a>
+      <ul>
+        <li><a *ngIf="!api.loggedIn()" routerLink="/register" routerLinkActive="active"> Register </a></li>
+        <li><a *ngIf="!api.loggedIn()" routerLink="/login" routerLinkActive="active"> Login</a></li>
+        <li><a *ngIf="api.loggedIn()" (click)="loggedOut()" routerLink="/" routerLinkActive="active"> logout</a></li>
+      </ul>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!-- Router Outlet -->
+    <router-outlet></router-outlet>
+    <!-- Router Outlet -->
+  </mat-sidenav-content>
+
+
+  </mat-sidenav-container>
+</div>
+
+<div *ngIf="!api.getRole()">
+  <mat-toolbar class="toolbar">
+    <div fxShow="true" fxHide.gt-sm="true">
+      <div class="menu-bar" fxShow="true" fxHide.gt-sm="true">
+        <!-- <button class="menu-bar" > -->
+            <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+        <!-- </button> -->
+      </div>
+      </div>
+    <a routerLink="/" routerLinkActive="active">
+        <img src="assets/img/nutree-logo.png"
+            style="width : 100px;height : 100px" alt="">
+    </a>
+    <span class="example-spacer"></span>
+  <div class="menu" fxShow="true" fxHide.lt-md="true">
+    <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+    <a mat-flat-button *ngIf="!api.loggedIn()" routerLink="/register" routerLinkActive="active"> Register </a>
+    <a mat-flat-button *ngIf="!api.loggedIn()" routerLink="/login" routerLinkActive="active"> Login</a>
+    
+    <mat-menu #appMenu="matMenu">
+        <button mat-menu-item>Settings</button>
+        <button mat-menu-item>Help</button>
+      </mat-menu>
+      
+      <button mat-icon-button [matMenuTriggerFor]="appMenu"></button>
+        <mat-icon>more_vert</mat-icon>
+
+      
+  </div>
+
+  <div class="shopping-cart" fxShow="true" fxHide.gt-sm="true">
+    <mat-icon routerLink="/cart" routerLinkActive="active">shopping_cart</mat-icon>
+
+</div>
+
+  </mat-toolbar>
+
+  <mat-sidenav-container fxFlexFill class="example-container">
+  <mat-sidenav #sidenav fxLayout="column">
+    <div fxLayout="column">
+      <a (click)="sidenav.toggle()" mat-button>X</a>
+      <ul class="side-menu">
+        <li><a  mat-flat-button *ngIf="!api.loggedIn()" routerLink="/register" routerLinkActive="active"> Register </a></li>
+        <li><a  mat-flat-button *ngIf="!api.loggedIn()" routerLink="/login" routerLinkActive="active"> Login</a></li>
+      </ul>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!-- Router Outlet -->
+    <router-outlet></router-outlet>
+    <!-- Router Outlet -->
+  </mat-sidenav-content>
+
+
+  </mat-sidenav-container>
+</div>

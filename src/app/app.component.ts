@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from 'src/app/api.service';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -8,13 +9,25 @@ import { ApiService } from 'src/app/api.service';
   styleUrls: ['./app.component.scss'],
   providers: [ApiService]})
 export class AppComponent {
-  title = 'frontend';
-  dietprograms = [];
-  selectedMovie;
+  faSearch = faSearch;
   
+  constructor(public api:ApiService){
+  
+  }
+  loggedOut(){
+    this.loggedOutAPI();
+    this.api.loggedOut();
+  }
 
-  constructor(private api:ApiService){
-  
+  loggedOutAPI = () => {
+    this.api.logout().subscribe(
+      data => {
+        console.log(data)
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
 

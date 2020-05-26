@@ -1,24 +1,4 @@
-  /* line 1, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_order.scss */
-  .order_area {
-    /* padding-top: 150px;
-    padding-bottom: 90px; */
-  }
-  
-  @media (max-width: 767px) {
-    /* line 1, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_order.scss */
-    .order_area {
-      padding-top: 60px;
-      padding-bottom: 0px;
-  
-    }
-  }
-  
-  /* addition to foodlist */
-  .order_area_foodlist {
-    /* padding-top: 150px;
-    padding-bottom: 90px; */
-  }
-  
+ 
   .order_area_foodlist .single_order_foodlist {
     /* margin-bottom: 60px; */
     margin-bottom:150px;
@@ -155,6 +135,7 @@
   }
 
    /* line 1, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_btn.scss */
+
    .boxed_btn {
     color: #fff;
     font-size: 15px;
@@ -217,4 +198,60 @@
   .boxed_btn_white:hover {
     background: #fff;
     color: #000;
+  }
+
+
+  @media (max-width: 500px) {
+    /* line 1, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_order.scss */
+    .order_area {
+      padding-top: 10px;
+      padding-bottom: 0px;
+    }   
+    
+    .foodlist_price{
+      // float:left;\
+      left:0;
+      bottom: 0;
+      width:40%;
+      color:#000;
+      text-align: left;
+      position:fixed;
+      padding:1px;
+      padding-left:10px;
+      background-color: white;
+      border-top: solid 1px #ededed;
+      
+    }
+    .price-p{
+      margin-bottom:0px;
+    }
+    .price-rp{
+      color:orange;
+    }
+
+    .boxed_btn {
+      // float:left;
+      display:flex;
+      font-size: 15px;
+      font-weight: 600;
+      background-color: #78b454;
+      // width:70%;
+      position: fixed;
+      left: 40%;
+      right: 0;
+      bottom: 0;
+      width: 60%;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .add-to-cart{
+      border-top: solid 0.5px #f2f2ff;
+      position:fixed;
+      left:0;
+      bottom:0;
+      width:100%;
+
+    }
+
   }

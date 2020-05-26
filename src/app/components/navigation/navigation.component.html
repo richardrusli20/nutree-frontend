@@ -1,170 +1,35 @@
-<!-- Customer Navigation -->
-<header *ngIf="authService.getRole() == 'customer'">
-        <div class="header-area ">
-            <div id="sticky-header" class="main-header-area">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-xl-10 col-lg-10">
-                            <div class="main-menu d-none d-lg-block">
-                                <nav>
-                                    <ul class="mein_menu_list" id="navigation">
-                                        <div class="logo-img d-none d-lg-block">
-                                            <a href="">
-                                                <img src="assets/img/nutree-logo.png"
-                                                    style="width : 100px;height : 100px" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="search-container">
-                                            <form action="/action_page.php">
-                                                <input type="text" placeholder="Search your Program" name="search">
-                                                <button type="submit"><fa-icon [icon]="faSearch"></fa-icon></button>
-                                            </form>
-                                        </div>
-                                        <li><a routerLink="/cart" routerLinkActive="active"> My Bag </a></li>
-                                        <li>		<button type="button" class="btn btn-demo" data-toggle="modal" data-target="#myModal2" (click)="openModal(content)">
-                                            Right Sidebar Modal
-                                        </button></li>
-                                        <li><a *ngIf="!authService.loggedIn()" routerLink="/register" routerLinkActive="active"> Register </a></li>
-                                        <li><a *ngIf="!authService.loggedIn()" routerLink="/login" routerLinkActive="active"> Login</a></li>
-                                        <li> {{authService.getUsername()}}
-                                            <ul class="submenu">
-                                                <li>
-                                                <li><a routerLink="/profile" routerLinkActive="active">My Profile</a>
-                                                </li>
-                                                <li><a *ngIf="authService.loggedIn()" (click)="authService.logoutUser()" > Log Out</a></li>
-                                            </ul>
-                                        </li>
-                                
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>                       
 
+    <mat-toolbar color="white">
+        <div fxShow="true" fxHide.gt-sm="true">
+            <button (click)="sidenav.toggle()" >
+                <mat-icon> menu</mat-icon>
+             </button>
+          </div>
+        <a routerLink="/" routerLinkActive="active">
+            <img src="assets/img/nutree-logo.png"
+                style="width : 100px;height : 100px" alt="">
+        </a>
+  
+      <div fxShow="true" fxHide.lt-md="true">
+        <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+        <a routerLink="/register" routerLinkActive="active"> Register </a>
+        <a routerLink="/login" routerLinkActive="active"> Login</a>
+      </div>
+  
 
-                        <div class="col-12">
-                            <div class="mobile_menu d-block d-lg-none"></div>
-                        </div>
-                        <div class="logo-img-small d-sm-block d-md-block d-lg-none">
-                         <a href="">
-                                <img src="assets/img/nutree-logo.png" class="m_navbar_logo" alt="">
-                         </a> 
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
+    </mat-toolbar>
+  
+    <mat-sidenav-container fxFlexFill class="example-container">
+      <mat-sidenav #sidenav fxLayout="column">
+        <div fxLayout="column">
+          <a (click)="sidenav.toggle()" mat-button>Close</a>
+          <a href="#" mat-button>Menu Item 1</a>
+          <a href="#" mat-button>Menu Item 2</a>
+          <a href="#" mat-button>Menu Item 3</a>
+          <a href="#" mat-button>Menu Item 4</a>
+          <a href="#" mat-button>Menu Item 5</a>
+          <a href="#" mat-button>Menu Item 6</a>
         </div>
+      </mat-sidenav>
 
-                                <!-- Modal -->
-                                <ng-template #content let-modal>
-                                    <div class="modal right fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
-                                                </div>
-                                
-                                                <div class="modal-body">
-                                                    <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                                    </p>
-                                                </div>
-                                
-                                            </div><!-- modal-content -->
-                                        </div><!-- modal-dialog -->
-                                    </div><!-- modal -->
-                                    </ng-template>
-                                    <!-- modal -->
-    </header>
-<br><br>
-
-<!-- Vendor Navigation -->
-<header *ngIf="authService.getRole() == 'vendor'">
-        <div class="header-area ">
-            <div id="sticky-header" class="main-header-area">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-xl-10 col-lg-10">
-                            <div class="main-menu d-none d-lg-block">
-                                <nav>
-                                    <ul class="mein_menu_list" id="navigation">
-                                        <div class="logo-img d-none d-lg-block">
-                                            <a href="">
-                                                <img src="assets/img/nutree-logo.png"
-                                                    style="width : 100px;height : 100px" alt="">
-                                            </a>
-                                        </div>
-               
-                                        <li><a routerLink="/foods" routerLinkActive="active">Foods</a></li>
-                                        <li><a routerLink="/foodlist" routerLinkActive="active">FoodList</a></li>
-                                        <li><a *ngIf="!authService.loggedIn()" routerLink="/register" routerLinkActive="active"> Register </a></li>
-                                        <li><a *ngIf="!authService.loggedIn()" routerLink="/login" routerLinkActive="active"> Login</a></li>
-                                        <li><a *ngIf="authService.loggedIn()" (click)="authService.logoutUser()" > Log Out</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <div class="mobile_menu d-block d-lg-none"></div>
-                        </div>
-                        <div class="logo-img-small d-sm-block d-md-block d-lg-none">
-                         <a href="">
-                                <img src="assets/img/nutree-logo.png" class="m_navbar_logo" alt="">
-                            </a> 
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-
-<br><br>
-
-<header *ngIf="!authService.getRole()">
-    <div class="header-area ">
-        <div id="sticky-header" class="main-header-area">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-xl-10 col-lg-10">
-                        <div class="main-menu d-none d-lg-block">
-                            <nav>
-                                <ul class="mein_menu_list" id="navigation">
-                                    <div class="logo-img d-none d-lg-block">
-                                        <a href="">
-                                            <img src="assets/img/nutree-logo.png"
-                                                style="width : 100px;height : 100px" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="search-container">
-                                        <form action="/action_page.php">
-                                            <input type="text" placeholder="Search your Program" name="search">
-                                            <button type="submit"><fa-icon [icon]="faSearch"></fa-icon></button>
-                                        </form>
-                                    </div>
-                                    <li><a  routerLink="/register" routerLinkActive="active"> Register </a></li>
-                                    <li><a  routerLink="/login" routerLinkActive="active"> Login</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <div class="mobile_menu d-block d-lg-none"></div>
-                    </div>
-                    <div class="logo-img-small d-sm-block d-md-block d-lg-none">
-                     <a href="">
-                            <img src="assets/img/nutree-logo.png" class="m_navbar_logo" alt="">
-                     </a> 
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-<br><br>
-
+    </mat-sidenav-container>

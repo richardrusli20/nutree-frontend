@@ -19,7 +19,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
 
-    getCustomerBag = () => {
+  getCustomerBag = () => {
       this.api.getCustomerBag().subscribe(
         data => {
           this.cartItems = data.customer_bag;
@@ -31,11 +31,20 @@ export class ShoppingCartComponent implements OnInit {
           console.log(error);
         }
       );
-    }
+  }
 
+  deleteCartItem = (foodlistid) => {
+    this.api.deleteCartItem(foodlistid).subscribe(
+      data => {
+        this.cartItems = data.customer_bag;
+      }
+    )
+  }
 
   ngOnInit(): void {
-    
+    if(!this.api.loggedIn()){
+      this.router.navigate(['/login']);
+    }
   }
 
 }

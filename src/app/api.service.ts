@@ -78,7 +78,13 @@ export class ApiService {
   addToCart(foodlistid,qty):Observable<any>{
     const body = {foodlist_pk:foodlistid,quantity:qty}
     return this.http.post(this.baseurl + '/api/foodlist/add-to-bag/', body,
-    {headers: this.httpHeadersAuth})
+    {headers: this.httpHeadersAuth});
+  }
+
+  deleteCartItem(foodlistid):Observable<any>{
+    const body = {foodlist_pk:foodlistid}
+    return this.http.post(this.baseurl + '/api/foodlist/remove-from-bag/',body,
+    {headers:this.httpHeadersAuth});
   }
   
   // customer bag
@@ -124,19 +130,25 @@ export class ApiService {
     {headers: this.httpHeaders});
   }
 
-
-  logoutUser() {
-    localStorage.removeItem('token')
-    localStorage.removeItem('role')
-    localStorage.removeItem('role_pk')
-    localStorage.removeItem('username')
-    this.router.navigate(['/'])
+  logout():Observable<any> {
+    return this.http.post(this.baseurl + '/api/logout/',
+    {headers:this.httpHeaders});
   }
+
+
+
   getToken(){
     return localStorage.getItem('token')
   }
   loggedIn(){
     return !!localStorage.getItem('token')
+  }
+  loggedOut() {
+    localStorage.removeItem('token')
+    localStorage.removeItem('role')
+    localStorage.removeItem('role_pk')
+    localStorage.removeItem('username')
+    this.router.navigate(['/'])
   }
   getRole(){
     return localStorage.getItem('role')

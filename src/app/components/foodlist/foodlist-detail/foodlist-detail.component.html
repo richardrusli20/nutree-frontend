@@ -2,27 +2,32 @@
 <div class="order_area"  >
     <div class="container">
         <div class="row">
+            
             <div class="col-md-6">
-
+                {{foodListDetail.diet_program.dietProgram_name}}
                 <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" style="width:100%" />
 
                 </div>
                 <div class="col-md-6">
-                    <h1>{{foodListDetail.foodlist_name}} </h1>
-                    <p> By: </p>
-                    <p> Desc:  {{foodListDetail.description}}</p>
-                    <p>  </p>
-                    <p> Available Date: {{foodListDetail.availdate}}</p>
+                    <p></p>
+                    <h2>{{foodListDetail.foodlist_name}} </h2>
+                    <p style="color:grey">{{foodListDetail.description}}</p>
 
-                   <h3>  </h3>
-                    <p> Price:</p>
-                    <h3> Rp  {{foodListDetail.price}}</h3>
+                    <hr>
+                    <p> <img style="height:50px;width:auto" src="assets/img/grey-circle-noimage.png"/> {{foodListDetail.vendor.vendor_name}} </p>
+                    <hr>
+
+                    <!-- <p> Available Date: {{foodListDetail.available_date}}</p> -->
+
 
                     <div class="">
                         <!--Foods in Foodlist-->
-                     
-                            <img src="" style="width:100px;height:auto">
-                            <a href="">  </a>
+                    
+                        <p>Foods : </p>
+                     <div *ngFor="let food of foods">
+                         <img src="data:image/jpeg;base64,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"/>
+                        {{food.food_name}}
+                    </div>
                         
 
 
@@ -39,18 +44,13 @@
                             </form> -->
                             <!-- Vendor -->
                             <!-- Customer -->
-                            <form class="form-inline" method='POST' action="" >
-                                <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-light active">
-                                        <input type="radio" name="options" checked="" value="1"> Single
-                                    </label>
-                                    <label class="btn btn-light">
-                                        <input type="radio" name="options" value="2"> Couple
-                                    </label>
-                                    <label class="btn btn-light">
-                                        <input type="radio" name="options" value="3"> Family
-                                    </label>
-                                    <input (click)="addToCart()" class="boxed_btn" type="submit" value="Add to Cart"/>
+                            <form>
+                                <div class="add-to-cart">
+                                <div class="foodlist_price">
+                                    <p class="price-p"> Price:</p>
+                                    <h4 class="price-rp"> Rp  {{foodListDetail.price}}</h4>
+                                </div>
+                                <input (click)="addToCart()" class="boxed_btn" value="Add to Cart"/>
                                 </div>
                             </form>
                             <!-- Customer -->
