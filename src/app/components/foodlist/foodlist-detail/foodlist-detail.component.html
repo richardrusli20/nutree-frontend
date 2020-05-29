@@ -45,14 +45,23 @@
                             <!-- Vendor -->
                             <!-- Customer -->
                             <form>
-                                <div class="add-to-cart">
-                                <div class="foodlist_price">
-                                    <p class="price-p"> Price:</p>
-                                    <h4 class="price-rp"> Rp  {{foodListDetail.price}}</h4>
-                                </div>
-                                <input *ngIf="foodlistQuantity == 0" (click)="addToCart()" class="boxed_btn" value="Add to Cart"/>
-                                <div class="add-button" *ngIf="foodlistQuantity != 0" (click)="addToCart()">+</div>
+                                <div class="add-to-cart" *ngIf="api.getRole()=='customer'">
+                                    <div class="foodlist_price">
+                                        <p class="price-p"> Price:</p>
+                                        <h4 class="price-rp"> Rp  {{foodListDetail.price}}</h4>
+                                    </div>
+                                    <input *ngIf="foodlistQuantity == 0" (click)="addToCart()" class="boxed_btn" value="Add to Cart"/>
+                                    <div class="button-plusminus">
+                                        <div class="minus-button" *ngIf="foodlistQuantity != 0" (click)="minusToCart()">-</div>
+                                        <div class="counter" *ngIf="foodlistQuantity != 0"><h2>{{foodlistQuantity}}</h2></div>
+                                        <div class="add-button" *ngIf="foodlistQuantity != 0" (click)="addToCart()">+</div>
+                                    </div>
                                 <!-- <button *ngIf="matchQuantity != 0" (click)="addToCart()" class="add-button" value="+"></button>  -->
+                                </div>
+
+                                <div class="vendor-update-delete" *ngIf="api.getRole()=='vendor'">
+                                    <button (click)="updateFoodlist(foodListDetail)" class="btn btn-success">Update</button>
+
                                 </div>
                             </form>
                             <!-- Customer -->

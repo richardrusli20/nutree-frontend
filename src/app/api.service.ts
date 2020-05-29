@@ -47,7 +47,22 @@ export class ApiService {
   }
 
   getFoodlistDetail(foodlistid):Observable<any>{
-    return this.http.get( this.baseurl + '/api/foodlist/' + foodlistid + '/')
+    return this.http.get( this.baseurl + '/api/foodlist/' + foodlistid + '/',
+    {headers:this.httpHeaders});
+  }
+
+  updateFoodlist(foodlist):Observable<any>{
+    const body = {
+      dietprogram_pk: foodlist.dietprogram,
+      foodlist_name: foodlist.foodlist_name,
+      food: foodlist.food,
+      description: foodlist.description,
+      price: foodlist.price,
+      calories: foodlist.calories,
+      available_date: foodlist.available_date
+    }
+    return this.http.post( this.baseurl + '/api/foodlist/' + foodlist.id + '/update/',body,
+    {headers:this.httpHeadersAuth});
   }
 
   createFoodlist(foodList,foods_id):Observable<any>{
@@ -140,14 +155,16 @@ export class ApiService {
   getToken(){
     return localStorage.getItem('token')
   }
+  
   loggedIn(){
     return !!localStorage.getItem('token')
   }
   loggedOut() {
-    localStorage.removeItem('token')
-    localStorage.removeItem('role')
-    localStorage.removeItem('role_pk')
-    localStorage.removeItem('username')
+    localStorage.clear()
+    // localStorage.removeItem('token')
+    // localStorage.removeItem('role')
+    // localStorage.removeItem('role_pk')
+    // localStorage.removeItem('username')
     this.router.navigate(['/'])
   }
   getRole(){

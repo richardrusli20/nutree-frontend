@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {   
   FormBuilder,
   FormGroup,
@@ -21,12 +21,18 @@ export class FoodlistAddComponent implements OnInit {
   foods = [];
   dietPrograms=[];
   vendor;
+  foodlist={foodlist_name:'',diet_program:{id:0},foods:[{id:0,food_name:''}],price:0,description:'',available_date:'yyy-mm-dd'};
+  foodListId;
 
   // foodlist={};
   // foods_id=[];
 
   selectedFoodlist;
-  constructor(private api:ApiService, private formBuilder : FormBuilder, private router:Router) {
+  constructor(private api:ApiService, private formBuilder : FormBuilder, private activeRoute: ActivatedRoute,private router:Router) {
+    let id = parseInt(this.activeRoute.snapshot.paramMap.get('id'))
+    this.foodListId = id
+    this.getFoodlists()
+    
     // this.selectedFoodlist = {foodlist_name:'',foodlist_dietprogram:'',foodlist_foods:[],foodlist_availdate:'',foodlist_price:0,foodlist_logo:''}
     this.vendor = {role_pk:localStorage.getItem('role_pk')}
     // const formControls = this.foods.map(control => new FormControl(false));
@@ -42,6 +48,31 @@ export class FoodlistAddComponent implements OnInit {
     });
     this.getVendorFoodlistAdd();
     
+  }
+
+  getFoodlists(){
+    this.getFoodlist();
+  }
+  getFoodlist = () => {
+    this.api.getFoodlistDetail(this.foodListId).subscribe(
+      data => {
+        console.log(data);
+        this.foodlist = data
+        this.form = this.formBuilder.group({
+          foodlist_name:[this.foodlist.foodlist_name,Validators.required],
+          foods: new FormArray([], this.minSelectedCheckboxes(1)),
+          dietprogram_pk:[this.foodlist.diet_program.id,Validators.required],
+          description:[this.foodlist.description,[Validators.required,Validators.minLength(20)]],
+          price:[this.foodlist.price,Validators.required],
+          calories:[this.foodlist,Validators.required],
+          available_date:[this.foodlist.available_date,Validators.required],
+          logo:'',
+        });
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   getVendorFoodlistAdd = () => {

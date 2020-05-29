@@ -13,6 +13,7 @@
           <span class="example-spacer"></span>
         <div class="menu" fxShow="true" fxHide.lt-md="true">
           <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+          <mat-icon routerLink="/cart" routerLinkActive="active">shopping_cart</mat-icon>
           <a mat-flat-button routerLink="/profile" routerLinkActive="active">My Profile</a>
           <a mat-flat-button *ngIf="api.loggedIn()" (click)="loggedOut()" routerLink="/" routerLinkActive="active"> logout</a>
           
@@ -46,11 +47,11 @@
             </ul>
           </div>
         </mat-sidenav>
-        <mat-sidenav-content>
+        <!-- <mat-sidenav-content> -->
           <!-- Router Outlet -->
           <router-outlet></router-outlet>
           <!-- Router Outlet -->
-        </mat-sidenav-content>
+        <!-- </mat-sidenav-content> -->
         
 
   </mat-sidenav-container>

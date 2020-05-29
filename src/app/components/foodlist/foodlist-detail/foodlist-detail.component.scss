@@ -210,12 +210,13 @@
     
     .foodlist_price{
       // float:left;\
-      left:0;
-      bottom: 0;
-      width:40%;
+      // left:0;
+      // bottom: 0;
+      width:50%;
       color:#000;
       text-align: left;
-      position:fixed;
+      // position:fixed;
+      display:inline-block;
       padding:1px;
       padding-left:10px;
       background-color: white;
@@ -230,26 +231,41 @@
     }
 
     .boxed_btn {
-      // float:left;
-      display:flex;
       font-size: 15px;
       font-weight: 600;
       background-color: #78b454;
       // width:70%;
       position: fixed;
+      display:inline-block;
       left: 40%;
       right: 0;
       bottom: 0;
       width: 60%;
       color: #ffffff;
       text-align: center;
-    }
+    } 
 
     .add-button {
       bottom:0;
       right:0;
       font-size:24px;
-      position: fixed;
+      // position: fixed;
+      text-align: center;
+      vertical-align: middle;
+      display:inline-block;
+      background-color: #78b454;
+      color:white;
+      width:50px;
+      height:60px;
+    }
+
+    .minus-button{
+      bottom:0;
+      right:0;
+      // margin-right:150px;
+      font-size:24px;
+      // position: fixed;
+      display:inline-block;
       text-align: center;
       vertical-align: middle;
       background-color: #78b454;
@@ -258,13 +274,34 @@
       height:60px;
     }
 
+    .counter{
+      // bottom:0;
+      // right:0;
+      // margin-right: 20px;
+      font-size:24px;
+      // position: fixed;
+      display:inline-block;
+      text-align: center;
+      vertical-align: middle;
+      background-color: white;
+      color:black;
+      width:30%;
+      // height:60px;
+    }
+
     .add-to-cart{
       border-top: solid 0.5px #f2f2ff;
       position:fixed;
       left:0;
       bottom:0;
       width:100%;
-
+      height:10%;
     }
 
+    .button-plusminus{
+      width:50%;
+      right:0;
+      bottom:0;
+      position:fixed;
+    }
   }

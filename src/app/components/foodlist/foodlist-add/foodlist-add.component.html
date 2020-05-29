@@ -7,7 +7,7 @@
 						<div class="input-group-append">
 							<span class="input-group-text"><i class="fa fa-envelope"></i></span>
 						</div>
-						<input formControlName="foodlist_name" type="text" placeholder="please input Foodlist name"  >
+						<input formControlName="foodlist_name" type="text" placeholder="please input Foodlist name" value="{{foodlist.foodlist_name}}" >
 						<span *ngIf="form.controls.foodlist_name.hasError('pattern')">
 							Oops, please provide a foodlist name!
 						</span>
@@ -18,7 +18,7 @@
 							<span class="input-group-text"><i class="fa fa-user"></i></span>
 						</div>
 						<select formControlName="dietprogram_pk" id="dietprogram">
-							<option  [value]="dietPrograms[i].id" *ngFor="let dietprogram of dietPrograms;let i = index">{{dietPrograms[i].dietProgram_name}}</option >
+							<option  [value]="dietPrograms[foodlist.diet_program.id].id" *ngFor="let dietprogram of dietPrograms;let i = index">{{dietPrograms[i].dietProgram_name}}</option >
 						</select>
 					</div>
 					<div class="input-fields">

@@ -1,24 +1,24 @@
 <br><br><br><br><br><br><br>
 <div *ngIf="login.login_success == false" class="container">
 	<div class="sub-container">
-			 <div class="login-form"> 
-				<div class="input-fields">
+			 <form [formGroup]="form" class="login-form" (ngSubmit)="customerLogins()"> 
+				 <span *ngIf="form.get('username').errors.required">please input your username</span>
+				<div class="form-group" [ngClass]="{'has-error' : form.get('username')}">
 					<label class="label">Username</label>
 					<div class="input-group mb-3">
 						<div class="input-group-append">
 							<span class="input-group-text"><i class="fa fa-envelope"></i></span>
 						</div>
-						<input  type="text" placeholder="please input username" [(ngModel)]="loginCustomer.username" >
+						<input  formControlName="username" type="text" placeholder="please input username" [(ngModel)]="loginCustomer.username" >
 					</div>
 					<label class="label">Password</label>
 					<div class="input-group mb-3">
 						<div class="input-group-append">
 							<span class="input-group-text"><i class="fa fa-user"></i></span>
 						</div>
-						<input type="password" placeholder="please input password " [(ngModel)]="loginCustomer.password" >
+						<input formControlName="password" type="password" placeholder="please input password " [(ngModel)]="loginCustomer.password" >
 					</div>
-				
-
+			
 
 					<div class="mt-4">
 						<div class="d-flex justify-content-center links">
@@ -28,8 +28,8 @@
 
 				</div>
 				<!--  <input class="btn" type="submit" value="Sign Up">  -->
-			<button class="btn" (click)="customerLogin()">Login</button>
-			</div> 
+			<button class="btn" >Login</button>
+			</form> 
 
 </div>
 </div>

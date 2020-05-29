@@ -17,23 +17,21 @@
                 <img src="assets/img/slimfitphoto.jpg"
                     class="img-checkout">
                 <div class="foodlist-info" >
-                        <h4>ID {{custBag.foodlist.id}}</h4>
+                        <!-- <h4>ID {{custBag.foodlist.id}}</h4> -->
                         <h3 >{{custBag.foodlist.foodlist_name}}</h3>
                     <p>Available date:  {{custBag.foodlist.available_date}}</p>
-                    <p>Qty : {{custBag.quantity}}</p>
-                     <select class="form-control" value="v.quantity">
-
-                        <option value="1">Single</option>
-                        <option value="2" >Double</option>
-                        <option value="3">Family(3 pax)</option>
-                        <option value="4">Family(4 pax)</option>
-                        <option value="5">Family(5 pax)</option>
-                    </select>  
+                    <!-- <p>Qty : <input type="number" value="{{custBag.quantity}}"/></p> -->
+                    <p>QTY : </p>
+                    <select (change)="changed($event,custBag.foodlist.id)" >
+                        <option *ngFor="let currentData of qty" [value]="currentData" [selected]="currentData == custBag.quantity" >
+                            {{currentData}}
+                        </option>
+                    </select>
                 </div>
 
 
                     <div class="price-wrap">
-                     <h3 class="price">Rp {{custBag.foodlist.price}}</h3>
+                     <h3 class="price">Rp {{custBag.total_price*custBag.quantity}}</h3>
                      </div>
 
 
@@ -53,14 +51,14 @@
                     </dl>
                     <dl class="dlist-align">
                     
-                        <dt>Delivery to :  <a href="{% url 'customer:address-update' customer_pk %}"><span style="color:blue;font-size:12px;">change address</span></a></dt>
+                        <dt>Delivery to :  <a><span style="color:blue;font-size:12px;">change address</span></a></dt>
                         <dd class="text-right">  </dd>
                         <dd class="text-right">  </dd>
                         <dd class="text-right">  </dd>
                         <dd class="text-right">  </dd>                    
                     </dl>
                     <dl class="dlist-align">
-                        <dt>Total price:</dt>
+                        <dt>Total price: </dt>
                         <dd class="text-right">Rp  </dd>
                     </dl>
                     <hr>

@@ -19,7 +19,7 @@ export class FoodlistDetailComponent implements OnInit {
   foodlistQuantity=0;
   totalQty;
 
-  constructor(private api:ApiService,private activeRoute: ActivatedRoute, private router:Router) {
+  constructor(public api:ApiService,private activeRoute: ActivatedRoute, private router:Router) {
     let id = parseInt(this.activeRoute.snapshot.paramMap.get('id'))
     this.foodListId = id
     this.getFoodlistDetail()
@@ -136,6 +136,14 @@ export class FoodlistDetailComponent implements OnInit {
   minusButton(){
     this.minusToCart()
   }
+
+
+  updateFoodlist(foodlist){
+    console.log(foodlist.id);
+    this.router.navigate(['/foodlist/add',this.foodListId])
+  }
+
+
   // addToCart(){
   //   if(!this.api.loggedIn()){
   //     this.router.navigate(['/login']);

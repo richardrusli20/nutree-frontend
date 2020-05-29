@@ -20,32 +20,31 @@ export class ProfileComponent implements OnInit {
   formAddress:FormGroup;
   boolean=false;
   booleanAddress=false;
-  customerProfile={customer_name:"", city:"", customer_phone:"", postal_code:"",province:"",street:""};
+  customerProfile={customer_name:"", customer_phone:""};
+  customerAddress={city:"",postal_code:"",province:"",street:""}
 
   constructor(private api:ApiService, private formBuilder : FormBuilder, private router:Router) {
     this.getCustomerProfile();
     console.log("customerprofilename");
     console.log(this.customerProfile.customer_name);
-    this.formCustomer = this.formBuilder.group({
-      customer_name:[this.customerProfile.customer_name,Validators.required],
-      customer_phone: [this.customerProfile.customer_phone,Validators.required],
-    });
-
-    this.formAddress = this.formBuilder.group({
-      street:['',Validators.required],
-      postal_code: ['',Validators.required],
-      city: ['',Validators.required],
-      province:['',Validators.required],
-    });
-
-    
   }
 
   getCustomerProfile = () => {
     this.api.getCustomerProfile().subscribe(
       data => {
         this.customerProfile = data;
+        this.customerAddress = data;
         console.log(this.customerProfile);
+        this.formCustomer = this.formBuilder.group({
+          customer_name:[this.customerProfile.customer_name,Validators.required],
+          customer_phone: [this.customerProfile.customer_phone,Validators.required],
+        });
+        this.formAddress = this.formBuilder.group({
+          street:[this.customerAddress.street,Validators.required],
+          postal_code: [this.customerAddress.postal_code,Validators.required],
+          city: [this.customerAddress.city,Validators.required],
+          province:[this.customerAddress.province,Validators.required],
+        });
       },
       error => {
         console.log(error);
@@ -57,6 +56,7 @@ export class ProfileComponent implements OnInit {
     this.api.updateCustomerProfile(customer).subscribe(
       data => {
         console.log(data)
+        this.customerProfile = data;
       },
       error => {
         console.log(error);
@@ -68,6 +68,7 @@ export class ProfileComponent implements OnInit {
     this.api.updateCustomerAddress(address).subscribe(
       data => {
           console.log(data)
+          this.customerAddress = data; 
       },
       error => {
         console.log(error);
@@ -91,6 +92,7 @@ export class ProfileComponent implements OnInit {
   }
 
   updateCustomerAddressAPI(){
+   
     console.log(this.formAddress.value);
     this.updateCustomerAddress(this.formAddress.value);
     this.booleanAddress=false;

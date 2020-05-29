@@ -37,6 +37,7 @@ const routes: Routes = [
   { path: 'foodlist', component:FoodlistComponent },
   { path: 'foodlist/detail/:id', component:FoodlistDetailComponent },
   { path: 'foodlist/add', component:FoodlistAddComponent},
+  { path: 'foodlist/add/:id', component:FoodlistAddComponent},
   { path: 'productlist', component:ProductListComponent},
   { path: '**', redirectTo:''}
 ];

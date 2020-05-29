@@ -12,10 +12,12 @@ export class ShoppingCartComponent implements OnInit {
   cartItems = [];
   foodlist = {};
   cartTotal = 0;
+  qty=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
 
   constructor(private api:ApiService, private router:Router) { 
     this.foodlist={available_date:"",description:"",}
     this.getCustomerBag();
+    // this.quantity();
   }
 
 
@@ -39,6 +41,26 @@ export class ShoppingCartComponent implements OnInit {
         this.cartItems = data.customer_bag;
       }
     )
+  }
+  changed(e,foodlistid){
+    console.log(e.target.value)
+    this.changeCartQty(foodlistid,e.target.value)
+  }
+
+
+
+  changeCartQty = (foodlistid,qty) => {
+
+        this.api.addToCart(foodlistid,qty).subscribe(
+          data=>{
+            console.log(data)
+            this.cartItems = data.customer_bag;
+          },
+          error=>{
+            console.log(error)
+          }
+        )
+        
   }
 
   ngOnInit(): void {
