@@ -95,6 +95,21 @@ $color-green: #78b454;
     .login-form .forgot {
       margin-bottom: 55px;
     }
+
+    input{
+      border:none;
+      border-bottom: 1px solid #f2f2f2;
+      outline: none;
+      width:100%;
+      padding:3px;
+    }
+
+    input:focus{
+      border-bottom: 1px solid #78b454;
+    }
+
+
+
     .btn {
       margin-top: 20px;
       padding: 10px;

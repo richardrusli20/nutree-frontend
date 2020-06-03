@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card-checkout">
+                <h4>Order Summary</h4>
+                <div class="card-list">
+                    <p></p>
+                    <p>Rp {{total_price}}</p>
+                    <a (click)="openDetail()"mat-flat-button>View Details</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card-checkout">
+                <h4>Choose Your Payment Method</h4>
+                    <div class="card-list">
+                        <form class="form-group" method="post">
+                            <div class="payment-list">
+                                <input type="radio" name="payment-gateway" value="GO-PAY" />
+                                <img src="assets/img/gopay-logo.jpg" style="width:100px; height:auto;" />
+                                GO-PAY
+                            </div>
+                            <br>
+                            <!-- <input type="radio" name="payment-gateway" value="OVO" />
+                            <img src="" style="width:70px; height:auto;" />
+                            OVO -->
+                            <!-- <br> -->
+                            <div class="payment-list">
+                                <input type="radio" name="payment-gateway" value="Credit Card Visa/Mastercard" />
+                                <img src="assets/img/cc-logo.png" style="width:150px; height:auto;" />
+                                Credit Card
+                            </div>
+                            <br>
+                            <div class="payment-list">
+                                <input type="radio" name="payment-gateway" value="Bank Transfer" />
+                                <img src="assets/img/BCA-LOGO.png" style="width:100px; height:auto;" />
+                                BCA Bank Transfer
+                            </div>
+                            
+                        </form>
+                        <a routerLink="" routerLinkActive="active" class="btn btn-success btn-block"> Pay Now </a>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+            
+        
+           

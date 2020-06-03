@@ -50,11 +50,12 @@
                                         <p class="price-p"> Price:</p>
                                         <h4 class="price-rp"> Rp  {{foodListDetail.price}}</h4>
                                     </div>
-                                    <input *ngIf="foodlistQuantity == 0" (click)="addToCart()" class="boxed_btn" value="Add to Cart"/>
+                                    <button *ngIf="foodlistQuantity == 0" (click)="addButton()" class="boxed_btn" value="Add to Cart">Add to Cart</button>
                                     <div class="button-plusminus">
+                    
                                         <div class="minus-button" *ngIf="foodlistQuantity != 0" (click)="minusToCart()">-</div>
-                                        <div class="counter" *ngIf="foodlistQuantity != 0"><h2>{{foodlistQuantity}}</h2></div>
-                                        <div class="add-button" *ngIf="foodlistQuantity != 0" (click)="addToCart()">+</div>
+                                        <div class="counter" *ngIf="foodlistQuantity != 0"><input (change)="changed($event)" type="text" size="5" value="{{foodlistQuantity}}"/></div>
+                                        <div class="add-button" *ngIf="foodlistQuantity != 0" (click)="addButton()">+</div>
                                     </div>
                                 <!-- <button *ngIf="matchQuantity != 0" (click)="addToCart()" class="add-button" value="+"></button>  -->
                                 </div>

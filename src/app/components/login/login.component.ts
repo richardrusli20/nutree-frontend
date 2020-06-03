@@ -52,6 +52,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this.api.loggedIn()){
+      this.router.navigate(['']);
+    }
   }
 
 }

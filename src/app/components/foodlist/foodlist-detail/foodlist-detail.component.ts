@@ -1,6 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { 
+  Router, 
+  ActivatedRoute,
+  Event as RouterEvent,
+  NavigationStart,
+  NavigationEnd,
+  NavigationCancel,
+  NavigationError
+
+} from '@angular/router';
 
 @Component({
   selector: 'app-foodlist-detail',
@@ -18,21 +27,23 @@ export class FoodlistDetailComponent implements OnInit {
   matchQuantity={quantity:0};
   foodlistQuantity=0;
   totalQty;
+  foodlistChange=[{foodlistid:0,changed:true}];
+  loading = true
 
   constructor(public api:ApiService,private activeRoute: ActivatedRoute, private router:Router) {
     let id = parseInt(this.activeRoute.snapshot.paramMap.get('id'))
     this.foodListId = id
     this.getFoodlistDetail()
     this.getCustomerBag()
-    // this.addToCart()
+    this.router.events.subscribe((e : RouterEvent) => {
+      this.navigationInterceptor(e);
+    })
   }
   getFoodlistDetail = () => {
     this.api.getFoodlistDetail(this.foodListId).subscribe(
       data => {
         this.foodListDetail = data;
-        // console.log(this.foodListDetail);
         this.foods = data.foods;
-        // console.log(this.foods);
       },
       error => {
         console.log(error);
@@ -54,85 +65,36 @@ export class FoodlistDetailComponent implements OnInit {
     );
   }
 
-  addToCart = () => {
+  addButton() {
     if(!this.api.loggedIn()){
       this.router.navigate(['/login']);
     }
-    this.api.getCustomerBag().subscribe(
-      data => {
-        this.cartItems = data.customer_bag;
-        // this.foodlist = data.foodlist;
-        // console.log(this.cartItems.find(x => x.foodlist.id === this.foodListId));
-            this.matchQuantity = this.cartItems.find(x => x.foodlist.id === this.foodListId)
-            console.log(this.matchQuantity)
-            // call api addtocart with total quantity
-            this.totalQty = 1;
-            if(this.matchQuantity != null){
-              this.totalQty = this.matchQuantity.quantity + 1;
-            }
+    console.log(this.foodlistQuantity)
+    this.foodlistQuantity = this.foodlistQuantity + 1;
+  }
 
-            this.api.addToCart(this.foodListId,this.totalQty).subscribe(
+  addToCart = () =>{
+
+            this.api.addToCart(this.foodListId,this.foodlistQuantity).subscribe(
               data=>{
                 console.log(data)
-                this.cartItems = data.customer_bag;
-                this.matchQuantity = this.cartItems.find(x => x.foodlist.id === this.foodListId)
-                if(this.matchQuantity != null){
-                  this.foodlistQuantity = this.matchQuantity.quantity
-                }
+                this.loading = true;
               },
               error=>{
                 console.log(error)
               }
             )
-          },
-          error => {
-            console.log(error);
-          }
-        );
+
   }
 
   minusToCart = () => {
     if(!this.api.loggedIn()){
       this.router.navigate(['/login']);
     }
-    this.api.getCustomerBag().subscribe(
-      data => {
-        this.cartItems = data.customer_bag;
-        // this.foodlist = data.foodlist;
-        // console.log(this.cartItems.find(x => x.foodlist.id === this.foodListId));
-      
-        this.matchQuantity = this.cartItems.find(x => x.foodlist.id === this.foodListId)
-        console.log(this.matchQuantity)
-        // call api addtocart with total quantity
-      if(this.matchQuantity.quantity != 0){
-        this.totalQty = this.matchQuantity.quantity - 1;
-      }
-
-        this.api.addToCart(this.foodListId,this.totalQty).subscribe(
-          data=>{
-            console.log(data)
-            this.cartItems = data.customer_bag;
-            this.matchQuantity = this.cartItems.find(x => x.foodlist.id === this.foodListId)
-            if(this.matchQuantity != null){
-              this.foodlistQuantity = this.matchQuantity.quantity
-            }
-          },
-          error=>{
-            console.log(error)
-          }
-        )
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    console.log(this.foodlistQuantity)
+    this.foodlistQuantity = this.foodlistQuantity - 1;
   }
 
-
-
-  addButton(){
-    this.addToCart()
-  }
   minusButton(){
     this.minusToCart()
   }
@@ -143,23 +105,38 @@ export class FoodlistDetailComponent implements OnInit {
     this.router.navigate(['/foodlist/add',this.foodListId])
   }
 
+  changed(event){
+    this.foodlistQuantity = event.target.value
+  }
 
-  // addToCart(){
-  //   if(!this.api.loggedIn()){
-  //     this.router.navigate(['/login']);
-  //   }
-  //   this.totalQty = this.matchQuantity + 1;
-  //   this.api.addToCart(this.foodListId,this.totalQty).subscribe(
-  //     data=> {
-  //       // console.log(data)
-  //     },
-  //     error=>{
-  //       console.log(error)
-  //     }
-  //   )
-  //   }
+  ngOnDestroy():void{
+    console.log("destroyed")
+    
+  }
 
   ngOnInit(): void {
+
+  }
+
+  // Shows and hides the loading spinner during RouterEvent changes
+  navigationInterceptor(event: RouterEvent): void {
+    if (event instanceof NavigationStart) {
+      this.addToCart()
+      console.log("Navigation Start")
+      // this.loading = true
+    }
+    if (event instanceof NavigationEnd) {
+      console.log("Navigation End")
+      this.loading = false
+    }
+
+    // Set loading state to false in both of the below events to hide the spinner in case a request fails
+    if (event instanceof NavigationCancel) {
+      this.loading = false
+    }
+    if (event instanceof NavigationError) {
+      this.loading = false
+    }
   }
 
 }

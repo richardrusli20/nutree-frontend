@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DeferLoadModule } from '@trademe/ng-defer-load';
+
 
 import { AppRoutingModule,routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,7 +21,6 @@ import { RegisterVendorComponent } from './components/register-vendor/register-v
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { FoodlistComponent } from './components/foodlist/foodlist.component';
 import { FoodsComponent } from './components/foods/foods.component';
-import { ProductListComponent } from './components/shopping-cart/product-list/product-list.component';
 import { FoodAddComponent } from './components/foods/food-add/food-add.component';
 import { FoodDetailComponent } from './components/foods/food-detail/food-detail.component';
 import { FoodlistAddComponent } from './components/foodlist/foodlist-add/foodlist-add.component';
@@ -34,7 +35,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatConfirmDialogComponent } from './components/mat-confirm-dialog/mat-confirm-dialog.component';
+import { PaymentComponent } from './components/shopping-cart/payment/payment.component';
+import { PaymentDetailDialogComponent } from './components/shopping-cart/payment/payment-detail-dialog/payment-detail-dialog.component';
 
 
 @NgModule({
@@ -50,7 +56,6 @@ import { MatButtonModule } from '@angular/material/button';
     ShoppingCartComponent,
     FoodlistComponent,
     FoodsComponent,
-    ProductListComponent,
     FoodAddComponent,
     FoodDetailComponent,
     FoodlistAddComponent,
@@ -59,6 +64,9 @@ import { MatButtonModule } from '@angular/material/button';
     ProfileComponent,
     CheckoutComponent,
     ProfileUpdateComponent,
+    MatConfirmDialogComponent,
+    PaymentComponent,
+    PaymentDetailDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +83,11 @@ import { MatButtonModule } from '@angular/material/button';
     MatSidenavModule,
     MatIconModule,
     MatMenuModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    MatGridListModule,
+    MatListModule,
+    DeferLoadModule
   ],
   providers: [],
   bootstrap: [AppComponent]

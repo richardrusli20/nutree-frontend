@@ -14,11 +14,14 @@ export class DietprogramDetailComponent implements OnInit {
   public dietProgramId;
   dietprogram_name='';
   foodlist=[];
-
+  imageCollection = [];
   constructor(private api:ApiService,private activeRoute: ActivatedRoute, private router:Router) { 
+
     let id = parseInt(this.activeRoute.snapshot.paramMap.get('id'));
     this.dietProgramId = id;
     this.getDietProgramFoodlist();
+
+ 
   }
 
   
@@ -27,6 +30,12 @@ export class DietprogramDetailComponent implements OnInit {
       data => {
         this.foodlist=data.foodlist
         this.dietprogram_name=data.dietprogram_name
+        for (let i = 0; i < this.foodlist.length; i++) {
+          const url = 'http://via.placeholder.com/500x450?text=Image No ' + (i + 1);
+            this.foodlist[i].foodlist_logo = url
+            this.foodlist[i].show = false
+
+        }
         console.log(this.foodlist)
       },
       error => {

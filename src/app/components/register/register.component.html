@@ -6,14 +6,14 @@
 					<label class="label">Full Name</label>
 					<div class="input-group mb-3">
 						<div class="input-group-append">
-							<span class="input-group-text"><i class="fa fa-envelope"></i></span>
+							<!-- <span class="input-group-text"><i class="fa fa-envelope"></i></span> -->
 						</div>
 						<input  type="text" placeholder="please input customer name" [(ngModel)]="selectedCustomer.customer_name" >
 					</div>
 					<label class="label">Email</label>
 					<div class="input-group mb-3">
 						<div class="input-group-append">
-							<span class="input-group-text"><i class="fa fa-user"></i></span>
+							<!-- <span class="input-group-text"><i class="fa fa-user"></i></span> -->
 						</div>
 						<input type="text" placeholder="please input customer email" [(ngModel)]="selectedCustomer.customer_email" >
 					</div>
@@ -21,7 +21,7 @@
 						<label class="label">Password</label>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
-								<span class="input-group-text"><i class="fa fa-key"></i></span>
+								<!-- <span class="input-group-text"><i class="fa fa-key"></i></span> -->
 							</div>
 							<input type="password"   placeholder="password" [(ngModel)]="selectedCustomer.password" >
 						</div>
@@ -29,7 +29,7 @@
 					<div class="input-fields">
 						<div class="input-group mb-2">
 							<div class="input-group-append">
-								<span class="input-group-text"><i class="fa fa-key"></i></span>
+								<!-- <span class="input-group-text"><i class="fa fa-key"></i></span> -->
 							</div>
 							<input type="password" placeholder="re-input password" [(ngModel)]="selectedCustomer.password2" >
 						</div>
@@ -38,7 +38,7 @@
 
 					<div class="mt-4">
 						<div class="d-flex justify-content-center links">
-							Already have an account? <a href="" class="ml-2">Login</a>
+							Already have an account? <a routerLink="/login" routerLinkActive="active" class="ml-2">Login</a>
 						</div>
 					</div>
 

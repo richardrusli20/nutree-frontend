@@ -7,7 +7,6 @@ import { DietprogramDetailComponent } from './components/dietprogram-detail/diet
 import { LoginComponent } from './components/login/login.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
-import { ProductListComponent } from './components/shopping-cart/product-list/product-list.component';
 import { FoodsComponent } from './components/foods/foods.component';
 import { FoodAddComponent } from './components/foods/food-add/food-add.component';
 import { FoodDetailComponent } from './components/foods/food-detail/food-detail.component';
@@ -17,6 +16,7 @@ import { FoodlistDetailComponent } from './components/foodlist/foodlist-detail/f
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CheckoutComponent } from './components/shopping-cart/checkout/checkout.component';
+import { PaymentComponent } from './components/shopping-cart/payment/payment.component';
 
 
 const routes: Routes = [
@@ -30,6 +30,7 @@ const routes: Routes = [
   { path: 'login', component:LoginComponent },
   { path: 'welcome', component:WelcomeComponent },
   { path: 'cart', component:ShoppingCartComponent},
+  { path: 'cart/payment', component:PaymentComponent},
   { path: 'checkout', component:CheckoutComponent},
   { path: 'foods', component:FoodsComponent },
   { path: 'foods/add', component:FoodAddComponent},
@@ -38,7 +39,6 @@ const routes: Routes = [
   { path: 'foodlist/detail/:id', component:FoodlistDetailComponent },
   { path: 'foodlist/add', component:FoodlistAddComponent},
   { path: 'foodlist/add/:id', component:FoodlistAddComponent},
-  { path: 'productlist', component:ProductListComponent},
   { path: '**', redirectTo:''}
 ];
 
@@ -51,7 +51,6 @@ export const routingComponents =
 [
   ProfileComponent,
   DashboardComponent,
-  ProductListComponent, 
   CheckoutComponent,
   FoodsComponent,
   FoodAddComponent ,
@@ -61,6 +60,7 @@ export const routingComponents =
   FoodlistAddComponent,
   WelcomeComponent, 
   ShoppingCartComponent,
+  PaymentComponent,
   DietprogramComponent, 
   DietprogramDetailComponent, 
   LoginComponent, 

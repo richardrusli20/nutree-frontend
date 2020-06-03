@@ -1,37 +1,50 @@
-<div class="container" *ngIf="cartItems.length > 0; else emptyCart" >
+<div class="container" *ngIf="cartItems.length > 0 && dataLoaded; else emptyCart" >
     <!--Manual Breadcrumbs-->
-    <ul class='breadcrumb'>
+    <!-- <ul class='breadcrumb'>
         <li><a href=""><i class="fa fa-home"></i></a></li>
         <li>My Bag</li>
-    </ul>
+    </ul> -->
     <!--End of Manual Breadcrumbs-->
     
     <div class="row">
 
         <div class="col-md-6">
     
-            <div class="card-checkout" *ngFor="let custBag of cartItems">
-                    <div class="remove-btn">
+            <div class="card-checkout" *ngFor="let custBag of cartItems;let i = index">
+                    <!-- <div class="remove-btn">
                         <a (click)="deleteCartItem(custBag.foodlist.id)" class="btn btn-outline-danger">×</a>
-                    </div>  
-                <img src="assets/img/slimfitphoto.jpg"
-                    class="img-checkout">
+                    </div>  -->
+                    
+                <img style="height:30px;width:auto;"src="assets/img/grey-circle-noimage.png"/>
+                <span>{{custBag.foodlist.vendor.vendor_name}}</span>
+                <hr>
+                <div class="col">
+                    <img src="assets/img/slimfitphoto.jpg"
+                        class="img-checkout">
+                </div>
+                <div class="col">
                 <div class="foodlist-info" >
                         <!-- <h4>ID {{custBag.foodlist.id}}</h4> -->
-                        <h3 >{{custBag.foodlist.foodlist_name}}</h3>
+                        <p><strong>{{custBag.foodlist.foodlist_name}}</strong></p>
                     <p>Available date:  {{custBag.foodlist.available_date}}</p>
                     <!-- <p>Qty : <input type="number" value="{{custBag.quantity}}"/></p> -->
-                    <p>QTY : </p>
-                    <select (change)="changed($event,custBag.foodlist.id)" >
+                    
+                    <div class="minus-button"  (click)="minusToCart(i)">-</div>
+                    <div (change)="changed($event,custBag.foodlist.id)" class="counter" ><input type="text" size="5" value="{{custBag.quantity}}"/></div>
+                    <div class="add-button"  (click)="addButton(i)">+</div>
+                    <mat-icon class="delete-btn" (click)="deleteCartItem(custBag.foodlist.id)">delete</mat-icon>
+            
+                    <!-- <select (change)="changed($event,custBag.foodlist.id)" >
                         <option *ngFor="let currentData of qty" [value]="currentData" [selected]="currentData == custBag.quantity" >
                             {{currentData}}
                         </option>
-                    </select>
+                    </select> -->
+                </div>
                 </div>
 
 
                     <div class="price-wrap">
-                     <h3 class="price">Rp {{custBag.total_price*custBag.quantity}}</h3>
+                     <h4 class="price">Rp {{custBag.foodlist.price * custBag.quantity}}</h4>
                      </div>
 
 
@@ -41,25 +54,25 @@
         <!--col-md-6 end-->
         <div class="col-md-6">
                 <div class="card-checkout">
-                    <dl class="dlist-align">
+                    <!-- <dl class="dlist-align">
                         <dt>Delivery Method : </dt>
                         <select class="form-control" >
                         <option value="1">Gojek</option>
                         <option value="2" >Grab</option>
                         <option value="3">Ninja Express</option>
                     </select>  
-                    </dl>
+                    </dl> -->
                     <dl class="dlist-align">
                     
                         <dt>Delivery to :  <a><span style="color:blue;font-size:12px;">change address</span></a></dt>
-                        <dd class="text-right">  </dd>
-                        <dd class="text-right">  </dd>
-                        <dd class="text-right">  </dd>
-                        <dd class="text-right">  </dd>                    
+                        <dd class="text-right">{{customerProfile.customer_name}}   </dd>
+                        <dd class="text-right">{{customerProfile.street}}, {{customerProfile.province}}, {{customerProfile.postal_code}} </dd>
+                        <dd class="text-right">{{customerProfile.customer_phone}}  </dd>
+                        <!-- <dd class="text-right">  </dd>                     -->
                     </dl>
                     <dl class="dlist-align">
                         <dt>Total price: </dt>
-                        <dd class="text-right">Rp  </dd>
+                        <dd class="text-right">Rp {{total_price}} </dd>
                     </dl>
                     <hr>
                     <a routerLink="/checkout" routerLinkActive="active" class="btn btn-success btn-block"> Checkout </a>

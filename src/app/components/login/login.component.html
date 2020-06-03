@@ -1,22 +1,22 @@
-<br><br><br><br><br><br><br>
+
 <div *ngIf="login.login_success == false" class="container">
 	<div class="sub-container">
 			 <form [formGroup]="form" class="login-form" (ngSubmit)="customerLogins()"> 
-				 <span *ngIf="form.get('username').errors.required">please input your username</span>
+				 <!-- <span *ngIf="form.get('username').errors.required">please input your username</span> -->
 				<div class="form-group" [ngClass]="{'has-error' : form.get('username')}">
-					<label class="label">Username</label>
+					<label class="label">Email</label>
 					<div class="input-group mb-3">
 						<div class="input-group-append">
-							<span class="input-group-text"><i class="fa fa-envelope"></i></span>
+							<!-- <span class="input-group-text"><i class="fa fa-envelope"></i></span> -->
 						</div>
-						<input  formControlName="username" type="text" placeholder="please input username" [(ngModel)]="loginCustomer.username" >
+						<input  formControlName="username" type="text" placeholder="Please input your email" [(ngModel)]="loginCustomer.username" >
 					</div>
 					<label class="label">Password</label>
 					<div class="input-group mb-3">
 						<div class="input-group-append">
-							<span class="input-group-text"><i class="fa fa-user"></i></span>
+							<!-- <span class="input-group-text"><i class="fa fa-user"></i></span> -->
 						</div>
-						<input formControlName="password" type="password" placeholder="please input password " [(ngModel)]="loginCustomer.password" >
+						<input formControlName="password" type="password" placeholder="Please input your password" [(ngModel)]="loginCustomer.password" >
 					</div>
 			
 

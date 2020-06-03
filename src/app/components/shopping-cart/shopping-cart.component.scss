@@ -26,19 +26,23 @@
     display:inline-block;
     margin-left:20px;
     padding:0px;
+    width:60%;
   }
   
   .img-checkout{
-    width:20%;
+    width:30%;
     height:auto;
     float:left;
+    vertical-align: center;
   }
   
   .price-wrap{
     float:right;
-     top:0;
+    margin-top:20px;
+    //  top:0;
      right:0;
-     margin-left:150px;
+     bottom:0;
+    //  margin-left:150px;
   }
   
   .remove-btn{
@@ -46,4 +50,125 @@
      top:0;
      right:0;
      margin:20px;
+  }
+
+  .delete-btn{
+    display:inline-block;
+    font-size:40px;
+    color:grey;
+    margin:0;
+  }
+
+  @media (max-width: 500px) {
+    /* line 1, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_order.scss */
+    .order_area {
+      padding-top: 10px;
+      padding-bottom: 0px;
+    }   
+    
+    .foodlist_price{
+      // float:left;\
+      // left:0;
+      // bottom: 0;
+      width:50%;
+      color:#000;
+      text-align: left;
+      // position:fixed;
+      display:inline-block;
+      padding:1px;
+      padding-left:10px;
+      background-color: white;
+      border-top: solid 1px #ededed;
+      
+    }
+    .price-p{
+      margin-bottom:0px;
+    }
+    .price-rp{
+      color:orange;
+    }
+
+    .boxed_btn {
+      font-size: 15px;
+      font-weight: 600;
+      background-color: #78b454;
+      // width:70%;
+      position: fixed;
+      display:inline-block;
+      left: 40%;
+      right: 0;
+      bottom: 0;
+      width: 60%;
+      color: #ffffff;
+      text-align: center;
+    } 
+
+    .add-button {
+      // bottom:0;
+      // right:0;
+      font-size:24px;
+      // position: fixed;
+      text-align: center;
+      vertical-align: middle;
+      display:inline-block;
+      background-color: #78b454;
+      color:white;
+      width:35px;
+      height:35px;
+    }
+
+    .minus-button{
+      bottom:0;
+      right:0;
+      // margin-right:150px;
+      font-size:24px;
+      // position: fixed;
+      display:inline-block;
+      text-align: center;
+      vertical-align: middle;
+      background-color: #78b454;
+      color:white;
+      width:35px;
+      height:35px;
+    }
+
+    .counter{
+      width: 50px;
+      font-size: 18px;
+      border-bottom: 0.5px #e0dede solid;
+      display:inline-block;
+      margin-right:10px;
+      margin-left:10px;
+
+    }
+
+    input {
+      border:none;
+      width:50px;
+      text-align: center;
+    }
+
+    input:focus{
+      border:none;
+      outline:none;
+      width:50px;
+      text-align: center;
+      border-bottom: 1px solid green;
+    }
+
+    // .add-to-cart{
+    //   border-top: solid 0.5px #f2f2ff;
+    //   position:fixed;
+    //   left:0;
+    //   bottom:0;
+    //   width:100%;
+    //   height:10%;
+    // }
+
+    .button-plusminus{
+      width:50%;
+      right:0;
+      bottom:0;
+      position:fixed;
+    }
   }
