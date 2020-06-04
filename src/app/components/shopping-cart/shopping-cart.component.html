@@ -9,15 +9,17 @@
     <div class="row">
 
         <div class="col-md-6">
-    
-            <div class="card-checkout" *ngFor="let custBag of cartItems;let i = index">
+            <div class="card-checkout" >
                     <!-- <div class="remove-btn">
                         <a (click)="deleteCartItem(custBag.foodlist.id)" class="btn btn-outline-danger">×</a>
                     </div>  -->
-                    
-                <img style="height:30px;width:auto;"src="assets/img/grey-circle-noimage.png"/>
-                <span>{{custBag.foodlist.vendor.vendor_name}}</span>
-                <hr>
+                <h4>Cart</h4>
+                
+                <div class="card-list" *ngFor="let custBag of cartItems;let i = index">
+                    <hr>
+                <!-- <img style="height:30px;width:auto;"src="assets/img/grey-circle-noimage.png"/> -->
+                <!-- <span>{{custBag.foodlist.vendor.vendor_name}}</span> -->
+                <!-- <hr> -->
                 <div class="col">
                     <img src="assets/img/slimfitphoto.jpg"
                         class="img-checkout">
@@ -26,14 +28,16 @@
                 <div class="foodlist-info" >
                         <!-- <h4>ID {{custBag.foodlist.id}}</h4> -->
                         <p><strong>{{custBag.foodlist.foodlist_name}}</strong></p>
-                    <p>Available date:  {{custBag.foodlist.available_date}}</p>
+                        
+                    <!-- <p>Available date:  {{custBag.foodlist.available_date}}</p> -->
                     <!-- <p>Qty : <input type="number" value="{{custBag.quantity}}"/></p> -->
                     
                     <div class="minus-button"  (click)="minusToCart(i)">-</div>
                     <div (change)="changed($event,custBag.foodlist.id)" class="counter" ><input type="text" size="5" value="{{custBag.quantity}}"/></div>
                     <div class="add-button"  (click)="addButton(i)">+</div>
-                    <mat-icon class="delete-btn" (click)="deleteCartItem(custBag.foodlist.id)">delete</mat-icon>
+                    <span><mat-icon class="delete-btn" (click)="deleteCartItem(custBag.foodlist.id)">delete</mat-icon></span>
             
+                    <p class="price">Rp {{custBag.foodlist.price * custBag.quantity}}</p>
                     <!-- <select (change)="changed($event,custBag.foodlist.id)" >
                         <option *ngFor="let currentData of qty" [value]="currentData" [selected]="currentData == custBag.quantity" >
                             {{currentData}}
@@ -43,13 +47,14 @@
                 </div>
 
 
-                    <div class="price-wrap">
-                     <h4 class="price">Rp {{custBag.foodlist.price * custBag.quantity}}</h4>
-                     </div>
-
-
+                    <!-- <div class="price-wrap"> -->
+                     <!-- <p class="price">Rp {{custBag.foodlist.price * custBag.quantity}}</p> -->
+                     <!-- </div> -->
+                     
+                </div>
+                
             </div>
-
+            
         </div>
         <!--col-md-6 end-->
         <div class="col-md-6">

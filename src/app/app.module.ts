@@ -28,7 +28,6 @@ import { FoodlistDetailComponent } from './components/foodlist/foodlist-detail/f
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CheckoutComponent } from './components/shopping-cart/checkout/checkout.component';
-import { ProfileUpdateComponent } from './profile-update/profile-update.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -38,9 +37,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatConfirmDialogComponent } from './components/mat-confirm-dialog/mat-confirm-dialog.component';
+import { MatConfirmDialogComponent } from './components/shopping-cart/mat-confirm-dialog/mat-confirm-dialog.component';
 import { PaymentComponent } from './components/shopping-cart/payment/payment.component';
 import { PaymentDetailDialogComponent } from './components/shopping-cart/payment/payment-detail-dialog/payment-detail-dialog.component';
+import { MatDialogChangeAddressComponent } from './components/shopping-cart/mat-dialog-change-address/mat-dialog-change-address.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
 
 @NgModule({
@@ -63,10 +64,11 @@ import { PaymentDetailDialogComponent } from './components/shopping-cart/payment
     DashboardComponent,
     ProfileComponent,
     CheckoutComponent,
-    ProfileUpdateComponent,
     MatConfirmDialogComponent,
     PaymentComponent,
     PaymentDetailDialogComponent,
+    MatDialogChangeAddressComponent,
+    OrdersComponent,
   ],
   imports: [
     BrowserModule,

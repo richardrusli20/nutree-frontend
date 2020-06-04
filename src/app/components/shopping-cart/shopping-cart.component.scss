@@ -44,6 +44,11 @@
      bottom:0;
     //  margin-left:150px;
   }
+  .price{
+    font-size:16px;
+    margin-bottom:0rem;
+    margin-top:25px;
+  }
   
   .remove-btn{
     float:right;
@@ -54,9 +59,13 @@
 
   .delete-btn{
     display:inline-block;
-    font-size:40px;
+    font-size:25px;
     color:grey;
     margin:0;
+  }
+
+  p{
+    margin-bottom: 0rem;
   }
 
   @media (max-width: 500px) {
@@ -106,34 +115,34 @@
     .add-button {
       // bottom:0;
       // right:0;
-      font-size:24px;
+      font-size:18px;
       // position: fixed;
       text-align: center;
       vertical-align: middle;
       display:inline-block;
       background-color: #78b454;
       color:white;
-      width:35px;
-      height:35px;
+      width:25px;
+      height:25px;
     }
 
     .minus-button{
       bottom:0;
       right:0;
       // margin-right:150px;
-      font-size:24px;
+      font-size:18px;
       // position: fixed;
       display:inline-block;
       text-align: center;
       vertical-align: middle;
       background-color: #78b454;
       color:white;
-      width:35px;
-      height:35px;
+      width:25px;
+      height:25px;
     }
 
     .counter{
-      width: 50px;
+      width: 25px;
       font-size: 18px;
       border-bottom: 0.5px #e0dede solid;
       display:inline-block;
@@ -144,14 +153,14 @@
 
     input {
       border:none;
-      width:50px;
+      width:25px;
       text-align: center;
     }
 
     input:focus{
       border:none;
       outline:none;
-      width:50px;
+      width:25px;
       text-align: center;
       border-bottom: 1px solid green;
     }

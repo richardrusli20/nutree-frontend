@@ -3,11 +3,7 @@ import { ApiService } from 'src/app/api.service';
 import { 
   Router, 
   ActivatedRoute,
-  Event as RouterEvent,
-  NavigationStart,
-  NavigationEnd,
-  NavigationCancel,
-  NavigationError
+
 
 } from '@angular/router';
 
@@ -35,9 +31,7 @@ export class FoodlistDetailComponent implements OnInit {
     this.foodListId = id
     this.getFoodlistDetail()
     this.getCustomerBag()
-    this.router.events.subscribe((e : RouterEvent) => {
-      this.navigationInterceptor(e);
-    })
+
   }
   getFoodlistDetail = () => {
     this.api.getFoodlistDetail(this.foodListId).subscribe(
@@ -110,33 +104,13 @@ export class FoodlistDetailComponent implements OnInit {
   }
 
   ngOnDestroy():void{
-    console.log("destroyed")
-    
+    console.log("app foodlist-detail destroyed")
+    this.addToCart()
   }
 
   ngOnInit(): void {
 
   }
 
-  // Shows and hides the loading spinner during RouterEvent changes
-  navigationInterceptor(event: RouterEvent): void {
-    if (event instanceof NavigationStart) {
-      this.addToCart()
-      console.log("Navigation Start")
-      // this.loading = true
-    }
-    if (event instanceof NavigationEnd) {
-      console.log("Navigation End")
-      this.loading = false
-    }
-
-    // Set loading state to false in both of the below events to hide the spinner in case a request fails
-    if (event instanceof NavigationCancel) {
-      this.loading = false
-    }
-    if (event instanceof NavigationError) {
-      this.loading = false
-    }
-  }
-
+  
 }

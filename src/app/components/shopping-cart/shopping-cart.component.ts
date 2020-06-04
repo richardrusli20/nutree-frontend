@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { MatConfirmDialogComponent } from 'src/app/components/mat-confirm-dialog/mat-confirm-dialog.component'
+import { MatConfirmDialogComponent } from 'src/app/components/shopping-cart/mat-confirm-dialog/mat-confirm-dialog.component'
 import { faOtter } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -74,7 +74,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   changed(e,foodlistid){
-    console.log(e.target.value + "foodlist id = " + foodlistid)
+    console.log(e + "foodlist id = " + foodlistid)
     this.foodlistQuantity=e.target.value;
     this.addToCart(foodlistid,e.target.value)
   }
@@ -119,7 +119,10 @@ export class ShoppingCartComponent implements OnInit {
 
       this.api.addToCart(foodlistid,qty).subscribe(
           data=>{
-            console.log(data)
+            // console.log(data)
+            this.cartItems = data.customer_bag;
+            this.setTotalPrice(this.cartItems,this.total_price);
+            this.dataLoaded = Promise.resolve(true);
           },
           error=>{
             console.log(error)
@@ -147,7 +150,7 @@ export class ShoppingCartComponent implements OnInit {
 
   updateQuantityAPI(){
     console.log("updateQuantityAPI")
-    console.log(this.cartItems[0].foodlist)
+    // console.log(this.cartItems[0].foodlist)
     for(var i = 0; i <= this.cartItems.length ; i++){
       // this.addToCart(this.cartItems[i].foodlist.id,this.cartItems[i].quantity)
     }
