@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable,Subject } from 'rxjs';
+import { Observable,Subject, BehaviorSubject } from 'rxjs';
+import { AngularFireDatabase} from '@angular/fire/database';
+
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+
+  private messageSource = new BehaviorSubject('default message');
+  sharedURL = this.messageSource.asObservable();
 
   subject = new Subject();
   
@@ -94,6 +99,11 @@ export class ApiService {
     const body = {foodlist_pk:foodlistid,quantity:qty}
     return this.http.post(this.baseurl + '/api/foodlist/add-to-bag/', body,
     {headers: this.httpHeadersAuth});
+  }
+
+  deleteFoodlist(foodlistid):Observable<any>{
+    return this.http.post(this.baseurl + '/api/foodlist/' + foodlistid + '/delete/',
+    {headers:this.httpHeadersAuth});
   }
 
   deleteCartItem(foodlistid):Observable<any>{
@@ -184,6 +194,10 @@ export class ApiService {
   }
   getMsg(){
     return this.subject.asObservable()
+  }
+
+  setSharedURL(url:string){
+    this.messageSource.next(url);
   }
 
 

@@ -22,10 +22,12 @@ export class ShoppingCartComponent implements OnInit {
   dataLoaded: Promise<boolean>;
   // qty=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
   foodlistQuantity = 0;
+  zeroQty=false;
+  
   constructor(private api:ApiService, private router:Router,private dialog:MatDialog) { 
     this.getCustomerBag();
     this.getCustomerProfile();
-    
+  
     this.foodlist={available_date:"",description:"",}
   }
 
@@ -137,9 +139,10 @@ export class ShoppingCartComponent implements OnInit {
     }
     console.log(this.cartItems[index])
     this.cartItems[index].quantity = this.cartItems[index].quantity - 1;
-    if(this.cartItems[index].quantity == 0){
+    if(this.cartItems[index].quantity == 1){
       // add popup box "Are you sure? confirm, no"
-      this.deleteCartItem(this.cartItems[index].foodlist.id)
+      // this.deleteCartItem(this.cartItems[index].foodlist.id)
+      this.zeroQty = true;
     }
     this.setTotalPrice(this.cartItems,this.total_price);
   }

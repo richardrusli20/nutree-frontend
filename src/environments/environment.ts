@@ -3,8 +3,19 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig: {
+    apiKey: "AIzaSyBJzdpjppsggJqPRREXR3PcnwNv2FeS0Kk",
+    authDomain: "nutree-project.firebaseapp.com",
+    databaseURL: "https://nutree-project.firebaseio.com",
+    projectId: "nutree-project",
+    storageBucket: "nutree-project.appspot.com",
+    messagingSenderId: "193841049371",
+    appId: "1:193841049371:web:84cb88e99f1a967f656dbe"
+  }
 };
+
+
 
 /*
  * For easier debugging in development mode, you can import the following file

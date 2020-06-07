@@ -18,12 +18,14 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { CheckoutComponent } from './components/shopping-cart/checkout/checkout.component';
 import { PaymentComponent } from './components/shopping-cart/payment/payment.component';
 import { OrdersComponent } from './components/orders/orders.component';
+import { UploaderComponent } from './uploader/uploader.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
   { path: 'profile', component:ProfileComponent},
   { path: 'orders', component:OrdersComponent},
+ 
   { path: 'dietprogram', component:DietprogramComponent },
   { path: 'dashboard', component:DashboardComponent },
   { path: 'dietprogram/:id', component:DietprogramDetailComponent },
@@ -68,5 +70,6 @@ export const routingComponents =
   DietprogramDetailComponent, 
   LoginComponent, 
   RegisterComponent, 
-  RegisterVendorComponent
+  RegisterVendorComponent,
+  UploaderComponent
 ]

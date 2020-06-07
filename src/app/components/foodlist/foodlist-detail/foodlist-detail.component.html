@@ -61,8 +61,8 @@
                                 </div>
 
                                 <div class="vendor-update-delete" *ngIf="api.getRole()=='vendor'">
-                                    <button (click)="updateFoodlist(foodListDetail)" class="btn btn-success">Update</button>
-
+                                    <button (click)="updateFoodlist()" class="btn btn-success">Update</button>
+                                    <button (click)="deleteFoodlist()" class="btn btn-danger">Delete</button> 
                                 </div>
                             </form>
                             <!-- Customer -->

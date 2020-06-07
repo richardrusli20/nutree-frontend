@@ -94,9 +94,23 @@ export class FoodlistDetailComponent implements OnInit {
   }
 
 
-  updateFoodlist(foodlist){
-    console.log(foodlist.id);
+  updateFoodlist(){
+    
     this.router.navigate(['/foodlist/add',this.foodListId])
+  }
+
+  deleteFoodlist(){
+    console.log("delete foodlist")
+    this.api.deleteFoodlist(this.foodListId).subscribe(
+        data=>{
+          console.log(data)
+          this.router.navigate(['/foodlist'])
+        },
+        error=>{
+          console.log(error)
+        }
+      )
+    
   }
 
   changed(event){

@@ -2,6 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DeferLoadModule } from '@trademe/ng-defer-load';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
+import { environment } from 'src/environments/environment';
 
 
 import { AppRoutingModule,routingComponents } from './app-routing.module';
@@ -42,6 +50,9 @@ import { PaymentComponent } from './components/shopping-cart/payment/payment.com
 import { PaymentDetailDialogComponent } from './components/shopping-cart/payment/payment-detail-dialog/payment-detail-dialog.component';
 import { MatDialogChangeAddressComponent } from './components/shopping-cart/mat-dialog-change-address/mat-dialog-change-address.component';
 import { OrdersComponent } from './components/orders/orders.component';
+import { DropzoneDirective } from './dropzone.directive';
+import { UploaderComponent } from './uploader/uploader.component';
+import { UploadTaskComponent } from './upload-task/upload-task.component';
 
 
 @NgModule({
@@ -69,6 +80,9 @@ import { OrdersComponent } from './components/orders/orders.component';
     PaymentDetailDialogComponent,
     MatDialogChangeAddressComponent,
     OrdersComponent,
+    DropzoneDirective,
+    UploaderComponent,
+    UploadTaskComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,7 +103,15 @@ import { OrdersComponent } from './components/orders/orders.component';
     MatDialogModule,
     MatGridListModule,
     MatListModule,
-    DeferLoadModule
+    DeferLoadModule,
+    // Firestore
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    AngularFireMessagingModule,
+    AngularFireDatabaseModule,
+    AngularFireFunctionsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

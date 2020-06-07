@@ -21,8 +21,11 @@ export class FoodlistAddComponent implements OnInit {
   foods = [];
   dietPrograms=[];
   vendor;
-  foodlist={foodlist_name:'',diet_program:{id:0},foods:[{id:0,food_name:''}],price:0,description:'',available_date:'yyy-mm-dd'};
+  foodlist={foodlist_name:'',diet_program:{id:0},foods:[{id:0,food_name:''}],price:0,description:'',available_date:'yyy-mm-dd',logo:''};
   foodListId;
+  selectedFile = null;
+  sharedURL:string;
+  uploaded:boolean;
 
   // foodlist={};
   // foods_id=[];
@@ -44,10 +47,12 @@ export class FoodlistAddComponent implements OnInit {
       price:['',Validators.required],
       calories:['',Validators.required],
       available_date:['',Validators.required],
-      logo:'',
+      logo:['',Validators.required],
     });
     this.getVendorFoodlistAdd();
-    
+
+    this.api.sharedURL.subscribe(message => this.sharedURL = message)
+
   }
 
   getFoodlists(){
@@ -60,13 +65,13 @@ export class FoodlistAddComponent implements OnInit {
         this.foodlist = data
         this.form = this.formBuilder.group({
           foodlist_name:[this.foodlist.foodlist_name,Validators.required],
-          foods: new FormArray([], this.minSelectedCheckboxes(1)),
+          foods: [this.foodlist.foods, [this.minSelectedCheckboxes(1),Validators.required]],
           dietprogram_pk:[this.foodlist.diet_program.id,Validators.required],
           description:[this.foodlist.description,[Validators.required,Validators.minLength(20)]],
           price:[this.foodlist.price,Validators.required],
           calories:[this.foodlist,Validators.required],
           available_date:[this.foodlist.available_date,Validators.required],
-          logo:'',
+          logo:[this.foodlist.logo,Validators.required],
         });
       },
       error => {
@@ -96,6 +101,7 @@ export class FoodlistAddComponent implements OnInit {
     this.api.createFoodlist(foodlist,foods_id).subscribe(
       data => {
         console.log("foodlist created successfully");
+        this.router.navigate['/foodlist'];
       },
       error => {
         console.log(error);
@@ -111,9 +117,14 @@ export class FoodlistAddComponent implements OnInit {
     console.log(selectedFoodids);
     console.log("---thisform---");
     console.log(this.form.value);
+    console.log(this.sharedURL);
     this.createFoodlist(this.form.value,selectedFoodids);
   }
 
+  public checkIfSelected(currentId){
+    // if(!this.validation) return;
+    // return this.validation.furtherAdditions.some(id => id == currentId);
+}
 
   private addCheckboxes(foods) {
     
@@ -139,6 +150,14 @@ export class FoodlistAddComponent implements OnInit {
   
     return validator;
   }
+
+  onFileSelected(event){
+    this.selectedFile = event.target.files[0];
+  }
+  onUpload(){
+
+  }
+
 
   ngOnInit(): void {
   }

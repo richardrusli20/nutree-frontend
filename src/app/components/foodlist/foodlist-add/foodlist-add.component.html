@@ -18,7 +18,7 @@
 							<span class="input-group-text"><i class="fa fa-user"></i></span>
 						</div>
 						<select formControlName="dietprogram_pk" id="dietprogram">
-							<option  [value]="dietPrograms[foodlist.diet_program.id].id" *ngFor="let dietprogram of dietPrograms;let i = index">{{dietPrograms[i].dietProgram_name}}</option >
+							<option  value="foodlist.diet_program.id" *ngFor="let dietprogram of dietPrograms;let i = index">{{dietPrograms[i].dietProgram_name}}</option >
 						</select>
 					</div>
 					<div class="input-fields">
@@ -28,7 +28,7 @@
 								<span class="input-group-text"></span>
 							</div>
 							<div formArrayName="foods" *ngFor="let food of form.controls.foods['controls']; let i = index">
-								<input type="checkbox" [formControlName]="i"  >{{foods[i].food_name}}
+								<input type="checkbox" [selected]="checkIfSelected(food.id)" [formControlName]="i"  >{{foods[i].food_name}}
 							</div>
 						</div>
 					</div>
@@ -76,7 +76,8 @@
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fa fa-key"></i></span>
 							</div>
-							<input formControlName="logo" type="text"   placeholder="logo"   >
+							<app-uploader></app-uploader>
+							<input formControlName="logo" type="text" value = "{{sharedURL}}"  >
 						</div>
 					</div>
 		
