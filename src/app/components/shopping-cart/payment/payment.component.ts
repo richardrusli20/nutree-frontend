@@ -55,6 +55,20 @@ export class PaymentComponent implements OnInit {
     );
   }
 
+
+  payNow = () => {
+    this.api.payNow().subscribe(
+      data=> {
+        console.log(data);
+        document.location.href = data.transaction_redirect_url;
+        // this.router.navigate([data.transaction_redirect_url])
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
   ngOnInit(): void {
   }
 

@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable,Subject, BehaviorSubject } from 'rxjs';
 import { AngularFireDatabase} from '@angular/fire/database';
+import * as firebase from 'firebase';
+import { Upload } from 'src/app/models/upload';
 
 
 
@@ -11,16 +13,18 @@ import { AngularFireDatabase} from '@angular/fire/database';
 })
 export class ApiService {
 
-  private messageSource = new BehaviorSubject('default message');
+  private messageSource = new BehaviorSubject('null');
   sharedURL = this.messageSource.asObservable();
+  private basePath:string = '/uploads';
+  private uploadTask:firebase.storage.UploadTask;
 
   subject = new Subject();
   
   baseurl = "http://127.0.0.1:8000";
   httpHeaders = new HttpHeaders({'Content-type' : 'application/json'});
-  httpHeadersAuth = new HttpHeaders({'Content-type' : 'application/json','Authorization' : "token " + localStorage.getItem('token')});
+  httpHeadersAuth = new HttpHeaders({'Content-type' : 'application/json','Authorization' : "token " + this.getToken()});
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router,private db:AngularFireDatabase) { }
 
   // Get all diet Program
   getAllDietProgram():Observable<any>{
@@ -70,8 +74,8 @@ export class ApiService {
     {headers:this.httpHeadersAuth});
   }
 
-  createFoodlist(foodList,foods_id):Observable<any>{
-    const body = { dietprogram_pk: foodList.dietprogram_pk,foodlist_name:foodList.foodlist_name,food:foods_id,description:foodList.description,price:foodList.price, calories:foodList.calories, available_date:foodList.available_date };
+  createFoodlist(foodList,foods_id,sharedURL):Observable<any>{
+    const body = { dietprogram_pk: foodList.dietprogram_pk,foodlist_name:foodList.foodlist_name,food:foods_id,description:foodList.description,price:foodList.price, calories:foodList.calories, available_date:foodList.available_date, foodlist_logo:sharedURL };
     return this.http.post(this.baseurl + '/api/foodlist/create/', body,
     {headers: this.httpHeadersAuth});
   }
@@ -118,6 +122,11 @@ export class ApiService {
     {headers:this.httpHeadersAuth})
   }
 
+  payNow():Observable<any>{
+    const body = {delivery_cost:"5000"}
+    return this.http.post(this.baseurl + '/api/customer/checkout/',body,
+    {headers:this.httpHeadersAuth})
+  }
   
   getCustomerProfile():Observable<any>{
     // const body = { vendor_pk: vendor.vendor_pk };
@@ -136,13 +145,17 @@ export class ApiService {
     return this.http.post(this.baseurl + '/api/customer/address/update/', body,
     {headers:this.httpHeadersAuth});
   }
+
   // Customer
-
-
   createCustomer(customer): Observable<any> {
     const body = {customer_name: customer.customer_name , customer_email: customer.customer_email, password: customer.password, password2: customer.password2 };
     return this.http.post(this.baseurl + '/api/register/customer/', body,
     {headers: this.httpHeaders});
+  }
+
+  confirmCustomer(userid,token):Observable<any>{
+    return this.http.get(this.baseurl + '/api/register/activate/' + userid + '/' + token + '/',
+    {headers:this.httpHeaders})
   }
   createVendor(vendor): Observable<any> {
     const body = {vendor_name:vendor.vendor_name, vendor_email:vendor.vendor_email, vendor_phone:vendor.vendor_phone, password:vendor.password, password2:vendor.password2};
@@ -155,6 +168,7 @@ export class ApiService {
     {headers: this.httpHeaders});
   }
 
+
   logout():Observable<any> {
     return this.http.post(this.baseurl + '/api/logout/',
     {headers:this.httpHeaders});
@@ -163,28 +177,41 @@ export class ApiService {
 
 
   getToken(){
-    return localStorage.getItem('token')
+    var data = JSON.parse(localStorage.getItem('data'))
+    // console.log(data)
+    if(!data){
+      return null
+    }
+    else{
+      return data['token']
+    }
   }
   
   loggedIn(){
-    return !!localStorage.getItem('token')
+    var data = JSON.parse(localStorage.getItem('data'))
+    return !!data
   }
   loggedOut() {
     localStorage.clear()
-    // localStorage.removeItem('token')
-    // localStorage.removeItem('role')
-    // localStorage.removeItem('role_pk')
-    // localStorage.removeItem('username')
     this.router.navigate(['/'])
   }
+
   getRole(){
-    return localStorage.getItem('role')
+    var data = JSON.parse(localStorage.getItem('data'))
+    // console.log(data)
+    if(!data){
+      return null
+    }
+    else{
+      return data['role']
+    }
   }
-  getRolePK(){
-    return localStorage.getItem('role_pk')
-  }
+  // getRolePK(){
+  //   return localStorage.getItem('role_pk')
+  // }
   getUsername(){
-    return localStorage.getItem('username')
+    var data = JSON.parse(localStorage.getItem('data'))
+    return data.username
   }
 
   // messenger
@@ -200,5 +227,29 @@ export class ApiService {
     this.messageSource.next(url);
   }
 
+  pushUpload(upload:Upload){
+    let storageRef = firebase.storage().ref();
+    this.uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
+
+    this.uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+      (snapshot) => {
+        upload.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      },
+      (error) =>{
+        console.log(error)
+      },
+      () => {
+        
+        this.uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+          upload.url = downloadURL;
+          this.setSharedURL(upload.url);
+          console.log('URL:' + upload.url);
+        });
+        // upload.name = upload.file.name
+        // this.setSharedURL(upload.url);
+        
+        // this.saveFileData(upload)
+      });
+  }
 
 }

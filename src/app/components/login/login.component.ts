@@ -32,15 +32,9 @@ export class LoginComponent implements OnInit {
   customerLogin = () => {
     this.api.login(this.loginCustomer).subscribe(
       data => {
-        // this.api.saveSession(data.token,data.role,data.username)
-        this.login = data;
-        console.log(this.login);
-        localStorage.setItem('token',data.token);
-        localStorage.setItem('role',data.role);
-        this.router.navigate([''])
-        // localStorage.setItem('role_pk',data.role_pk);
-        // localStorage.setItem('username',data.username);
-        
+        this.login = JSON.stringify(data);
+        localStorage.setItem('data',this.login);
+        this.router.navigate(['/'])
       },
       error => {
         console.log(error);

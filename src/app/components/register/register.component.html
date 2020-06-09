@@ -1,4 +1,4 @@
-<div *ngIf="customer.customer_created == false; else success" class="container">
+<div *ngIf="customer.user_created != true; else success" class="container">
 	<div class="sub-container">
 			 <!-- <form class="login-form" method="POST" action="">  -->
 			 <div class="login-form">
@@ -52,11 +52,16 @@
 </div>
 
 <ng-template #success>
-	<div *ngIf="customer.customer_created" class="container">
+	<div class="container">
 		
-			Customer Created Success
+			Please check your email for Confirmation
 
 	</div>
 </ng-template>
+
+<div *ngIf = "confirmed.is_activated == true">
+	Congratulations your account is activated 
+	redirecting to login page.
+</div>
 
 

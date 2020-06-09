@@ -18,7 +18,8 @@
 							<span class="input-group-text"><i class="fa fa-user"></i></span>
 						</div>
 						<select formControlName="dietprogram_pk" id="dietprogram">
-							<option  value="foodlist.diet_program.id" *ngFor="let dietprogram of dietPrograms;let i = index">{{dietPrograms[i].dietProgram_name}}</option >
+							<option  [value]="dietPrograms[i].id" *ngFor="let dietprogram of dietPrograms;let i = index">{{dietPrograms[i].dietProgram_name}}</option >
+							<!-- <option  value="foodlist.diet_program.id" *ngFor="let dietprogram of dietPrograms;let i = index">{{dietPrograms[i].dietProgram_name}}</option > -->
 						</select>
 					</div>
 					<div class="input-fields">
@@ -28,7 +29,7 @@
 								<span class="input-group-text"></span>
 							</div>
 							<div formArrayName="foods" *ngFor="let food of form.controls.foods['controls']; let i = index">
-								<input type="checkbox" [selected]="checkIfSelected(food.id)" [formControlName]="i"  >{{foods[i].food_name}}
+								<input type="checkbox" [formControlName]="i"  >{{foods[i].food_name}}
 							</div>
 						</div>
 					</div>
@@ -76,8 +77,10 @@
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fa fa-key"></i></span>
 							</div>
-							<app-uploader></app-uploader>
-							<input formControlName="logo" type="text" value = "{{sharedURL}}"  >
+							<input type="file" (change)="onFileSelected($event)"/>
+							Progress: {{currentUpload?.name}} | {{currentUpload?.progress}}% complete
+							<!-- <app-uploader></app-uploader> -->
+							<!-- <input formControlName="logo" type="text" value = "{{sharedURL}}"  > -->
 						</div>
 					</div>
 		

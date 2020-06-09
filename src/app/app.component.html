@@ -16,7 +16,7 @@
           <mat-icon routerLink="/cart" routerLinkActive="active">shopping_cart</mat-icon>
           <a mat-flat-button routerLink="/orders" routerLinkActive="active">My Orders</a>
           <a mat-flat-button routerLink="/profile" routerLinkActive="active">My Profile</a>
-          <a mat-flat-button *ngIf="api.loggedIn()" (click)="loggedOut()" routerLink="/" routerLinkActive="active"> logout</a>
+          <a mat-flat-button (click)="loggedOut()" routerLink="/" routerLinkActive="active"> logout</a>
           
 
           <!-- <mat-menu #appMenu="matMenu">
@@ -47,7 +47,7 @@
               <li><a (click)="sidenav.toggle()" mat-flat-button routerLink="" routerLinkActive="active">Home</a></li>
               <li><a (click)="sidenav.toggle()" mat-flat-button routerLink="/profile" routerLinkActive="active">My Profile</a></li>
               <li><a (click)="sidenav.toggle()" mat-flat-button routerLink="/orders" routerLinkActive="active">My Orders</a></li>
-              <li><a (click)="sidenav.toggle()"  mat-flat-button *ngIf="api.loggedIn()" (click)="loggedOut()" routerLink="/" routerLinkActive="active"> logout</a></li>
+              <li><a (click)="sidenav.toggle()"  mat-flat-button (click)="loggedOut()" routerLink="/" routerLinkActive="active"> logout</a></li>
             </ul>
           </div>
         </mat-sidenav>
@@ -109,7 +109,7 @@
               <li><a (click)="sidenav.toggle()" mat-flat-button routerLink="" routerLinkActive="active">Dashboard</a></li>
               <li><a (click)="sidenav.toggle()" mat-flat-button routerLink="/foods" routerLinkActive="active">Foods</a></li>
               <li><a (click)="sidenav.toggle()" mat-flat-button routerLink="/foodlist" routerLinkActive="active">Foodlist</a></li>
-              <li><a (click)="sidenav.toggle()"  mat-flat-button *ngIf="api.loggedIn()" (click)="loggedOut()" routerLink="/" routerLinkActive="active"> logout</a></li>
+              <li><a (click)="sidenav.toggle()"  mat-flat-button  (click)="loggedOut()" routerLink="/" routerLinkActive="active"> logout</a></li>
             </ul>
           </div>
         </mat-sidenav>
@@ -123,7 +123,7 @@
   </mat-sidenav-container>
 </div>
 
-<div *ngIf="!api.getRole()">
+<div *ngIf="api.getRole()==undefined">
   <mat-toolbar class="toolbar">
     <div fxShow="true" fxHide.gt-sm="true">
       <div class="menu-bar" fxShow="true" fxHide.gt-sm="true">
@@ -139,8 +139,8 @@
     <span class="example-spacer"></span>
   <div class="menu" fxShow="true" fxHide.lt-md="true">
     <!-- The following menu items will be hidden on both SM and XS screen sizes -->
-    <a mat-flat-button *ngIf="!api.loggedIn()" routerLink="/register" routerLinkActive="active"> Register </a>
-    <a mat-flat-button *ngIf="!api.loggedIn()" routerLink="/login" routerLinkActive="active"> Login</a>
+    <a mat-flat-button  routerLink="/register" routerLinkActive="active"> Register </a>
+    <a mat-flat-button  routerLink="/login" routerLinkActive="active"> Login</a>
     
     <mat-menu #appMenu="matMenu">
         <button mat-menu-item>Settings</button>

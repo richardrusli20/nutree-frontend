@@ -98,9 +98,9 @@
                
                                         <li><a routerLink="/foods" routerLinkActive="active">Foods</a></li>
                                         <li><a routerLink="/foodlist" routerLinkActive="active">FoodList</a></li>
-                                        <li><a *ngIf="!authService.loggedIn()" routerLink="/register" routerLinkActive="active"> Register </a></li>
-                                        <li><a *ngIf="!authService.loggedIn()" routerLink="/login" routerLinkActive="active"> Login</a></li>
-                                        <li><a *ngIf="authService.loggedIn()" (click)="authService.logoutUser()" > Log Out</a></li>
+                                        <!-- <li><a *ngIf="!authService.loggedIn()" routerLink="/register" routerLinkActive="active"> Register </a></li>
+                                        <li><a *ngIf="!authService.loggedIn()" routerLink="/login" routerLinkActive="active"> Login</a></li> -->
+                                        <li><a  (click)="authService.logoutUser()" > Log Out</a></li>
                                     </ul>
                                 </nav>
                             </div>

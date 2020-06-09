@@ -25,7 +25,7 @@ import { BannerCarouselComponent } from './components/banner-carousel/banner-car
 import { DietprogramDetailComponent } from './components/dietprogram-detail/dietprogram-detail.component';
 import { LoginComponent } from './components/login/login.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { RegisterVendorComponent } from './components/register-vendor/register-vendor.component';
+import { RegisterVendorComponent } from './components/register/register-vendor/register-vendor.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { FoodlistComponent } from './components/foodlist/foodlist.component';
 import { FoodsComponent } from './components/foods/foods.component';

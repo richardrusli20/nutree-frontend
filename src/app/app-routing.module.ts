@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DietprogramComponent } from './components/dietprogram/dietprogram.component';
 import { RegisterComponent } from './components/register/register.component';
-import { RegisterVendorComponent } from './components/register-vendor/register-vendor.component';
+import { RegisterVendorComponent } from './components/register/register-vendor/register-vendor.component';
 import { DietprogramDetailComponent } from './components/dietprogram-detail/dietprogram-detail.component';
 import { LoginComponent } from './components/login/login.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
@@ -25,11 +25,11 @@ const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
   { path: 'profile', component:ProfileComponent},
   { path: 'orders', component:OrdersComponent},
- 
   { path: 'dietprogram', component:DietprogramComponent },
   { path: 'dashboard', component:DashboardComponent },
   { path: 'dietprogram/:id', component:DietprogramDetailComponent },
   { path: 'register', component:RegisterComponent },
+  { path: 'register/activate/:userid/:token', component:RegisterComponent},
   { path: 'register/vendor', component:RegisterVendorComponent },
   { path: 'login', component:LoginComponent },
   { path: 'welcome', component:WelcomeComponent },

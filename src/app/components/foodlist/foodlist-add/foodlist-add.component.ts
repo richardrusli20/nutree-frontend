@@ -8,6 +8,7 @@ import {
   FormControl,
   ValidatorFn,
   Validators} from '@angular/forms';
+import { Upload } from 'src/app/models/upload';
 
 @Component({
   selector: 'app-foodlist-add',
@@ -23,9 +24,10 @@ export class FoodlistAddComponent implements OnInit {
   vendor;
   foodlist={foodlist_name:'',diet_program:{id:0},foods:[{id:0,food_name:''}],price:0,description:'',available_date:'yyy-mm-dd',logo:''};
   foodListId;
-  selectedFile = null;
+  selectedFile: FileList;
   sharedURL:string;
   uploaded:boolean;
+  currentUpload:Upload;
 
   // foodlist={};
   // foods_id=[];
@@ -51,7 +53,6 @@ export class FoodlistAddComponent implements OnInit {
     });
     this.getVendorFoodlistAdd();
 
-    this.api.sharedURL.subscribe(message => this.sharedURL = message)
 
   }
 
@@ -97,8 +98,8 @@ export class FoodlistAddComponent implements OnInit {
     );
   }
 
-  createFoodlist = (foodlist,foods_id) => {
-    this.api.createFoodlist(foodlist,foods_id).subscribe(
+  createFoodlist = (foodlist,foods_id,sharedURL) => {
+    this.api.createFoodlist(foodlist,foods_id,sharedURL).subscribe(
       data => {
         console.log("foodlist created successfully");
         this.router.navigate['/foodlist'];
@@ -117,8 +118,9 @@ export class FoodlistAddComponent implements OnInit {
     console.log(selectedFoodids);
     console.log("---thisform---");
     console.log(this.form.value);
-    console.log(this.sharedURL);
-    this.createFoodlist(this.form.value,selectedFoodids);
+    this.onUpload(selectedFoodids);
+    // console.log(this.sharedURL);
+    
   }
 
   public checkIfSelected(currentId){
@@ -127,7 +129,6 @@ export class FoodlistAddComponent implements OnInit {
 }
 
   private addCheckboxes(foods) {
-    
     foods.forEach((o, i) => {
       const control = new FormControl(i === 0); // if first item set to true, else false
       (this.form.controls.foods as FormArray).push(control);
@@ -152,11 +153,31 @@ export class FoodlistAddComponent implements OnInit {
   }
 
   onFileSelected(event){
-    this.selectedFile = event.target.files[0];
+    this.selectedFile = event.target.files;
   }
-  onUpload(){
 
+  onUpload(selectedFoodids){
+    console.log(this.selectedFile.item(0))
+    let file = this.selectedFile.item(0)
+    this.currentUpload = new Upload(file);
+    this.api.pushUpload(this.currentUpload)
+
+      this.api.sharedURL.subscribe(
+        message => {
+          if(message == 'null'){
+            console.log("loading")
+          }
+          else{
+            this.sharedURL = message
+            this.createFoodlist(this.form.value,selectedFoodids,this.sharedURL)
+          }
+          
+          
+      }
+      )
+    // }
   }
+
 
 
   ngOnInit(): void {
