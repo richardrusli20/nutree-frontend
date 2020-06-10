@@ -16,7 +16,7 @@ import {
 export class FoodlistDetailComponent implements OnInit {
 
   // foodList=[];
-  foodListDetail={foodlist_name:"",description:"", available_date:"",price:0,diet_program:{id:0,dietProgram_name:''},foods:[{id:0,food_name:''}],vendor:{vendor_name:''}};
+  foodListDetail={foodlist_name:"",description:"", available_date:"",price:0,diet_program:{id:0,dietProgram_name:''},foods:[{id:0,food_name:''}],vendor:{vendor_name:''},foodlist_logo:''};
   foodListId=0;
   foods=[];
   cartItems=[{quantity:0,foodlist:{id:0}}];

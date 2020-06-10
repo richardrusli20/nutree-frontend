@@ -122,6 +122,11 @@ export class ApiService {
     {headers:this.httpHeadersAuth})
   }
 
+  getCustomerOrder():Observable<any>{
+    return this.http.get(this.baseurl + '/api/customer/order/',
+    {headers:this.httpHeadersAuth})
+  }
+
   payNow():Observable<any>{
     const body = {delivery_cost:"5000"}
     return this.http.post(this.baseurl + '/api/customer/checkout/',body,
@@ -174,7 +179,10 @@ export class ApiService {
     {headers:this.httpHeaders});
   }
 
-
+  paymentSuccess():Observable<any> {
+    return this.http.get(this.baseurl + '/api/payment/success/',
+    {headers:this.httpHeadersAuth});
+  }
 
   getToken(){
     var data = JSON.parse(localStorage.getItem('data'))

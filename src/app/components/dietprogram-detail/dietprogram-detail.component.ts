@@ -30,12 +30,12 @@ export class DietprogramDetailComponent implements OnInit {
       data => {
         this.foodlist=data.foodlist
         this.dietprogram_name=data.dietprogram_name
-        for (let i = 0; i < this.foodlist.length; i++) {
-          const url = 'http://via.placeholder.com/500x450?text=Image No ' + (i + 1);
-            this.foodlist[i].foodlist_logo = url
-            this.foodlist[i].show = false
+        // for (let i = 0; i < this.foodlist.length; i++) {
+        //   const url = 'http://via.placeholder.com/500x450?text=Image No ' + (i + 1);
+        //     this.foodlist[i].foodlist_logo = url
+        //     this.foodlist[i].show = false
 
-        }
+        // }
         console.log(this.foodlist)
       },
       error => {

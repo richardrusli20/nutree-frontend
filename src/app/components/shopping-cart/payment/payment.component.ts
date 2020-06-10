@@ -61,10 +61,22 @@ export class PaymentComponent implements OnInit {
       data=> {
         console.log(data);
         document.location.href = data.transaction_redirect_url;
+        this.paymentSuccess();
         // this.router.navigate([data.transaction_redirect_url])
       },
       error => {
         console.log(error);
+      }
+    )
+  }
+
+  paymentSuccess = () =>{
+    this.api.paymentSuccess().subscribe(
+      data=> {
+        console.log(data)
+      },
+      error => {
+        console.log(error)
       }
     )
   }
