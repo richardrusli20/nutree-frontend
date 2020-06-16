@@ -15,19 +15,19 @@
                     </div>  -->
                 <h4>Cart</h4>
                 
-                <div class="card-list" *ngFor="let custBag of cartItems;let i = index">
+                <div class="card-list" *ngFor="let custBag of cartItems;let i = index" >
                     <hr>
                 <!-- <img style="height:30px;width:auto;"src="assets/img/grey-circle-noimage.png"/> -->
                 <!-- <span>{{custBag.foodlist.vendor.vendor_name}}</span> -->
                 <!-- <hr> -->
                 <div class="col">
-                    <img src="assets/img/slimfitphoto.jpg"
+                    <img src="{{custBag.foodlist.foodlist_logo}}"
                         class="img-checkout">
                 </div>
                 <div class="col">
                 <div class="foodlist-info" >
                         <!-- <h4>ID {{custBag.foodlist.id}}</h4> -->
-                        <p><strong>{{custBag.foodlist.foodlist_name}}</strong></p>
+                        <p (click)="goToFoodlist(custBag.foodlist.id)"><strong>{{custBag.foodlist.foodlist_name}}</strong></p>
                         
                     <!-- <p>Available date:  {{custBag.foodlist.available_date}}</p> -->
                     <!-- <p>Qty : <input type="number" value="{{custBag.quantity}}"/></p> -->

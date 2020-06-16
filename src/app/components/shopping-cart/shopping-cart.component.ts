@@ -43,9 +43,10 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   getCustomerBag = () => {
+    if(this.api.loggedIn()){
       this.api.getCustomerBag().subscribe(
         data => {
-          // console.log(data.customer_bag)
+          console.log(data.customer_bag)
           this.cartItems = data.customer_bag;
           this.setTotalPrice(this.cartItems,this.total_price);
           this.dataLoaded = Promise.resolve(true);
@@ -56,6 +57,10 @@ export class ShoppingCartComponent implements OnInit {
           console.log(error);
         }
       );
+    }
+    else{
+      console.log("user not logged in")
+    }
   }
 
   deleteCartItem = (foodlistid) => {
@@ -73,6 +78,10 @@ export class ShoppingCartComponent implements OnInit {
       }
     });
 
+  }
+
+  goToFoodlist(foodlistid){
+    this.router.navigate(['/foodlist/detail/',foodlistid])
   }
 
   changed(e,foodlistid){

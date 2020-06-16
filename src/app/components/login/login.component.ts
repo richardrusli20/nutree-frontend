@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   form:FormGroup;
   login;
   loginCustomer;
+  error={error:''};
 
   constructor(private api: ApiService,private router:Router, private formBuilder : FormBuilder) {
     this.login = {login_success:false};
@@ -29,6 +30,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  get username() { return this.form.get('username'); }
+  get password() { return this.form.get('password'); }
+
   customerLogin = () => {
     this.api.login(this.loginCustomer).subscribe(
       data => {
@@ -37,12 +41,24 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/'])
       },
       error => {
-        console.log(error);
+        this.error = error.error;
+        // console.log(error.error);
+        if(error.status == 500){
+          this.error.error = "Email not exist"
+        }
       }
     );
   }
   customerLogins(){
-    this.customerLogin()
+    if(this.form.valid){
+      this.customerLogin()
+      this.error.error = 'please enter your email';
+      console.log('login form valid')
+    }
+    else{
+      console.log('login form invalid')
+    }
+    
   }
 
   ngOnInit(): void {

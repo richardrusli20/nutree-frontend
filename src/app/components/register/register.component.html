@@ -1,21 +1,21 @@
 <div *ngIf="customer.user_created != true; else success" class="container">
 	<div class="sub-container">
-			 <!-- <form class="login-form" method="POST" action="">  -->
-			 <div class="login-form">
+			 <form [formGroup]="form" class="login-form" method="POST" action="" (ngSubmit)="createCustomer()"> 
+			 <!-- <div class="login-form"> -->
 				<div class="input-fields">
 					<label class="label">Full Name</label>
 					<div class="input-group mb-3">
 						<div class="input-group-append">
 							<!-- <span class="input-group-text"><i class="fa fa-envelope"></i></span> -->
 						</div>
-						<input  type="text" placeholder="please input customer name" [(ngModel)]="selectedCustomer.customer_name" >
+						<input  type="text" placeholder="please input customer name" formControlName="customer_name" >
 					</div>
 					<label class="label">Email</label>
 					<div class="input-group mb-3">
 						<div class="input-group-append">
 							<!-- <span class="input-group-text"><i class="fa fa-user"></i></span> -->
 						</div>
-						<input type="text" placeholder="please input customer email" [(ngModel)]="selectedCustomer.customer_email" >
+						<input type="text" placeholder="please input customer email" formControlName="customer_email" >
 					</div>
 					<div class="input-fields">
 						<label class="label">Password</label>
@@ -23,7 +23,7 @@
 							<div class="input-group-append">
 								<!-- <span class="input-group-text"><i class="fa fa-key"></i></span> -->
 							</div>
-							<input type="password"   placeholder="password" [(ngModel)]="selectedCustomer.password" >
+							<input type="password"   placeholder="password" formControlName="password" >
 						</div>
 					</div>
 					<div class="input-fields">
@@ -31,7 +31,7 @@
 							<div class="input-group-append">
 								<!-- <span class="input-group-text"><i class="fa fa-key"></i></span> -->
 							</div>
-							<input type="password" placeholder="re-input password" [(ngModel)]="selectedCustomer.password2" >
+							<input type="password" placeholder="re-input password" formControlName="password2" >
 						</div>
 					</div>
 
@@ -44,9 +44,9 @@
 
 				</div>
 				<!--  <input class="btn" type="submit" value="Sign Up">  -->
-			<button class="btn" (click)="createCustomer()">REGISTER</button>
-			</div>
-			 <!-- </form>  -->
+			<button class="btn">REGISTER</button>
+			<!-- </div> -->
+			 </form> 
 
 </div>
 </div>

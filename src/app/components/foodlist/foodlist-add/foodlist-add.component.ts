@@ -22,7 +22,7 @@ export class FoodlistAddComponent implements OnInit {
   foods = [];
   dietPrograms=[];
   vendor;
-  foodlist={foodlist_name:'',diet_program:{id:0},foods:[{id:0,food_name:''}],price:0,description:'',available_date:'yyy-mm-dd',logo:''};
+  foodlist={foodlist_name:'',diet_program:{id:0},foods:[{id:0,food_name:''}],price:0,description:'',available_date:'yyy-mm-dd',foodlist_logo:''};
   foodListId;
   selectedFile: FileList;
   sharedURL:string;
@@ -36,8 +36,10 @@ export class FoodlistAddComponent implements OnInit {
   constructor(private api:ApiService, private formBuilder : FormBuilder, private activeRoute: ActivatedRoute,private router:Router) {
     let id = parseInt(this.activeRoute.snapshot.paramMap.get('id'))
     this.foodListId = id
-    this.getFoodlists()
-    
+    // console.log(this.foodListId); 
+    if(this.foodListId){
+      this.getFoodlist()
+    }
     // this.selectedFoodlist = {foodlist_name:'',foodlist_dietprogram:'',foodlist_foods:[],foodlist_availdate:'',foodlist_price:0,foodlist_logo:''}
     this.vendor = {role_pk:localStorage.getItem('role_pk')}
     // const formControls = this.foods.map(control => new FormControl(false));
@@ -49,21 +51,22 @@ export class FoodlistAddComponent implements OnInit {
       price:['',Validators.required],
       calories:['',Validators.required],
       available_date:['',Validators.required],
-      logo:['',Validators.required],
+      logo:[''],
     });
     this.getVendorFoodlistAdd();
-
-
   }
 
-  getFoodlists(){
-    this.getFoodlist();
-  }
   getFoodlist = () => {
     this.api.getFoodlistDetail(this.foodListId).subscribe(
       data => {
-        console.log(data);
+        // console.log(data);
         this.foodlist = data
+        console.log(this.foodlist.foods)
+
+        // this.form.value.foods
+        // .map((checked, index) => (checked ? this.foodlist.foods[index].id : null))
+        // .filter(value => value !== null);
+
         this.form = this.formBuilder.group({
           foodlist_name:[this.foodlist.foodlist_name,Validators.required],
           foods: [this.foodlist.foods, [this.minSelectedCheckboxes(1),Validators.required]],
@@ -72,7 +75,7 @@ export class FoodlistAddComponent implements OnInit {
           price:[this.foodlist.price,Validators.required],
           calories:[this.foodlist,Validators.required],
           available_date:[this.foodlist.available_date,Validators.required],
-          logo:[this.foodlist.logo,Validators.required],
+          logo:[this.foodlist.foodlist_logo],
         });
       },
       error => {
@@ -102,7 +105,7 @@ export class FoodlistAddComponent implements OnInit {
     this.api.createFoodlist(foodlist,foods_id,sharedURL).subscribe(
       data => {
         console.log("foodlist created successfully");
-        this.router.navigate['/foodlist'];
+        this.router.navigate(['/foodlist']);
       },
       error => {
         console.log(error);
@@ -118,9 +121,12 @@ export class FoodlistAddComponent implements OnInit {
     console.log(selectedFoodids);
     console.log("---thisform---");
     console.log(this.form.value);
-    this.onUpload(selectedFoodids);
-    // console.log(this.sharedURL);
-    
+    if(this.form.valid){
+      this.onUpload(selectedFoodids);
+    }
+    else{
+      console.log('foodlist add form is invalid')
+    }
   }
 
   public checkIfSelected(currentId){

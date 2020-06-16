@@ -17,10 +17,16 @@
 						<div class="input-group-append">
 							<span class="input-group-text"><i class="fa fa-user"></i></span>
 						</div>
-						<select formControlName="dietprogram_pk" id="dietprogram">
-							<option  [value]="dietPrograms[i].id" *ngFor="let dietprogram of dietPrograms;let i = index">{{dietPrograms[i].dietProgram_name}}</option >
-							<!-- <option  value="foodlist.diet_program.id" *ngFor="let dietprogram of dietPrograms;let i = index">{{dietPrograms[i].dietProgram_name}}</option > -->
+						<!-- Check if the foodlist id non existent -->
+						<select  *ngIf="!foodListId" formControlName="dietprogram_pk" id="dietprogram">
+							<option [value]="dietPrograms[i].id" *ngFor="let dietprogram of dietPrograms;let i = index">{{dietPrograms[i].dietProgram_name}}</option >
 						</select>
+
+						<!-- Check if the foodlist id is exist -->
+						<select  *ngIf="foodListId" formControlName="dietprogram_pk" id="dietprogram">
+							<option  value="foodlist.diet_program.id" *ngFor="let dietprogram of dietPrograms;let i = index">{{dietPrograms[i].dietProgram_name}}</option >
+						</select>
+						
 					</div>
 					<div class="input-fields">
 						<label class="label">Foods : </label>
@@ -29,7 +35,7 @@
 								<span class="input-group-text"></span>
 							</div>
 							<div formArrayName="foods" *ngFor="let food of form.controls.foods['controls']; let i = index">
-								<input type="checkbox" [formControlName]="i"  >{{foods[i].food_name}}
+								<input type="checkbox" [checked]="foodlist.foods" [formControlName]="i"  >{{foods[i].food_name}}
 							</div>
 						</div>
 					</div>
@@ -48,7 +54,7 @@
 							<div class="input-group-append">
 								<span class="input-group-text"></span>
 							</div>
-								<input type="text" formControlName="description"  >
+								<input type="text" formControlName="description" value="{{foodlist.description}}" />
 				
 						</div>
 					</div>
@@ -58,7 +64,7 @@
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fa fa-key"></i></span>
 							</div>
-							<input formControlName="available_date" type="date"   placeholder="Available date" >
+							<input formControlName="available_date" type="date"   placeholder="Available date" value="{{foodlist.available_date}}" >
 						</div>
 					</div>
 
@@ -68,7 +74,7 @@
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fa fa-key" ></i></span>
 							</div>
-							<input formControlName="price" type="number"  placeholder="Price" >
+							<input formControlName="price" type="number"  placeholder="Price" value="{{foodlist.price}}" >
 						</div>
 					</div>
 					<div class="input-fields">
@@ -77,10 +83,9 @@
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fa fa-key"></i></span>
 							</div>
-							<input type="file" (change)="onFileSelected($event)"/>
-							Progress: {{currentUpload?.name}} | {{currentUpload?.progress}}% complete
-							<!-- <app-uploader></app-uploader> -->
-							<!-- <input formControlName="logo" type="text" value = "{{sharedURL}}"  > -->
+							<input type="file" (change)="onFileSelected($event)" />
+							<p>Progress: {{currentUpload?.name}} | {{currentUpload?.progress}}% complete</p>
+							<img src="{{foodlist.foodlist_logo}}" style="height:100%;width:200px"/>
 						</div>
 					</div>
 		

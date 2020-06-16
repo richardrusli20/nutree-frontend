@@ -17,16 +17,20 @@ import {
 export class ProfileComponent implements OnInit {
 
   formCustomer:FormGroup;
+  formPassword:FormGroup;
   formAddress:FormGroup;
   boolean=false;
+  booleanPassword=false;
   booleanAddress=false;
   customerProfile={customer_name:"", customer_phone:""};
   customerAddress={city:"",postal_code:"",province:"",street:""}
+  username = '';
 
   constructor(private api:ApiService, private formBuilder : FormBuilder, private router:Router) {
     this.getCustomerProfile();
     console.log("customerprofilename");
     console.log(this.customerProfile.customer_name);
+    this.username = this.api.getUsername();
   }
 
   getCustomerProfile = () => {
@@ -39,6 +43,14 @@ export class ProfileComponent implements OnInit {
           customer_name:[this.customerProfile.customer_name,Validators.required],
           customer_phone: [this.customerProfile.customer_phone,Validators.required],
         });
+
+        this.formPassword = this.formBuilder.group({
+          username:['',Validators.required],
+          old_password:['',Validators.required],
+          new_password:['',Validators.required],
+          new_password2:['',Validators.required]
+        });
+
         this.formAddress = this.formBuilder.group({
           street:[this.customerAddress.street,Validators.required],
           postal_code: [this.customerAddress.postal_code,Validators.required],
@@ -64,6 +76,16 @@ export class ProfileComponent implements OnInit {
     );
   }
   
+  updateCustomerPassword = (customer) =>{
+    this.api.updateCustomerPassword(customer).subscribe(
+      data=>{
+        console.log(data)
+      },
+      error=>{
+        console.log(error)
+      }
+  )}
+  
   updateCustomerAddress = (address) => {
     this.api.updateCustomerAddress(address).subscribe(
       data => {
@@ -87,15 +109,26 @@ export class ProfileComponent implements OnInit {
     this.getCustomerProfile();
   }
 
+  updateCustomerPasswordAPI(){
+    console.log(this.formCustomer.value);
+    this.updateCustomerPassword(this.formPassword.value);
+    this.booleanPassword=false;
+    this.getCustomerProfile();
+  }
+
+
   Address(){
     this.booleanAddress=true;
   }
 
   updateCustomerAddressAPI(){
-   
     console.log(this.formAddress.value);
-    this.updateCustomerAddress(this.formAddress.value);
+    this.updateCustomerAddress(this.formPassword.value);
     this.booleanAddress=false;
+  }
+
+  updatePassword(){
+    this.booleanPassword=true;
   }
 
   ngOnInit(): void {

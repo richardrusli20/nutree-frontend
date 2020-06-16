@@ -145,6 +145,12 @@ export class ApiService {
     {headers:this.httpHeadersAuth});
   }
 
+  updateCustomerPassword(customer):Observable<any>{
+    const body = {username:this.getUsername(),old_password:customer.old_password,new_password:customer.new_password,new_password2:customer.new_password2}
+    return this.http.post(this.baseurl + '/api/customer/password/update/', body,
+    {headers:this.httpHeadersAuth});
+  }
+
   updateCustomerAddress(address):Observable<any>{
     const body = { street:address.street,postal_code:address.postal_code,city:address.city,province:address.province}
     return this.http.post(this.baseurl + '/api/customer/address/update/', body,
@@ -219,7 +225,13 @@ export class ApiService {
   // }
   getUsername(){
     var data = JSON.parse(localStorage.getItem('data'))
-    return data.username
+    // console.log(data)
+    if(!data){
+      return null
+    }
+    else{
+      return data['username']
+    }
   }
 
   // messenger

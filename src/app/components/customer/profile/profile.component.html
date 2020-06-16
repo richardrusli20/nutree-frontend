@@ -28,26 +28,33 @@
 			</ng-template>
 			<!-- update profile Template-->
 
-			<div class="profile-card">
-				<header class="card-header">
+			<div class="profile-card" *ngIf="!booleanPassword;else passwordUpdate">
+				<header class="card-header">	
 					<strong class="d-inline-block mr-3">Account</strong>
 				</header>
 				<div class="card-body">
-					<h4>Email :  </h4>
-					<form action="" method="post">
-						
-						<input type="hidden" name="button_val" value="change-password" />
-						<button type="submit" class="btn btn-success">Change Password</button>
-					</form>
-					<br>
-					<br>
-					<form action="" method="post">
-					
-						<input type="hidden" name="button_val" value="delete-account" />
-						<button type="submit" class="btn btn-danger">Delete Account</button>
-					</form>
+					<h4>Email :  {{username}}</h4>	
+						<button (click)="updatePassword()" class="btn btn-success">Change Password</button>
 				</div>
 			</div>
+
+			<ng-template #passwordUpdate>
+				<div class="profile-card">
+					<header class="card-header">	
+						<strong class="d-inline-block mr-3">Account</strong>
+					</header>
+					<div class="card-body">
+						<h4>Email :  {{username}}</h4>	
+						<form [formGroup]="formPassword" (ngSubmit)="updateCustomerPasswordAPI()">
+						<h4>Old Password</h4><input type="password" formControlName="old_password"/>
+						<h4>New Password</h4><input type="password" formControlName="new_password"/>
+						<h4>retype new Password</h4><input  type="password" formControlName="new_password2"/>
+						<button type="submit" class="btn btn-success">Update Password</button>
+					</form>
+							
+					</div>
+				</div>
+			</ng-template>
 
 			<div class="profile-card" *ngIf="!booleanAddress;else addressUpdate">
 				<header class="card-header">

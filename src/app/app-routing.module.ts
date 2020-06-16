@@ -14,7 +14,7 @@ import { FoodlistComponent } from './components/foodlist/foodlist.component';
 import { FoodlistAddComponent } from './components/foodlist/foodlist-add/foodlist-add.component';
 import { FoodlistDetailComponent } from './components/foodlist/foodlist-detail/foodlist-detail.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileComponent } from './components/customer/profile/profile.component';
 import { CheckoutComponent } from './components/shopping-cart/checkout/checkout.component';
 import { PaymentComponent } from './components/shopping-cart/payment/payment.component';
 import { OrdersComponent } from './components/orders/orders.component';
@@ -42,7 +42,7 @@ const routes: Routes = [
   { path: 'foodlist', component:FoodlistComponent },
   { path: 'foodlist/detail/:id', component:FoodlistDetailComponent },
   { path: 'foodlist/add', component:FoodlistAddComponent},
-  { path: 'foodlist/add/:id', component:FoodlistAddComponent},
+  { path: 'foodlist/update/:id', component:FoodlistAddComponent},
   { path: '**', redirectTo:''}
 ];
 

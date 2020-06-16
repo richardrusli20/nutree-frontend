@@ -34,7 +34,7 @@ import { FoodDetailComponent } from './components/foods/food-detail/food-detail.
 import { FoodlistAddComponent } from './components/foodlist/foodlist-add/foodlist-add.component';
 import { FoodlistDetailComponent } from './components/foodlist/foodlist-detail/foodlist-detail.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileComponent } from './components/customer/profile/profile.component';
 import { CheckoutComponent } from './components/shopping-cart/checkout/checkout.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';

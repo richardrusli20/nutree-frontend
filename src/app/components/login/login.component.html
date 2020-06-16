@@ -2,6 +2,8 @@
 <div *ngIf="login.login_success == false" class="container">
 	<div class="sub-container">
 			 <form [formGroup]="form" class="login-form" (ngSubmit)="customerLogins()"> 
+				 <p>{{error.error}}</p>
+				 <!-- <p *ngIf = "username.errors.required">username is empty</p> -->
 				 <!-- <span *ngIf="form.get('username').errors.required">please input your username</span> -->
 				<div class="form-group" [ngClass]="{'has-error' : form.get('username')}">
 					<label class="label">Email</label>

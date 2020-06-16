@@ -42,21 +42,24 @@ export class AppComponent {
 
 
   ngOnInit(): void {
-    console.log("app component on")
     this.getCustomerBag()
-
   }
   getCustomerBag = () => {
-    this.api.getCustomerBag().subscribe(
-      data => {
-        // console.log(data.customer_bag)
-        this.cartItems = data.customer_bag;
-        // this.foodlistQuantity = data.customer_bag
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    if(this.api.loggedIn()){
+      this.api.getCustomerBag().subscribe(
+        data => {
+          // console.log(data.customer_bag)
+          this.cartItems = data.customer_bag;
+          // this.foodlistQuantity = data.customer_bag
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    }
+    else{
+      console.log('customer not logged in')
+    }
 }
 
 

@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api.service';
 import { Router,ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import {   
+  FormBuilder,
+  FormGroup,
+  Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -12,6 +16,7 @@ import { Subscription } from 'rxjs';
 export class RegisterComponent implements OnInit {
   customer;
   selectedCustomer;
+  form:FormGroup;
 
   userId: string;
   token: string;
@@ -19,23 +24,34 @@ export class RegisterComponent implements OnInit {
   confirmed;
   private subscription: Subscription ;
 
-  constructor(private api: ApiService, private router: Router, private route:ActivatedRoute) {
+  constructor(private api: ApiService, private router: Router, private route:ActivatedRoute, private formBuilder:FormBuilder) {
     this.customer = {customer_created:false};
-    this.selectedCustomer = {customer_name: '', customer_email: '' , password: '', password2: '' };
-    console.log("------");
-    console.log(this.selectedCustomer);
+    // this.selectedCustomer = {customer_name: '', customer_email: '' , password: '', password2: '' };
+    // console.log("------");
+    // console.log(this.selectedCustomer);
+    this.form = this.formBuilder.group({
+      customer_name:['',Validators.required],
+      customer_email:['',Validators.required],
+      password:['',Validators.required],
+      password2:['',Validators.required]
+    })
   }
 
   createCustomer = () => {
-    this.api.createCustomer(this.selectedCustomer).subscribe(
-      data => {
-        this.customer = data;
-        console.log(this.customer);
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    if(this.form.valid){
+      this.api.createCustomer(this.form.value).subscribe(
+        data => {
+          this.customer = data;
+          console.log(this.customer);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    }
+    else{
+      console.log("registration form is invalid")
+    }
   }
 
   ngOnInit(): void {
