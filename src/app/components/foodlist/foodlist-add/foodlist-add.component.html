@@ -35,7 +35,7 @@
 								<span class="input-group-text"></span>
 							</div>
 							<div formArrayName="foods" *ngFor="let food of form.controls.foods['controls']; let i = index">
-								<input type="checkbox" [checked]="foodlist.foods" [formControlName]="i"  >{{foods[i].food_name}}
+								<input type="checkbox" [formControlName]="i"  >{{foods[i].food_name}}
 							</div>
 						</div>
 					</div>

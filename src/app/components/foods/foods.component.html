@@ -5,7 +5,7 @@
                 <div  class="col-xl-4 col-md-6"  *ngFor="let food of foods">
                     <div (click)="onSelect(food)" class="single_order">
                         <div class="order_thumb">
-                            <img src= "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+                            <img src="{{food.food_logo}}" alt="">
                         </div>
                         <div class="order_info">
                             <h3>{{food.food_name}}</h3>

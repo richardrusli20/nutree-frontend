@@ -28,6 +28,7 @@ export class FoodlistAddComponent implements OnInit {
   sharedURL:string;
   uploaded:boolean;
   currentUpload:Upload;
+  foodsArray = [];
 
   // foodlist={};
   // foods_id=[];
@@ -36,10 +37,8 @@ export class FoodlistAddComponent implements OnInit {
   constructor(private api:ApiService, private formBuilder : FormBuilder, private activeRoute: ActivatedRoute,private router:Router) {
     let id = parseInt(this.activeRoute.snapshot.paramMap.get('id'))
     this.foodListId = id
-    // console.log(this.foodListId); 
-    if(this.foodListId){
-      this.getFoodlist()
-    }
+    this.getVendorFoodlistAdd();
+
     // this.selectedFoodlist = {foodlist_name:'',foodlist_dietprogram:'',foodlist_foods:[],foodlist_availdate:'',foodlist_price:0,foodlist_logo:''}
     this.vendor = {role_pk:localStorage.getItem('role_pk')}
     // const formControls = this.foods.map(control => new FormControl(false));
@@ -53,20 +52,16 @@ export class FoodlistAddComponent implements OnInit {
       available_date:['',Validators.required],
       logo:[''],
     });
-    this.getVendorFoodlistAdd();
+    
   }
 
-  getFoodlist = () => {
+  getFoodlist = (foods) => {
     this.api.getFoodlistDetail(this.foodListId).subscribe(
       data => {
         // console.log(data);
         this.foodlist = data
-        console.log(this.foodlist.foods)
-
-        // this.form.value.foods
-        // .map((checked, index) => (checked ? this.foodlist.foods[index].id : null))
-        // .filter(value => value !== null);
-
+        // console.log(this.foodlist.foods)
+        this.checkIfSelected(foods,this.foodlist.foods);
         this.form = this.formBuilder.group({
           foodlist_name:[this.foodlist.foodlist_name,Validators.required],
           foods: [this.foodlist.foods, [this.minSelectedCheckboxes(1),Validators.required]],
@@ -77,11 +72,12 @@ export class FoodlistAddComponent implements OnInit {
           available_date:[this.foodlist.available_date,Validators.required],
           logo:[this.foodlist.foodlist_logo],
         });
+        
       },
       error => {
         console.log(error);
       }
-    );
+    );   
   }
 
   getVendorFoodlistAdd = () => {
@@ -89,11 +85,13 @@ export class FoodlistAddComponent implements OnInit {
       data => {
         this.foods = data.food;
         this.dietPrograms = data.dietprogram;
-        // this.foods.push(data.food);
-        console.log('------dietprogram and foods----');
-        console.log(this.foods);
-        console.log(this.dietPrograms);
-        this.addCheckboxes(this.foods);
+        
+        if(this.foodListId){
+          this.getFoodlist(this.foods)
+        }
+        else{
+          this.addCheckboxes(this.foods);
+        }
       },
       error => {
         console.log(error);
@@ -113,6 +111,18 @@ export class FoodlistAddComponent implements OnInit {
     );
   }
 
+  updateFoodlist = (foodlist) =>{
+    this.api.updateFoodlist(foodlist).subscribe(
+      data =>{
+        console.log("foodlist updated");
+        this.router.navigate(['/foodlist']);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
   submit(){
     const selectedFoodids = this.form.value.foods
       .map((checked, index) => (checked ? this.foods[index].id : null))
@@ -122,20 +132,56 @@ export class FoodlistAddComponent implements OnInit {
     console.log("---thisform---");
     console.log(this.form.value);
     if(this.form.valid){
-      this.onUpload(selectedFoodids);
+      if(this.foodListId){
+        console.log("update foodlist")
+        this.api.updateFoodlist(this.form.value);
+      }
+      else{
+        console.log("upload and create fooodlist")
+        this.onUpload(selectedFoodids);
+      }
+      
     }
     else{
       console.log('foodlist add form is invalid')
     }
   }
 
-  public checkIfSelected(currentId){
-    // if(!this.validation) return;
-    // return this.validation.furtherAdditions.some(id => id == currentId);
-}
+  private checkIfSelected(foods,foods_1){
+
+    console.log(foods);
+    console.log(foods_1);   
+    foods.forEach((o,i) => {
+      foods_1.forEach((o,j)=>{
+        // console.log(i + "i = " +  foods[i].id + j+ "j = " + foods_1[j].id)
+        if(foods[i].id === foods_1[j].id){
+          this.foodsArray.push(i);
+        }
+      })
+    })
+
+    foods.forEach((o,i)=> {
+      if(i == this.foodsArray[i]){
+        if(i == 0){
+          const control = new FormControl(i===0); // if first item set to true, else false
+          (this.form.controls.foods as FormArray).push(control);
+        }
+        else{
+          const control = new FormControl(i);
+          (this.form.controls.foods as FormArray).push(control);
+        }
+      }
+      else{
+        const control = new FormControl();
+        (this.form.controls.foods as FormArray).push(control);
+      }
+    })
+  }
 
   private addCheckboxes(foods) {
+
     foods.forEach((o, i) => {
+      // console.log(this.form.controls.foods);
       const control = new FormControl(i === 0); // if first item set to true, else false
       (this.form.controls.foods as FormArray).push(control);
     });
