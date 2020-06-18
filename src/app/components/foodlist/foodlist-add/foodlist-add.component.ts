@@ -72,7 +72,6 @@ export class FoodlistAddComponent implements OnInit {
           available_date:[this.foodlist.available_date,Validators.required],
           logo:[this.foodlist.foodlist_logo],
         });
-        
       },
       error => {
         console.log(error);
@@ -148,34 +147,26 @@ export class FoodlistAddComponent implements OnInit {
   }
 
   private checkIfSelected(foods,foods_1){
-
-    console.log(foods);
-    console.log(foods_1);   
+    // console.log(foods);
+    // console.log(foods_1);   
     foods.forEach((o,i) => {
-      foods_1.forEach((o,j)=>{
-        // console.log(i + "i = " +  foods[i].id + j+ "j = " + foods_1[j].id)
-        if(foods[i].id === foods_1[j].id){
-          this.foodsArray.push(i);
-        }
-      })
-    })
-
-    foods.forEach((o,i)=> {
-      if(i == this.foodsArray[i]){
-        if(i == 0){
-          const control = new FormControl(i===0); // if first item set to true, else false
+        // console.log(foods_1.find(x=>x.id === foods[i].id));
+        if(foods_1.find(x=>x.id === foods[i].id)){
+          if(i == 0){
+            const control = new FormControl(i===0);
+            (this.form.controls.foods as FormArray).push(control);
+          }
+          else{
+          const control = new FormControl(i); // if first item set to true, else false
           (this.form.controls.foods as FormArray).push(control);
+          }
         }
         else{
-          const control = new FormControl(i);
+          const control = new FormControl(); // if first item set to true, else false
           (this.form.controls.foods as FormArray).push(control);
         }
-      }
-      else{
-        const control = new FormControl();
-        (this.form.controls.foods as FormArray).push(control);
-      }
-    })
+
+    });
   }
 
   private addCheckboxes(foods) {
