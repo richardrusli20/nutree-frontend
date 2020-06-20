@@ -60,11 +60,11 @@ export class ApiService {
     {headers:this.httpHeaders});
   }
 
-  updateFoodlist(foodlist):Observable<any>{
+  updateFoodlist(foodlist,foods_id):Observable<any>{
     const body = {
       dietprogram_pk: foodlist.dietprogram,
       foodlist_name: foodlist.foodlist_name,
-      food: foodlist.food,
+      food: foods_id,
       description: foodlist.description,
       price: foodlist.price,
       calories: foodlist.calories,

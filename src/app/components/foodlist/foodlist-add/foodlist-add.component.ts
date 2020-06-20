@@ -27,16 +27,15 @@ export class FoodlistAddComponent implements OnInit {
   selectedFile: FileList;
   sharedURL:string;
   uploaded:boolean;
+  unchecked:boolean;
   currentUpload:Upload;
   foodsArray = [];
-
-  // foodlist={};
-  // foods_id=[];
 
   selectedFoodlist;
   constructor(private api:ApiService, private formBuilder : FormBuilder, private activeRoute: ActivatedRoute,private router:Router) {
     let id = parseInt(this.activeRoute.snapshot.paramMap.get('id'))
     this.foodListId = id
+    this.unchecked = false;
     this.getVendorFoodlistAdd();
 
     // this.selectedFoodlist = {foodlist_name:'',foodlist_dietprogram:'',foodlist_foods:[],foodlist_availdate:'',foodlist_price:0,foodlist_logo:''}
@@ -60,23 +59,24 @@ export class FoodlistAddComponent implements OnInit {
       data => {
         // console.log(data);
         this.foodlist = data
-        // console.log(this.foodlist.foods)
+        console.log(this.foodlist.foods)
         this.checkIfSelected(foods,this.foodlist.foods);
-        this.form = this.formBuilder.group({
-          foodlist_name:[this.foodlist.foodlist_name,Validators.required],
-          foods: [this.foodlist.foods, [this.minSelectedCheckboxes(1),Validators.required]],
-          dietprogram_pk:[this.foodlist.diet_program.id,Validators.required],
-          description:[this.foodlist.description,[Validators.required,Validators.minLength(20)]],
-          price:[this.foodlist.price,Validators.required],
-          calories:[this.foodlist,Validators.required],
-          available_date:[this.foodlist.available_date,Validators.required],
-          logo:[this.foodlist.foodlist_logo],
-        });
+        this.form.patchValue({
+          foodlist_name:this.foodlist.foodlist_name,
+          foods:FormArray,
+          dietprogram_pk:this.foodlist.diet_program.id,
+          description:this.foodlist.description,
+          price:this.foodlist.price,
+          calories:this.foodlist,
+          available_date:this.foodlist.available_date,
+          logo:this.foodlist.foodlist_logo
+        })
       },
       error => {
         console.log(error);
       }
     );   
+    
   }
 
   getVendorFoodlistAdd = () => {
@@ -110,8 +110,8 @@ export class FoodlistAddComponent implements OnInit {
     );
   }
 
-  updateFoodlist = (foodlist) =>{
-    this.api.updateFoodlist(foodlist).subscribe(
+  updateFoodlist = (foodlist,foods_id) =>{
+    this.api.updateFoodlist(foodlist,foods_id).subscribe(
       data =>{
         console.log("foodlist updated");
         this.router.navigate(['/foodlist']);
@@ -126,16 +126,16 @@ export class FoodlistAddComponent implements OnInit {
     const selectedFoodids = this.form.value.foods
       .map((checked, index) => (checked ? this.foods[index].id : null))
       .filter(value => value !== null);
-    console.log("--------------")
-    console.log(selectedFoodids);
+    // console.log("--------------")
+    // console.log(selectedFoodids);
     console.log("---thisform---");
     console.log(this.form.value);
     if(this.form.valid){
       if(this.foodListId){
         console.log("update foodlist")
-        this.api.updateFoodlist(this.form.value);
+        this.updateFoodlist(this.form.value,selectedFoodids);
       }
-      else{
+      else{ 
         console.log("upload and create fooodlist")
         this.onUpload(selectedFoodids);
       }
@@ -148,24 +148,19 @@ export class FoodlistAddComponent implements OnInit {
 
   private checkIfSelected(foods,foods_1){
     // console.log(foods);
-    // console.log(foods_1);   
+    // console.log(foods_1); 
+    // console.log(this.form.controls.foods);  
     foods.forEach((o,i) => {
         // console.log(foods_1.find(x=>x.id === foods[i].id));
+        console.log(this.form.controls.foods as FormArray)
         if(foods_1.find(x=>x.id === foods[i].id)){
-          if(i == 0){
-            const control = new FormControl(i===0);
-            (this.form.controls.foods as FormArray).push(control);
-          }
-          else{
-          const control = new FormControl(i); // if first item set to true, else false
+          const control = new FormControl(foods[i]); // if first item set to true, else false
           (this.form.controls.foods as FormArray).push(control);
-          }
         }
         else{
           const control = new FormControl(); // if first item set to true, else false
           (this.form.controls.foods as FormArray).push(control);
         }
-
     });
   }
 
@@ -214,8 +209,6 @@ export class FoodlistAddComponent implements OnInit {
             this.sharedURL = message
             this.createFoodlist(this.form.value,selectedFoodids,this.sharedURL)
           }
-          
-          
       }
       )
     // }
