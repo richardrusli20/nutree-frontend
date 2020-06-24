@@ -1,19 +1,20 @@
 <div  class="container">
 	<div class="sub-container">
-			<form [formGroup]="form" (ngSubmit)="submit()"> 
-				<div class="input-fields">
+			<form [formGroup]="form" (ngSubmit)="submit()">
+				<div class="input-fields" >
 					<label class="label">Foodlist Name : </label>
-					<div class="input-group mb-3">
+					<div class="input-group mb-3" [ngClass]="displayFieldCss('foodlist_name')">
 						<div class="input-group-append">
 							<span class="input-group-text"><i class="fa fa-envelope"></i></span>
 						</div>
-						<input formControlName="foodlist_name" type="text" placeholder="please input Foodlist name" value="{{foodlist.foodlist_name}}" >
-						<span *ngIf="form.controls.foodlist_name.hasError('pattern')">
-							Oops, please provide a foodlist name!
-						</span>
+						<input  formControlName="foodlist_name" type="text" placeholder="please input Foodlist name" value="{{foodlist.foodlist_name}}" >
+						<app-field-error-display 
+							[displayError]="isFieldValid('foodlist_name')" 
+							errorMsg="Please inform foodlist name">
+						</app-field-error-display>
 					</div>
 					<label class="label">Diet Program : </label>
-					<div class="input-group mb-3">
+					<div class="input-group mb-3" [ngClass]="displayFieldCss('foodlist_name')">
 						<div class="input-group-append">
 							<span class="input-group-text"><i class="fa fa-user"></i></span>
 						</div>
@@ -21,12 +22,11 @@
 						<select  *ngIf="!foodListId" formControlName="dietprogram_pk" id="dietprogram">
 							<option [value]="dietPrograms[i].id" *ngFor="let dietprogram of dietPrograms;let i = index">{{dietPrograms[i].dietProgram_name}}</option >
 						</select>
-
-						<!-- Check if the foodlist id is exist -->
+						<!-- Check if the foodlist id is exist -->	
 						<select  *ngIf="foodListId" formControlName="dietprogram_pk" id="dietprogram">
 							<option  [value]="dietPrograms[i].id" *ngFor="let dietprogram of dietPrograms;let i = index">{{dietPrograms[i].dietProgram_name}}</option >
 						</select>
-						
+					
 					</div>
 					<div class="input-fields">
 						<label class="label">Foods : </label>
@@ -45,7 +45,11 @@
 							<div class="input-group-append">
 								<span class="input-group-text"></span>
 							</div>
-								<input type="number" formControlName="calories"  >
+							<input type="number" formControlName="calories"  >
+							<app-field-error-display 
+								[displayError]="isFieldValid('calories')" 
+								errorMsg="Fill in Calories field">
+							</app-field-error-display>
 						</div>
 					</div>
 					<div class="input-fields">
@@ -55,7 +59,10 @@
 								<span class="input-group-text"></span>
 							</div>
 								<input type="text" formControlName="description" value="{{foodlist.description}}" />
-				
+								<app-field-error-display 
+									[displayError]="isFieldValid('description')" 
+									errorMsg="Min length of description 20 words">
+								</app-field-error-display>
 						</div>
 					</div>
 					<div class="input-fields">
@@ -65,6 +72,10 @@
 								<span class="input-group-text"><i class="fa fa-key"></i></span>
 							</div>
 							<input formControlName="available_date" type="date"   placeholder="Available date" value="{{foodlist.available_date}}" >
+							<app-field-error-display 
+								[displayError]="isFieldValid('available_date')" 
+								errorMsg="Please inform available date">
+							</app-field-error-display>
 						</div>
 					</div>
 
@@ -75,6 +86,10 @@
 								<span class="input-group-text"><i class="fa fa-key" ></i></span>
 							</div>
 							<input formControlName="price" type="number"  placeholder="Price" value="{{foodlist.price}}" >
+							<app-field-error-display 
+								[displayError]="isFieldValid('price')" 
+								errorMsg="Please inform foodlist name">
+							</app-field-error-display>	
 						</div>
 					</div>
 					<div class="input-fields">

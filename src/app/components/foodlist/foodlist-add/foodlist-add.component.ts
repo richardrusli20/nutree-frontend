@@ -30,12 +30,14 @@ export class FoodlistAddComponent implements OnInit {
   unchecked:boolean;
   currentUpload:Upload;
   foodsArray = [];
+  submitted:boolean;
 
   selectedFoodlist;
   constructor(private api:ApiService, private formBuilder : FormBuilder, private activeRoute: ActivatedRoute,private router:Router) {
     let id = parseInt(this.activeRoute.snapshot.paramMap.get('id'))
     this.foodListId = id
     this.unchecked = false;
+    this.submitted = false;
     this.getVendorFoodlistAdd();
 
     // this.selectedFoodlist = {foodlist_name:'',foodlist_dietprogram:'',foodlist_foods:[],foodlist_availdate:'',foodlist_price:0,foodlist_logo:''}
@@ -63,11 +65,11 @@ export class FoodlistAddComponent implements OnInit {
         this.checkIfSelected(foods,this.foodlist.foods);
         this.form.patchValue({
           foodlist_name:this.foodlist.foodlist_name,
-          foods:FormArray,
+          // foods:FormArray,
           dietprogram_pk:this.foodlist.diet_program.id,
           description:this.foodlist.description,
           price:this.foodlist.price,
-          calories:this.foodlist,
+          // calories:this.foodlist,
           available_date:this.foodlist.available_date,
           logo:this.foodlist.foodlist_logo
         })
@@ -84,6 +86,7 @@ export class FoodlistAddComponent implements OnInit {
       data => {
         this.foods = data.food;
         this.dietPrograms = data.dietprogram;
+        console.log(this.foods + " " + this.dietPrograms)
         
         if(this.foodListId){
           this.getFoodlist(this.foods)
@@ -111,7 +114,7 @@ export class FoodlistAddComponent implements OnInit {
   }
 
   updateFoodlist = (foodlist,foods_id) =>{
-    this.api.updateFoodlist(foodlist,foods_id).subscribe(
+    this.api.updateFoodlist(foodlist,foods_id,this.foodListId).subscribe(
       data =>{
         console.log("foodlist updated");
         this.router.navigate(['/foodlist']);
@@ -126,8 +129,9 @@ export class FoodlistAddComponent implements OnInit {
     const selectedFoodids = this.form.value.foods
       .map((checked, index) => (checked ? this.foods[index].id : null))
       .filter(value => value !== null);
-    // console.log("--------------")
-    // console.log(selectedFoodids);
+      this.submitted = true;
+    console.log("--------------")
+    console.log(selectedFoodids);
     console.log("---thisform---");
     console.log(this.form.value);
     if(this.form.valid){
@@ -135,14 +139,14 @@ export class FoodlistAddComponent implements OnInit {
         console.log("update foodlist")
         this.updateFoodlist(this.form.value,selectedFoodids);
       }
-      else{ 
+      else{
         console.log("upload and create fooodlist")
         this.onUpload(selectedFoodids);
       }
-      
     }
     else{
       console.log('foodlist add form is invalid')
+      this.validateAllFormFields(this.form); //{7}
     }
   }
 
@@ -150,22 +154,46 @@ export class FoodlistAddComponent implements OnInit {
     // console.log(foods);
     // console.log(foods_1); 
     // console.log(this.form.controls.foods);  
-    foods.forEach((o,i) => {
+  foods.forEach((o,i) => {
         // console.log(foods_1.find(x=>x.id === foods[i].id));
         console.log(this.form.controls.foods as FormArray)
         if(foods_1.find(x=>x.id === foods[i].id)){
-          const control = new FormControl(foods[i]); // if first item set to true, else false
+          const control = new FormControl(true); // if first item set to true, else false
           (this.form.controls.foods as FormArray).push(control);
         }
         else{
-          const control = new FormControl(); // if first item set to true, else false
+          const control = new FormControl(false); // if first item set to true, else false
           (this.form.controls.foods as FormArray).push(control);
         }
     });
   }
 
-  private addCheckboxes(foods) {
+  isFieldValid(field: string) {
+    if(this.submitted){
+      return (!this.form.get(field).valid)
+    }
+  }
+  
+  displayFieldCss(field: string) {
+    return {
+      'has-error': this.isFieldValid(field),
+      'has-feedback': this.isFieldValid(field)
+    };
+  }
 
+  validateAllFormFields(formGroup: FormGroup) {         //{1}
+  Object.keys(formGroup.controls).forEach(field => {  //{2}
+    const control = formGroup.get(field);             //{3}
+    if (control instanceof FormControl) {             //{4}
+      control.markAsPristine({ onlySelf: true });
+    } else if (control instanceof FormGroup) {        //{5}
+      this.validateAllFormFields(control);            //{6}
+    }
+  });
+  }
+
+
+  private addCheckboxes(foods) {
     foods.forEach((o, i) => {
       // console.log(this.form.controls.foods);
       const control = new FormControl(i === 0); // if first item set to true, else false
@@ -198,7 +226,7 @@ export class FoodlistAddComponent implements OnInit {
     console.log(this.selectedFile.item(0))
     let file = this.selectedFile.item(0)
     this.currentUpload = new Upload(file);
-    this.api.pushUpload(this.currentUpload)
+    this.api.pushUpload(this.currentUpload,"foodlist")
 
       this.api.sharedURL.subscribe(
         message => {

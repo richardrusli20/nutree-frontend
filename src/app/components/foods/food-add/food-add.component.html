@@ -1,36 +1,42 @@
 <div  class="container">
 	<div class="sub-container">
-			 <!-- <form class="login-form" method="POST" action="">  -->
+			 <form  [formGroup]="form" class="login-form" (ngSubmit)="onSubmit()"> 
 				<div class="input-fields">
 					<label class="label">Food Name</label>
 					<div class="input-group mb-3">
 						<div class="input-group-append">
-							<span class="input-group-text"><i class="fa fa-envelope"></i></span>
+					
 						</div>
-						<input  type="text" placeholder="please input customer name" [(ngModel)]="selectedFoods.food_name" >
+						<input formControlName="food_name" type="text" placeholder="Please input the food name" >
 					</div>
 					<label class="label">Description</label>
 					<div class="input-group mb-3">
 						<div class="input-group-append">
-							<span class="input-group-text"><i class="fa fa-user"></i></span>
+					
 						</div>
-						<input type="text" placeholder="please input customer email" [(ngModel)]="selectedFoods.description" >
+						<input formControlName="description" type="text" placeholder="Please input the description"  >
 					</div>
 					<div class="input-fields">
 						<label class="label">Calories</label>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
-								<span class="input-group-text"><i class="fa fa-key"></i></span>
+							
 							</div>
-							<input type="number"   placeholder="password" [(ngModel)]="selectedFoods.calories" >
+							<input formControlName="food_calories" type="number"   placeholder="Input the Number of Calories"  >
 						</div>
 					</div>
-		
-
+					<div class="input-fields">
+						<label class="label">Food Photo</label>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+							</div>
+							<input formControlName="food_photo" (change)="onFileSelected($event)" type="file" >
+						</div>
+					</div>
 				</div>
 				<!--  <input class="btn" type="submit" value="Sign Up">  -->
-			<button (click)="createVendorFoods()">Submit</button>
-			 <!-- </form>  -->
+			<button >Submit</button>
+			 </form> 
 
 </div>
 </div>

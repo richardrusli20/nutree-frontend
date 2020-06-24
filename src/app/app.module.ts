@@ -53,6 +53,7 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { DropzoneDirective } from './dropzone.directive';
 import { UploaderComponent } from './uploader/uploader.component';
 import { UploadTaskComponent } from './upload-task/upload-task.component';
+import { FieldErrorDisplayComponent } from './field-error-display/field-error-display.component';
 
 
 @NgModule({
@@ -83,6 +84,7 @@ import { UploadTaskComponent } from './upload-task/upload-task.component';
     DropzoneDirective,
     UploaderComponent,
     UploadTaskComponent,
+    FieldErrorDisplayComponent,
   ],
   imports: [
     BrowserModule,

@@ -10,7 +10,8 @@ export class OrdersComponent implements OnInit {
 
   orders=[];
   order_id;
-  
+  foodlist= [];
+  date;
 
   constructor(private api:ApiService) {
     this.getOrders();
@@ -21,10 +22,10 @@ export class OrdersComponent implements OnInit {
       data=>{
         console.log(data.order)
         this.orders = data.order;
-        this.order_id = Date.parse(data.order.order_date)
-        console.log(this.order_id)
-        // this.orderid = Date.parse(data.order_date)
-        // console.log(this.orderid)
+        // this.date = new Date (data.order_date);
+        // this.foodlist = data.item;
+        // console.log(this.foodlist)
+        // this.order_id = Date.parse(data.order.order_date)
       },
       error=>{
         console.log(error)

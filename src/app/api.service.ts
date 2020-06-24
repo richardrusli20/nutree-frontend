@@ -44,9 +44,9 @@ export class ApiService {
     return this.http.get(this.baseurl + '/api/vendor/food/',
     {headers: this.httpHeadersAuth});
   } 
-  createVendorFoods(food):Observable<any>{
-    const body = { role_pk: food.role_pk, food_name: food.food_name, description:food.description, food_calories:food.food_calories };
-    return this.http.post(this.baseurl + '/api/vendor/add/', body, 
+  createVendorFoods(food,sharedURL):Observable<any>{
+    const body = { role_pk: food.role_pk, food_name: food.food_name, description:food.description, food_calories:food.food_calories,food_photo:sharedURL };
+    return this.http.post(this.baseurl + '/api/food/create/', body, 
     {headers: this.httpHeadersAuth});
   } 
 
@@ -60,7 +60,7 @@ export class ApiService {
     {headers:this.httpHeaders});
   }
 
-  updateFoodlist(foodlist,foods_id):Observable<any>{
+  updateFoodlist(foodlist,foods_id,foodlist_id):Observable<any>{
     const body = {
       dietprogram_pk: foodlist.dietprogram,
       foodlist_name: foodlist.foodlist_name,
@@ -70,7 +70,7 @@ export class ApiService {
       calories: foodlist.calories,
       available_date: foodlist.available_date
     }
-    return this.http.post( this.baseurl + '/api/foodlist/' + foodlist.id + '/update/',body,
+    return this.http.post( this.baseurl + '/api/foodlist/' + foodlist_id + '/update/',body,
     {headers:this.httpHeadersAuth});
   }
 
@@ -249,10 +249,9 @@ export class ApiService {
     this.messageSource.next(url);
   }
 
-  pushUpload(upload:Upload){
+  pushUpload(upload:Upload,name){
     let storageRef = firebase.storage().ref();
-    this.uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
-
+    this.uploadTask = storageRef.child(`${name}/${upload.file.name}`).put(upload.file);
     this.uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot) => {
         upload.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
