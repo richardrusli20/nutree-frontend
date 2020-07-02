@@ -32,7 +32,7 @@ export class FoodlistComponent implements OnInit {
 
   onSelect(foodlist){
     console.log(foodlist.id)
-    this.router.navigate(['foodlist/detail',foodlist.id])
+    this.router.navigate(['/foodlist/detail',foodlist.id])
   }
 
   onAdd(){

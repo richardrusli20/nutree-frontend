@@ -60,7 +60,7 @@ export class ApiService {
     {headers:this.httpHeaders});
   }
 
-  updateFoodlist(foodlist,foods_id,foodlist_id):Observable<any>{
+  updateFoodlist(foodlist,foods_id,foodlist_id,sharedURL):Observable<any>{
     const body = {
       dietprogram_pk: foodlist.dietprogram,
       foodlist_name: foodlist.foodlist_name,
@@ -68,14 +68,22 @@ export class ApiService {
       description: foodlist.description,
       price: foodlist.price,
       calories: foodlist.calories,
-      available_date: foodlist.available_date
+      available_date: foodlist.available_date,
+      logo:sharedURL,
     }
     return this.http.post( this.baseurl + '/api/foodlist/' + foodlist_id + '/update/',body,
     {headers:this.httpHeadersAuth});
   }
 
   createFoodlist(foodList,foods_id,sharedURL):Observable<any>{
-    const body = { dietprogram_pk: foodList.dietprogram_pk,foodlist_name:foodList.foodlist_name,food:foods_id,description:foodList.description,price:foodList.price, calories:foodList.calories, available_date:foodList.available_date, foodlist_logo:sharedURL };
+    const body = { 
+      dietprogram_pk: foodList.dietprogram_pk,
+      foodlist_name:foodList.foodlist_name,
+      food:foods_id,
+      description:foodList.description,
+      price:foodList.price, calories:foodList.calories,
+      available_date:foodList.available_date, 
+      foodlist_logo:sharedURL };
     return this.http.post(this.baseurl + '/api/foodlist/create/', body,
     {headers: this.httpHeadersAuth});
   }

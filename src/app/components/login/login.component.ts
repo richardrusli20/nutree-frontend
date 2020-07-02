@@ -38,11 +38,12 @@ export class LoginComponent implements OnInit {
       data => {
         this.login = JSON.stringify(data);
         localStorage.setItem('data',this.login);
-        this.router.navigate(['/'])
+        // this.router.navigate(['/'])
+        window.location.href = ''
       },
       error => {
         this.error = error.error;
-        // console.log(error.error);
+        console.log(error.error);
         if(error.status == 500){
           this.error.error = "Email not exist"
         }

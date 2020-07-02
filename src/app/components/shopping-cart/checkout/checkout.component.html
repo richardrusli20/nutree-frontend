@@ -11,7 +11,7 @@
 	<div class="row">
 		<div class="col-md-6">
             <div class="card-checkout" *ngFor="let custBag of cartItems">
-            <img src="assets/img/slimfitphoto.jpg"
+            <img src="{{custBag.foodlist.foodlist_logo}}"
                 class="img-checkout">
             <div class="foodlist-info" >
                     <h3 >{{custBag.foodlist.foodlist_name}}</h3>

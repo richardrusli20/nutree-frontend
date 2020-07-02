@@ -6,9 +6,7 @@
     <p>{{order.order_date | date:'dd/MM/yyyy'}}</p>
     <p>Order No : {{order.order_date | date:'ddmmyy'}}</p>
     <hr>
-
         <div class="card-list" *ngFor = "let item of order.item" >
-
             <img src=""
             class="img-checkout">
             <div class="foodlist-info" >
@@ -20,6 +18,5 @@
         <div class="price-wrap">
             <h3 class="price">Rp {{order.grand_total}}</h3>
             </div>
-    </div>
-
+        </div>
 </div>

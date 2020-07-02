@@ -25,18 +25,12 @@ export class BannerCarouselComponent implements OnInit {
       id:1,
       src:'assets/img/banner-1.png',
       alt:'Image_1',
-      title:'Image_1'
+      title:'Image_1',
     },
     {
       id:2,
-      src:'assets/img/banner-1.png',
+      src:'assets/img/banner-2.png',
       alt:'Image_2',
-      title:'Image_3'
-    },
-    {
-      id:3,
-      src:'assets/img/banner-1.png',
-      alt:'Image_3',
       title:'Image_3'
     }
   ]

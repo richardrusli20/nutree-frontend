@@ -3,7 +3,7 @@
   (dragging)="startDragging($event.dragging)">
   
       <ng-template carouselSlide *ngFor="let slide of slidesStore" [id]="slide.id">
-        <img [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
+        <img  [src]="slide.src" [alt]="slide.alt" [title] = "slide.title" [owlRouterLink]="['/daftar-mitra-nutree']" >
       </ng-template>
     
   </owl-carousel-o>

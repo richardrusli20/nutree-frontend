@@ -19,6 +19,7 @@ import { CheckoutComponent } from './components/shopping-cart/checkout/checkout.
 import { PaymentComponent } from './components/shopping-cart/payment/payment.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { UploaderComponent } from './uploader/uploader.component';
+import { RegisterPartnershipComponent} from './register-partnership/register-partnership.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'register', component:RegisterComponent },
   { path: 'register/activate/:userid/:token', component:RegisterComponent},
   { path: 'register/vendor', component:RegisterVendorComponent },
+  { path: 'daftar-mitra-nutree', component:RegisterPartnershipComponent},
   { path: 'login', component:LoginComponent },
   { path: 'welcome', component:WelcomeComponent },
   { path: 'cart', component:ShoppingCartComponent},
@@ -71,5 +73,6 @@ export const routingComponents =
   LoginComponent, 
   RegisterComponent, 
   RegisterVendorComponent,
+  RegisterPartnershipComponent,
   UploaderComponent
 ]

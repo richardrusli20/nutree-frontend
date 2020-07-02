@@ -113,8 +113,8 @@ export class FoodlistAddComponent implements OnInit {
     );
   }
 
-  updateFoodlist = (foodlist,foods_id) =>{
-    this.api.updateFoodlist(foodlist,foods_id,this.foodListId).subscribe(
+  updateFoodlist = (foodlist,foods_id, sharedURL) =>{
+    this.api.updateFoodlist(foodlist,foods_id,this.foodListId,sharedURL).subscribe(
       data =>{
         console.log("foodlist updated");
         this.router.navigate(['/foodlist']);
@@ -137,11 +137,17 @@ export class FoodlistAddComponent implements OnInit {
     if(this.form.valid){
       if(this.foodListId){
         console.log("update foodlist")
-        this.updateFoodlist(this.form.value,selectedFoodids);
+        console.log(this.selectedFile)
+        if(this.selectedFile){
+          this.onUpload(selectedFoodids)
+        }
+        else{
+          this.updateFoodlist(this.form.value,selectedFoodids,this.sharedURL)
+        }
       }
       else{
         console.log("upload and create fooodlist")
-        this.onUpload(selectedFoodids);
+        this.onUpload(selectedFoodids)
       }
     }
     else{
@@ -156,7 +162,7 @@ export class FoodlistAddComponent implements OnInit {
     // console.log(this.form.controls.foods);  
   foods.forEach((o,i) => {
         // console.log(foods_1.find(x=>x.id === foods[i].id));
-        console.log(this.form.controls.foods as FormArray)
+        // console.log(this.form.controls.foods as FormArray)
         if(foods_1.find(x=>x.id === foods[i].id)){
           const control = new FormControl(true); // if first item set to true, else false
           (this.form.controls.foods as FormArray).push(control);
@@ -234,12 +240,16 @@ export class FoodlistAddComponent implements OnInit {
             console.log("loading")
           }
           else{
-            this.sharedURL = message
-            this.createFoodlist(this.form.value,selectedFoodids,this.sharedURL)
+            if(this.foodListId){
+              this.sharedURL = message
+              this.updateFoodlist(this.form.value,selectedFoodids,this.sharedURL)
+            }
+            else{
+              this.sharedURL = message
+              this.createFoodlist(this.form.value,selectedFoodids,this.sharedURL)
+            }
           }
-      }
-      )
-    // }
+      })
   }
 
 
