@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatConfirmDialogComponent } from 'src/app/components/shopping-cart/mat-confirm-dialog/mat-confirm-dialog.component'
 import { faOtter } from '@fortawesome/free-solid-svg-icons';
+import { MatDialogChangeaddressComponent } from './mat-dialog-change-address/mat-dialog-change-address.component';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -22,7 +23,7 @@ export class ShoppingCartComponent implements OnInit {
   dataLoaded: Promise<boolean>;
   // qty=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
   foodlistQuantity = 0;
-  zeroQty=false;
+  // zeroQty=false;
   
   constructor(private api:ApiService, private router:Router,private dialog:MatDialog) { 
     this.getCustomerBag();
@@ -34,9 +35,6 @@ export class ShoppingCartComponent implements OnInit {
   setTotalPrice(cartItems,total_price){
     cartItems.forEach(function(item){
       total_price = total_price + (item.quantity * item.foodlist.price);
-      // console.log(total_price)
-      // console.log("setTotalPrice");
-      // console.log(total_price);
     });
     this.total_price = total_price;
     console.log(this.total_price)
@@ -63,7 +61,7 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
-  deleteCartItem = (foodlistid) => {
+  deleteCartItem = (foodlistid,index) => {
     this.openConfirmDialog().afterClosed().subscribe(res =>{
       console.log(res)
       if(res == "true"){
@@ -75,9 +73,26 @@ export class ShoppingCartComponent implements OnInit {
       }
       else{
         console.log("deletefailed")
+        this.cartItems[index].quantity = this.cartItems[index].quantity + 1
       }
     });
+  }
 
+  deleteCartItemIcon = (foodlistid,index) => {
+    this.openConfirmDialog().afterClosed().subscribe(res =>{
+      console.log(res)
+      if(res == "true"){
+          this.api.deleteCartItem(foodlistid).subscribe(
+            data => {
+              this.cartItems = data.customer_bag;
+            }
+          )
+      }
+      else{
+        console.log("deletefailed")
+        // this.cartItems[index].quantity = this.cartItems[index].quantity + 1
+      }
+    });
   }
 
   goToFoodlist(foodlistid){
@@ -94,33 +109,26 @@ export class ShoppingCartComponent implements OnInit {
     return this.dialog.open(MatConfirmDialogComponent,{
       width:'390px',
       panelClass: 'confirm-dialog-container',
-      disableClose:true
+      // disableClose:true
     });
+    
   }
 
-
-
-  // changeCartQty = (foodlistid,qty) => {
-
-  //       this.api.addToCart(foodlistid,qty).subscribe(
-  //         data=>{
-  //           console.log(data)
-  //           this.cartItems = data.customer_bag;
-  //         },
-  //         error=>{
-  //           console.log(error)
-  //         }
-  //       )
-        
-  // }
+  editAddress(){
+    return this.dialog.open(MatDialogChangeaddressComponent,{
+      width:'390px',
+      panelClass: 'confirm-dialog-container',
+      // disableClose:true
+    }).afterClosed().subscribe(res=>{
+      this.getCustomerProfile();
+    })
+  }
 
 
   addButton(index) {
     if(!this.api.loggedIn()){
       this.router.navigate(['/login']);
     }
-    // console.log(this.cartItems[index])
-    // console.log(this.cartItems[index].foodlist.id)
     this.cartItems[index].quantity = this.cartItems[index].quantity + 1;
     this.total_price = 0;
     this.setTotalPrice(this.cartItems,this.total_price);
@@ -146,12 +154,11 @@ export class ShoppingCartComponent implements OnInit {
     if(!this.api.loggedIn()){
       this.router.navigate(['/login']);
     }
-    console.log(this.cartItems[index])
+    // console.log(this.cartItems[index])
     this.cartItems[index].quantity = this.cartItems[index].quantity - 1;
-    if(this.cartItems[index].quantity == 1){
+    if(this.cartItems[index].quantity == 0){
       // add popup box "Are you sure? confirm, no"
-      // this.deleteCartItem(this.cartItems[index].foodlist.id)
-      this.zeroQty = true;
+      this.deleteCartItem(this.cartItems[index].foodlist.id,index)
     }
     this.setTotalPrice(this.cartItems,this.total_price);
   }
@@ -161,11 +168,11 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   updateQuantityAPI(){
-    console.log("updateQuantityAPI")
-    // console.log(this.cartItems[0].foodlist)
-    for(var i = 0; i <= this.cartItems.length ; i++){
+    // console.log("updateQuantityAPI")
+    // console.log(this.cartItems[0])
+    // for(var i = 0; i <= this.cartItems.length ; i++){
       // this.addToCart(this.cartItems[i].foodlist.id,this.cartItems[i].quantity)
-    }
+    // }
   }
 
 
@@ -178,8 +185,8 @@ export class ShoppingCartComponent implements OnInit {
   getCustomerProfile = () => {
     this.api.getCustomerProfile().subscribe(
       data => {
+        console.log("get customer Profile")
         this.customerProfile = data;
-        // console.log(this.customerProfile)
       }),
       error => {
         console.log(error);
@@ -187,7 +194,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   ngOnDestroy():void{
-    this.updateQuantityAPI();
+    // this.updateQuantityAPI();
   }
 
   

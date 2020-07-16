@@ -26,24 +26,18 @@
                 </div>
                 <div class="col">
                 <div class="foodlist-info" >
-                        <!-- <h4>ID {{custBag.foodlist.id}}</h4> -->
                         <p (click)="goToFoodlist(custBag.foodlist.id)"><strong>{{custBag.foodlist.foodlist_name}}</strong></p>
                         
-                    <!-- <p>Available date:  {{custBag.foodlist.available_date}}</p> -->
-                    <!-- <p>Qty : <input type="number" value="{{custBag.quantity}}"/></p> -->
+                    <p>Available date:  {{custBag.foodlist.available_date}}</p>
                     
-                    <div *ngIf="!zeroQty" class="minus-button"  (click)="minusToCart(i)">-</div>
-                    <button *ngIf="zeroQty" [disabled]="true" class="minus-button"  (click)="minusToCart(i)">-</button>
+                    <div class="minus-button"  (click)="minusToCart(i)">-</div>
+                    
                     <div (change)="changed($event,custBag.foodlist.id)" class="counter" ><input type="text" size="5" value="{{custBag.quantity}}"/></div>
                     <div class="add-button"  (click)="addButton(i)">+</div>
-                    <span><mat-icon class="delete-btn" (click)="deleteCartItem(custBag.foodlist.id)">delete</mat-icon></span>
+                    <span><mat-icon class="delete-btn" (click)="deleteCartItemIcon(custBag.foodlist.id,i)">delete</mat-icon></span>
             
                     <p class="price">Rp {{custBag.foodlist.price * custBag.quantity}}</p>
-                    <!-- <select (change)="changed($event,custBag.foodlist.id)" >
-                        <option *ngFor="let currentData of qty" [value]="currentData" [selected]="currentData == custBag.quantity" >
-                            {{currentData}}
-                        </option>
-                    </select> -->
+    
                 </div>
                 </div>
 
@@ -70,7 +64,7 @@
                     </dl> -->
                     <dl class="dlist-align">
                     
-                        <dt>Delivery to :  <a><span style="color:blue;font-size:12px;">change address</span></a></dt>
+                        <dt>Delivery to :  <a (click)=editAddress()><span style="color:blue;font-size:12px;">change address</span></a></dt>
                         <dd class="text-right">{{customerProfile.customer_name}}   </dd>
                         <dd class="text-right">{{customerProfile.street}}, {{customerProfile.province}}, {{customerProfile.postal_code}} </dd>
                         <dd class="text-right">{{customerProfile.customer_phone}}  </dd>

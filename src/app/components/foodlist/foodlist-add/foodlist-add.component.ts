@@ -22,7 +22,7 @@ export class FoodlistAddComponent implements OnInit {
   foods = [];
   dietPrograms=[];
   vendor;
-  foodlist={foodlist_name:'',diet_program:{id:0},foods:[{id:0,food_name:''}],price:0,description:'',available_date:'yyy-mm-dd',foodlist_logo:''};
+  foodlist={foodlist_name:'',diet_program:{id:0},foods:[{id:0,food_name:''}],calories:0,price:0,description:'',available_date:'yyy-mm-dd',foodlist_logo:'',location:''};
   foodListId;
   selectedFile: FileList;
   sharedURL:string;
@@ -52,6 +52,7 @@ export class FoodlistAddComponent implements OnInit {
       calories:['',Validators.required],
       available_date:['',Validators.required],
       logo:[''],
+      // location:[''],
     });
     
   }
@@ -69,9 +70,10 @@ export class FoodlistAddComponent implements OnInit {
           dietprogram_pk:this.foodlist.diet_program.id,
           description:this.foodlist.description,
           price:this.foodlist.price,
-          // calories:this.foodlist,
+          calories:this.foodlist.calories,
           available_date:this.foodlist.available_date,
-          logo:this.foodlist.foodlist_logo
+          logo:this.foodlist.foodlist_logo,
+          // location:this.foodlist.location,
         })
       },
       error => {
@@ -105,6 +107,7 @@ export class FoodlistAddComponent implements OnInit {
     this.api.createFoodlist(foodlist,foods_id,sharedURL).subscribe(
       data => {
         console.log("foodlist created successfully");
+        console.log(data)
         this.router.navigate(['/foodlist']);
       },
       error => {

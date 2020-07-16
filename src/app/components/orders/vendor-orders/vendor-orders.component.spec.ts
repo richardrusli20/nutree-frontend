@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UploadTaskComponent } from './upload-task.component';
+import { VendorOrdersComponent } from './vendor-orders.component';
 
-describe('UploadTaskComponent', () => {
-  let component: UploadTaskComponent;
-  let fixture: ComponentFixture<UploadTaskComponent>;
+describe('VendorOrdersComponent', () => {
+  let component: VendorOrdersComponent;
+  let fixture: ComponentFixture<VendorOrdersComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UploadTaskComponent ]
+      declarations: [ VendorOrdersComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UploadTaskComponent);
+    fixture = TestBed.createComponent(VendorOrdersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

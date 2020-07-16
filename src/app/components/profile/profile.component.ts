@@ -7,7 +7,8 @@ import {
   FormArray,
   FormControl,
   ValidatorFn,
-  Validators} from '@angular/forms'
+  Validators,
+  Form} from '@angular/forms'
 
 @Component({
   selector: 'app-profile',
@@ -26,10 +27,24 @@ export class ProfileComponent implements OnInit {
   customerAddress={city:"",postal_code:"",province:"",street:""}
   username = '';
 
-  constructor(private api:ApiService, private formBuilder : FormBuilder, private router:Router) {
-    this.getCustomerProfile();
-    console.log("customerprofilename");
-    console.log(this.customerProfile.customer_name);
+  formVendor:FormGroup;
+  formVendorPassword:FormGroup;
+  formVendorAddress:FormGroup;
+  vendorProfile={vendor_name:"", vendor_phone:""};
+  booleanVendor=false;
+  booleanVendorPassword=false;
+  booleanVendorAddress=false;
+  vendorAddress={city:"",postal_code:"",province:"",street:""}
+  
+
+
+  constructor(public api:ApiService, private formBuilder : FormBuilder, private router:Router) {
+    if(api.getRole() == 'customer'){
+      this.getCustomerProfile();
+    }
+    else if(api.getRole() == 'vendor'){
+      this.getVendorProfile();
+    }
     this.username = this.api.getUsername();
   }
 
@@ -64,6 +79,39 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  getVendorProfile = () => {
+    this.api.getVendorProfile().subscribe(
+      data => {
+        this.vendorProfile = data;
+        this.vendorAddress = data.vendor_address;
+        // this.customerAddress = data;
+        console.log(this.vendorProfile);
+        this.formVendor = this.formBuilder.group({
+          // vendor_logo:['',Validators.required],
+          vendor_name:[this.vendorProfile.vendor_name,Validators.required],
+          vendor_phone:[this.vendorProfile.vendor_phone,Validators.required],
+        });
+
+        this.formVendorPassword = this.formBuilder.group({
+          username:['',Validators.required],
+          old_password:['',Validators.required],
+          new_password:['',Validators.required],
+          new_password2:['',Validators.required]
+        });
+
+        this.formVendorAddress = this.formBuilder.group({
+          street:[this.vendorAddress.street,Validators.required],
+          postal_code: [this.vendorAddress.postal_code,Validators.required],
+          city: ['Jakarta',Validators.required],
+          province:['DKI Jakarta',Validators.required],
+        });
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
   updateCustomerProfile = (customer) => {
     this.api.updateCustomerProfile(customer).subscribe(
       data => {
@@ -75,6 +123,8 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
+
+
   
   updateCustomerPassword = (customer) =>{
     this.api.updateCustomerPassword(customer).subscribe(
@@ -98,6 +148,33 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+
+  updateVendorProfile = (vendor) => {
+    this.api.updateVendorProfile(vendor).subscribe(
+      data => {
+        console.log(data)
+        this.vendorProfile = data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  updateVendorAddress = (address) => {
+    this.api.updateVendorAddress(address).subscribe(
+      data => {
+          console.log(data)
+          this.vendorAddress = data; 
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+
+  //Customer Update
   update(){
     this.boolean=true;
   }
@@ -121,14 +198,53 @@ export class ProfileComponent implements OnInit {
     this.booleanAddress=true;
   }
 
+  vendorAddressbool(){
+    this.booleanVendorAddress = true;
+  }
+
   updateCustomerAddressAPI(){
     console.log(this.formAddress.value);
-    this.updateCustomerAddress(this.formPassword.value);
+    this.updateCustomerAddress(this.formAddress.value);
     this.booleanAddress=false;
   }
 
   updatePassword(){
     this.booleanPassword=true;
+  }
+
+
+  // Vendor Update
+  updateVendor(){
+    this.booleanVendor=true;
+  }
+
+  updateVendorProfileAPI(){
+    console.log(this.formVendor.value);
+    this.updateVendorProfile(this.formVendor.value);
+    this.booleanVendor=false;
+    this.getVendorProfile();
+  }
+
+  updateVendorPasswordAPI(){
+    console.log(this.formCustomer.value);
+    this.updateCustomerPassword(this.formPassword.value);
+    this.booleanPassword=false;
+    // this.getVendorProfile();
+  }
+
+
+  AddressVendor(){
+    this.booleanAddress=true;
+  }
+
+  updateVendorAddressAPI(){
+    console.log(this.formVendorAddress.value);
+    this.updateVendorAddress(this.formVendorAddress.value);
+    this.booleanVendorAddress=false;
+  }
+
+  updateVendorPassword(){
+    this.booleanVendorPassword=true;
   }
 
   ngOnInit(): void {

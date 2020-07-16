@@ -140,16 +140,60 @@
     color: #fff;
     font-size: 15px;
     font-weight: 600;
-    display: inline-block;
+    // display: inline-block;
     padding: 18px 39px;
     // margin-top:30px;
     background-color: #78b454;
     /* border: 2px solid #78b454; */
     text-transform: capitalize;
-    // width:100%;
+    width:100%;
     text-align:center;
   }
   
+  .add-button {
+    bottom:0;
+    right:0;
+    font-size:35px;
+    // position: fixed;
+    text-align: center;
+    vertical-align: middle;
+    display:inline-block;
+    background-color: #78b454;
+    color:white;
+    width:50px;
+
+  }
+
+  .minus-button{
+    bottom:0;
+    right:0;
+    // margin-right:150px;
+    font-size:35px;
+    // position: fixed;
+    display:inline-block;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #78b454;
+    color:white;
+    width:50px;
+    // height:100%;
+  }
+
+  .counter{
+    width: 50px;
+    border-bottom: 0.5px #e0dede solid;
+    margin-right:10px;
+    margin-left:10px;
+    font-size:24px;
+    display:inline-block;
+    text-align: center;
+    vertical-align: middle;
+    background-color: white;
+    color:black;
+    width:20%;
+    // height:100%;
+  }
+
   /* line 9, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_btn.scss */
   // .boxed_btn:hover {
   //   background: #78b454;
@@ -170,23 +214,23 @@
       padding-bottom: 0px;
     }   
     
-    .foodlist_price{
+    .foodlist-price{
       // float:left;\
       // left:0;
       // bottom: 0;
-      position:fixed;
-      bottom:0;
-      left:0;
-      width:50%;
+      // position:relative ;
+      // bottom:0;
+      // left:0;
+      // width:50%;
       color:#000;
-      text-align: left;
+      // text-align: left;
       // position:fixed;
-      display:inline-block;
-      padding:1px;
-      padding-left:10px;
-      background-color: white;
-      border-top: solid 1px #ededed;
-      height:10%;
+      // display:inline-block;
+      // padding:1px;
+      // padding-left:10px;
+      // background-color: white;
+      // border-top: solid 1px #ededed;
+      // height:auto;
     }
     .price-p{
       margin-bottom:0px;
@@ -201,10 +245,10 @@
       // background-color: #78b454;
       // color: #ffffff;
       // text-align: center;
-      width:50%;
+      width:100%;
       right:0;
       bottom:0;
-      position:fixed;
+      // position:fixed;
       height:10%;
       z-index: 999;
       border:none;
@@ -271,23 +315,18 @@
       // height:100%;
     }
 
-    // .add-to-cart{
-      // border-top: solid 0.5px #f2f2ff;
-      // position:fixed;
-      // bottom:0;
+    .add-to-cart{
+      border-top: solid 0.5px #f2f2ff;
+      background-color: white;
+      position:fixed;
+      bottom:0;
       // left:0;
-      // width:100%;
-    // }
+      width:100%;
+      // height:100px;
+    }
 
     .button-plusminus{
-      width:50%;
-      right:0;
-      bottom:0;
-      margin:0;
-      position:fixed;
       background-color:white;
-      height:10%;
-  
     }
     .detail {
       margin-bottom:100px;

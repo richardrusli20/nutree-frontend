@@ -1,0 +1,196 @@
+<div class="container" *ngIf = "api.getRole()=='customer';else vendor">
+		
+			<div class="profile-card" *ngIf="!boolean;else success">
+				<header class="card-header">
+					<strong class="d-inline-block mr-3">Detail</strong>
+				</header>
+				<div class="card-body">
+					<h4>Name : {{customerProfile.customer_name}}</h4>
+					<h4>Phone Number : {{customerProfile.customer_phone}}</h4>
+						<button (click)="update()" type="submit" class="btn btn-success">Update Profile</button>
+				</div>
+			</div>	
+
+			<!-- update profile Template-->
+			<ng-template #success>
+				<div class="profile-card">
+					<header class="card-header">
+						<strong class="d-inline-block mr-3">Detail</strong>
+					</header>
+					<div class="card-body">
+						<form [formGroup]="formCustomer" (ngSubmit)="updateCustomerProfileAPI()">
+							<h4>Name :<input formControlName="customer_name" type="text" value='{{customerProfile.customer_name}}'/></h4>
+							<h4>Phone Number : <input formControlName="customer_phone" type="text" value='{{customerProfile.customer_phone}}'/></h4>
+							<button type="submit" class="btn btn-success">Update Profile</button>
+						</form>
+					</div>
+				</div>
+			</ng-template>
+			<!-- update profile Template-->
+
+			<div class="profile-card" *ngIf="!booleanPassword;else passwordUpdate">
+				<header class="card-header">	
+					<strong class="d-inline-block mr-3">Account</strong>
+				</header>
+				<div class="card-body">
+					<h4>Email :  {{username}}</h4>	
+						<button (click)="updatePassword()" class="btn btn-success">Change Password</button>
+				</div>
+			</div>
+
+			<ng-template #passwordUpdate>
+				<div class="profile-card">
+					<header class="card-header">	
+						<strong class="d-inline-block mr-3">Account</strong>
+					</header>
+					<div class="card-body">
+						<h4>Email :  {{username}}</h4>	
+						<form [formGroup]="formPassword" (ngSubmit)="updateCustomerPasswordAPI()">
+						<h4>Old Password</h4><input type="password" formControlName="old_password"/>
+						<h4>New Password</h4><input type="password" formControlName="new_password"/>
+						<h4>retype new Password</h4><input  type="password" formControlName="new_password2"/>
+						<button type="submit" class="btn btn-success">Update Password</button>
+					</form>
+							
+					</div>
+				</div>
+			</ng-template>
+
+			<div class="profile-card" *ngIf="!booleanAddress;else addressUpdate">
+				<header class="card-header">
+					<strong class="d-inline-block mr-3">Address</strong>
+				</header>
+				<div class="card-body">
+				<form class="form-horizontal" action="" method="POST" enctype="multiple/form-data">
+					<h4>Provinsi : {{customerAddress.province}} </h4> 
+					<h4>Kota:  {{customerAddress.city}}</h4> 
+					<h4>Jalan: {{customerAddress.street}}</h4>
+					<h4>Kode Pos: {{customerAddress.postal_code}}</h4>
+					<button (click)="Address()" type="submit" class="btn btn-success"> Update Address </button>
+				</form>
+
+				</div>
+			</div>
+
+			<!-- Update Address Template -->
+			<ng-template #addressUpdate>
+			<div class="profile-card">
+				<header class="card-header">
+					<strong class="d-inline-block mr-3">Address</strong>
+				</header>
+				<div class="card-body">
+				<form [formGroup]="formAddress" (ngSubmit)="updateCustomerAddressAPI()">
+					<h4>Provinsi :  </h4> <input formControlName="province" type="text" name="province" value='{{customerAddress.province}}' />
+					<h4>Kota:  </h4> <input formControlName="city" type="text" name="city" value= '{{customerAddress.city}}' />
+					<h4>Jalan: </h4><input formControlName="street" type="text" name="street" value= '{{customerAddress.street}}' />
+					<h4>Kode Pos: </h4><input formControlName="postal_code" type="text" name="postal_code" value= '{{customerAddress.postal_code}}' />
+					<button class="btn btn-success"> Update Address </button>
+				</form>
+
+				</div>
+			</div>
+			</ng-template>
+			<!-- Update Address Template -->
+
+</div><!-- Container-->
+
+
+
+
+<ng-template #vendor>
+	<div class="container">
+		<img src="" alt=""/>
+		<div class="profile-card" *ngIf="!booleanVendor;else successVendor">
+			<header class="card-header">
+				<strong class="d-inline-block mr-3">Detail</strong>
+			</header>
+			<div class="card-body">
+				<h4>Name : {{vendorProfile.vendor_name}}</h4>
+				<h4>Phone Number : {{vendorProfile.vendor_phone}}</h4>
+					<button (click)="updateVendor()" type="submit" class="btn btn-success">Update Profile</button>
+			</div>
+		</div>	
+
+		<!-- update profile Template-->
+		<ng-template #successVendor>
+			<div class="profile-card">
+				<header class="card-header">
+					<strong class="d-inline-block mr-3">Detail</strong>
+				</header>
+				<div class="card-body">
+					<form [formGroup]="formVendor" (ngSubmit)="updateVendorProfileAPI()">
+						<h4>Name :<input formControlName="vendor_name" type="text" value='{{vendorProfile.vendor_name}}'/></h4>
+						<h4>Phone Number : <input formControlName="vendor_phone" type="text" value='{{vendorProfile.vendor_phone}}'/></h4>
+						<button type="submit" class="btn btn-success">Update Profile</button>
+					</form>
+				</div>
+			</div>
+		</ng-template>
+		<!-- update profile Template-->
+
+		<div class="profile-card" *ngIf="!booleanPassword;else passwordVendorUpdate">
+			<header class="card-header">	
+				<strong class="d-inline-block mr-3">Account</strong>
+			</header>
+			<div class="card-body">
+				<h4>Email :  {{username}}</h4>	
+					<button (click)="updateVendorPassword()" class="btn btn-success">Change Password</button>
+			</div>
+		</div>
+
+		<ng-template #passwordVendorUpdate>
+			<div class="profile-card">
+				<header class="card-header">	
+					<strong class="d-inline-block mr-3">Account</strong>
+				</header>
+				<div class="card-body">
+					<h4>Email :  {{username}}</h4>	
+					<form [formGroup]="formPassword" (ngSubmit)="updateVendorPasswordAPI()">
+					<h4>Old Password</h4><input type="password" formControlName="old_password"/>
+					<h4>New Password</h4><input type="password" formControlName="new_password"/>
+					<h4>retype new Password</h4><input  type="password" formControlName="new_password2"/>
+					<button type="submit" class="btn btn-success">Update Password</button>
+				</form>
+						
+				</div>
+			</div>
+		</ng-template>
+
+		<div class="profile-card" *ngIf="!booleanVendorAddress;else addressVendorUpdate">
+			<header class="card-header">
+				<strong class="d-inline-block mr-3">Address</strong>
+			</header>
+			<div class="card-body">
+			<form class="form-horizontal" action="" method="POST" enctype="multiple/form-data">
+				<h4>Provinsi : {{vendorAddress.province}} </h4> 
+				<h4>Kota:  {{vendorAddress.city}}</h4> 
+				<h4>Jalan: {{vendorAddress.street}}</h4>
+				<h4>Kode Pos: {{vendorAddress.postal_code}}</h4>
+				<button (click)="vendorAddressbool()" type="submit" class="btn btn-success"> Update Address </button>
+			</form>
+
+			</div>
+		</div>
+
+		<!-- Update Address Template -->
+		<ng-template #addressVendorUpdate>
+		<div class="profile-card">
+			<header class="card-header">
+				<strong class="d-inline-block mr-3">Address</strong>
+			</header>
+			<div class="card-body">
+			<form [formGroup]="formVendorAddress" (ngSubmit)="updateVendorAddressAPI()">
+				<h4>Provinsi :  </h4> <input formControlName="province" type="text" name="province" value='DKI Jakarta' disabled />
+				<h4>Kota:  </h4> <input formControlName="city" type="text" name="city" value= 'Jakarta' disabled/>
+				<h4>Jalan: </h4><p>e.g : Jl. KH. Wahid Hasyim No.123, Kb. Kacang</p><input formControlName="street" type="text" name="street" value= '{{customerAddress.street}}' />
+				<h4>Kode Pos: </h4><input formControlName="postal_code" type="text" name="postal_code" value= '{{customerAddress.postal_code}}' />
+				<button class="btn btn-success"> Update Address </button>
+			</form>
+
+			</div>
+		</div>
+		</ng-template>
+		<!-- Update Address Template -->
+
+</div><!-- Container-->
+</ng-template>

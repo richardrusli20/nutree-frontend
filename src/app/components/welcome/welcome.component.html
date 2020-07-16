@@ -1,9 +1,20 @@
+<!-- <select *ngIf="authService.getRole()=='customer'" class="options">
+    <option *ngFor="let loc of location">{{loc.city}}</option>
+</select> -->
 <app-banner-carousel *ngIf="authService.getRole()=='customer'"></app-banner-carousel>
 <app-dietprogram *ngIf="authService.getRole()=='customer'"></app-dietprogram>
 
 <app-banner-carousel *ngIf="!authService.getRole()"></app-banner-carousel>
 <app-dietprogram *ngIf="!authService.getRole()"></app-dietprogram>
 
-
-
 <app-dashboard *ngIf="authService.getRole()=='vendor'"></app-dashboard>
+
+
+
+<div class="container" *ngIf="!authService.getRole() || authService.getRole()=='customer'">
+    <div class="row"></div>
+    <h2 style="text-align: center;">Made with Hygiene, Delivered it safely</h2>
+    <p style="text-align: center;">We make sure the customer safety all the way possible with the hygiene checked for each of our staff member</p>
+    <img src="assets/img/delivery-vector-yellow.png" style="height:100px;width:auto;"/>
+    <span>Real time temperature checking for our delivery guy</span>    
+</div>

@@ -45,7 +45,7 @@ export class ApiService {
     {headers: this.httpHeadersAuth});
   } 
   createVendorFoods(food,sharedURL):Observable<any>{
-    const body = { role_pk: food.role_pk, food_name: food.food_name, description:food.description, food_calories:food.food_calories,food_photo:sharedURL };
+    const body = { food_name: food.food_name, description:food.description, calories:food.food_calories,food_photo:sharedURL };
     return this.http.post(this.baseurl + '/api/food/create/', body, 
     {headers: this.httpHeadersAuth});
   } 
@@ -70,6 +70,7 @@ export class ApiService {
       calories: foodlist.calories,
       available_date: foodlist.available_date,
       logo:sharedURL,
+      location:foodlist.location
     }
     return this.http.post( this.baseurl + '/api/foodlist/' + foodlist_id + '/update/',body,
     {headers:this.httpHeadersAuth});
@@ -83,7 +84,9 @@ export class ApiService {
       description:foodList.description,
       price:foodList.price, calories:foodList.calories,
       available_date:foodList.available_date, 
-      foodlist_logo:sharedURL };
+      foodlist_logo:sharedURL,
+      // location:foodList.location
+    };
     return this.http.post(this.baseurl + '/api/foodlist/create/', body,
     {headers: this.httpHeadersAuth});
   }
@@ -137,6 +140,11 @@ export class ApiService {
     {headers:this.httpHeadersAuth})
   }
 
+  getVendorOrder():Observable<any>{
+    return this.http.get(this.baseurl + '/api/vendor/order/',
+    {headers:this.httpHeadersAuth})
+  }
+
   payNow():Observable<any>{
     const body = {delivery_cost:"5000"}
     return this.http.post(this.baseurl + '/api/customer/checkout/',body,
@@ -147,6 +155,23 @@ export class ApiService {
     // const body = { vendor_pk: vendor.vendor_pk };
     return this.http.get(this.baseurl + '/api/customer/profile/',
     {headers: this.httpHeadersAuth});
+  }
+
+  getVendorProfile():Observable<any>{
+    return this.http.get(this.baseurl + '/api/vendor/profile/',
+    {headers: this.httpHeadersAuth})
+  }
+
+  updateVendorProfile(vendor):Observable<any>{
+    const body = {vendor_name:vendor.vendor_name, vendor_phone:vendor.vendor_phone}
+    return this.http.post(this.baseurl + '/api/vendor/profile/update/', body, 
+    {headers:this.httpHeadersAuth});
+  }
+
+  updateVendorAddress(vendorAddress):Observable<any>{
+    const body = {city:vendorAddress.city,street:vendorAddress.street,postal_code:vendorAddress.postal_code,province:vendorAddress.province}
+    return this.http.post(this.baseurl + '/api/vendor/address/update/',body,
+    {headers:this.httpHeadersAuth});
   }
   
   updateCustomerProfile(customer):Observable<any>{
@@ -162,7 +187,7 @@ export class ApiService {
   }
 
   updateCustomerAddress(address):Observable<any>{
-    const body = { street:address.street,postal_code:address.postal_code,city:address.city,province:address.province}
+    const body = { street:address.street.formatted_address,postal_code:address.postal_code,city:address.city,province:address.province}
     return this.http.post(this.baseurl + '/api/customer/address/update/', body,
     {headers:this.httpHeadersAuth});
   }
@@ -174,7 +199,7 @@ export class ApiService {
     {headers: this.httpHeaders});
   }
 
-  confirmCustomer(userid,token):Observable<any>{
+  confirmCustomer(userid, token):Observable<any>{
     return this.http.get(this.baseurl + '/api/register/activate/' + userid + '/' + token + '/',
     {headers:this.httpHeaders})
   }

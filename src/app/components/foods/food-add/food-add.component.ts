@@ -70,6 +70,7 @@ export class FoodAddComponent implements OnInit {
           }
           else{
             this.sharedURL = message
+            console.log(this.form.value)
             this.createVendorFoods(this.form.value,this.sharedURL)
           }
       }

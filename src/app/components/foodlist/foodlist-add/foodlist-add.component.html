@@ -88,7 +88,7 @@
 							<input formControlName="price" type="number"  placeholder="Price" value="{{foodlist.price}}" >
 							<app-field-error-display 
 								[displayError]="isFieldValid('price')" 
-								errorMsg="Please inform foodlist name">
+								errorMsg="Please inform the price">
 							</app-field-error-display>	
 						</div>
 					</div>
@@ -103,6 +103,20 @@
 							<img src="{{foodlist.foodlist_logo}}" style="height:100%;width:200px"/>
 						</div>
 					</div>
+<!-- 
+					<div class="input-fields">
+						<label class="label">Location</label>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fa fa-key" ></i></span>
+							</div>
+							<input formControlName="location" type="text"  placeholder="location" value="{{foodlist.location}}" >
+							<app-field-error-display 
+								[displayError]="isFieldValid('location')" 
+								errorMsg="Please inform location">
+							</app-field-error-display>	
+						</div>
+					</div> -->
 		
 
 				</div>

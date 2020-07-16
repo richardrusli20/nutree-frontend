@@ -9,7 +9,23 @@ import { ApiService } from 'src/app/api.service';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor(public authService: ApiService) { }
+  location = [];
+  constructor(public authService: ApiService) {
+    this.location = [
+      {
+        id:1,
+        city : "Jakarta Utara"
+      },
+      {
+        id:2,
+        city : "Jakarta Barat"
+      },
+      {
+        id:3,
+        city : "Tangerang"
+      }
+    ]
+  }
 
   ngOnInit(): void {
   }

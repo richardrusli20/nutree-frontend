@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DietprogramComponent } from './components/dietprogram/dietprogram.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RegisterVendorComponent } from './components/register/register-vendor/register-vendor.component';
-import { DietprogramDetailComponent } from './components/dietprogram-detail/dietprogram-detail.component';
+import { DietprogramDetailComponent } from './components/dietprogram/dietprogram-detail/dietprogram-detail.component';
 import { LoginComponent } from './components/login/login.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
@@ -14,18 +14,20 @@ import { FoodlistComponent } from './components/foodlist/foodlist.component';
 import { FoodlistAddComponent } from './components/foodlist/foodlist-add/foodlist-add.component';
 import { FoodlistDetailComponent } from './components/foodlist/foodlist-detail/foodlist-detail.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ProfileComponent } from './components/customer/profile/profile.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { CheckoutComponent } from './components/shopping-cart/checkout/checkout.component';
 import { PaymentComponent } from './components/shopping-cart/payment/payment.component';
 import { OrdersComponent } from './components/orders/orders.component';
-import { UploaderComponent } from './uploader/uploader.component';
+
 import { RegisterPartnershipComponent} from './register-partnership/register-partnership.component';
+import { VendorOrdersComponent} from './components/orders/vendor-orders/vendor-orders.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
   { path: 'profile', component:ProfileComponent},
   { path: 'orders', component:OrdersComponent},
+  { path: 'vendor-orders', component:VendorOrdersComponent},
   { path: 'dietprogram', component:DietprogramComponent },
   { path: 'dashboard', component:DashboardComponent },
   { path: 'dietprogram/:id', component:DietprogramDetailComponent },
@@ -74,5 +76,4 @@ export const routingComponents =
   RegisterComponent, 
   RegisterVendorComponent,
   RegisterPartnershipComponent,
-  UploaderComponent
 ]

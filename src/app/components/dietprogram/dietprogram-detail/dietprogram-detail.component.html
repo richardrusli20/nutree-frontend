@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="!(foodlist.length == 0);else comingsoon" class="container">
 <div class="section_title mb-70">
     <h1>{{dietprogram_name}} </h1> 
 </div>
@@ -19,6 +19,15 @@
         <hr>
 
     </div>
+</div>
+
+<ng-template #comingsoon>
+    <div class="section_title mb-70">
+        <h1>{{dietprogram_name}} </h1> 
+    </div>
+    <h2>Coming Soon...</h2>
+
+</ng-template>
 
 <!-- <div class="foodlist-img">
     <img style="height:120px;width:120px;object-fit:cover;"src="https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/healthy-eating-ingredients-1296x728-header.jpg?w=1155&h=1528" alt="">

@@ -4,9 +4,8 @@
             <div class="row">
                 <div  class="col-xl-4 col-md-6"  *ngFor="let food of foods">
                     <div (click)="onSelect(food)" class="single_order">
-                        <div class="order_thumb">
-                            <img src="{{food.food_logo}}" alt="">
-                        </div>
+
+                            <img src="{{food.food_photo}}" style="width:100%;height:auto;" alt="">
                         <div class="order_info">
                             <h3>{{food.food_name}}</h3>
                             <p>Description : {{food.food_description}}</p>

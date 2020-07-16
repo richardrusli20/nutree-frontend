@@ -79,6 +79,8 @@
           <!-- <mat-icon routerLink="/cart" routerLinkActive="active">shopping_cart</mat-icon> -->
           <a mat-flat-button routerLink="/foods" routerLinkActive="active">Foods</a>
           <a mat-flat-button routerLink="/foodlist" routerLinkActive="active">Foodlist</a>
+          <a mat-flat-button routerLink="/vendor-orders" routerLinkActive="active">Orders</a>
+          <a mat-flat-button routerLink="/profile" routerLinkActive="active">Profile</a>
           <a mat-flat-button *ngIf="api.loggedIn()" (click)="loggedOut()" routerLink="/" routerLinkActive="active"> logout</a>
           
           <!-- <mat-menu #appMenu="matMenu">
@@ -109,6 +111,8 @@
               <li><a (click)="sidenav.toggle()" mat-flat-button routerLink="" routerLinkActive="active">Dashboard</a></li>
               <li><a (click)="sidenav.toggle()" mat-flat-button routerLink="/foods" routerLinkActive="active">Foods</a></li>
               <li><a (click)="sidenav.toggle()" mat-flat-button routerLink="/foodlist" routerLinkActive="active">Foodlist</a></li>
+              <li><a (click)="sidenav.toggle()" mat-flat-button routerLink="/vendor-orders" routerLinkActive="active">Orders</a></li>
+              <li><a (click)="sidenav.toggle()" mat-flat-button routerLink="/profile" routerLinkActive="active">Profile</a></li>
               <li><a (click)="sidenav.toggle()"  mat-flat-button  (click)="loggedOut()" routerLink="/" routerLinkActive="active"> logout</a></li>
             </ul>
           </div>

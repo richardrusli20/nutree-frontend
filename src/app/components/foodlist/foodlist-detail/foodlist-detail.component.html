@@ -12,16 +12,15 @@
                     <p></p>
                     <h2>{{foodListDetail.foodlist_name}} </h2>
                     <p style="color:grey">{{foodListDetail.description}}</p>
-
                     <hr>
                     <p> <img style="height:50px;width:auto" src="assets/img/grey-circle-noimage.png"/> {{foodListDetail.vendor.vendor_name}} </p>
                     <hr>
-
+                    <img style="height:50px;width:auto" src="assets/img/calories-vector.png"/><p>{{foodListDetail.calories}} Kcal</p>
                     <!-- <p> Available Date: {{foodListDetail.available_date}}</p> -->
                     <div class="">
                         <!--Foods in Foodlist-->
                     
-                        <p>Foods : </p>
+                        <p>Ingredient : </p>
                      <div *ngFor="let food of foods">
                          <img src="{{food.food_logo}}"/>
                         {{food.food_name}}
@@ -30,41 +29,31 @@
 
 
                         
-                        <div class="action">
-                            <!-- <a href="">
-                                <button type="submit" class="btn btn-success">Update</button>
-                            </a> -->
-                            <!-- Vendor -->
-                            <!-- <form action="" method="post">
-    
-                                <input type="hidden" name="food_id" value="" />
-                                <button type="submit" class="btn btn-danger">Delete Foodlist</button>
-                            </form> -->
-                            <!-- Vendor -->
-                            <!-- Customer -->
-                            <form>
-                                <div class="add-to-cart" *ngIf="api.getRole()=='customer'">
-                                    <div class="foodlist_price">
+                        <!-- <div class="action"> -->
+                            <!-- <div class="container"> -->
+                        
+                                <div class="row add-to-cart" *ngIf="api.getRole()=='customer' || !api.getRole()">
+                                    <div class="col foodlist-price">
                                         <p class="price-p"> Price:</p>
                                         <h4 class="price-rp"> Rp  {{foodListDetail.price}}</h4>
                                     </div>
-                                    <button *ngIf="foodlistQuantity == 0" (click)="addButton()" class="boxed_btn" value="Add to Cart">Add to Cart</button>
-                                    <div class="button-plusminus">
-                    
-                                        <div class="minus-button" *ngIf="foodlistQuantity != 0" (click)="minusToCart()">-</div>
-                                        <div class="counter" *ngIf="foodlistQuantity != 0"><input (change)="changed($event)" type="text" size="5" value="{{foodlistQuantity}}"/></div>
-                                        <div class="add-button" *ngIf="foodlistQuantity != 0" (click)="addButton()">+</div>
+    
+                                    <div class="col button-plusminus">
+                                        <div class="minus-button"  (click)="minusButton()">-</div>
+                                        <div class="counter" ><input (change)="changed($event)" type="text" size="5" value="{{foodlistQuantity}}"/></div>
+                                        <div class="add-button"  (click)="plusButton()">+</div>
                                     </div>
-                                <!-- <button *ngIf="matchQuantity != 0" (click)="addToCart()" class="add-button" value="+"></button>  -->
+                                    
+                                    <button  (click)="addButton()" class="boxed_btn" value="Add to Cart">Add to Cart</button>
                                 </div>
 
                                 <div class="vendor-update-delete" *ngIf="api.getRole()=='vendor'">
                                     <button (click)="updateFoodlist()" class="btn btn-success">Update</button>
                                     <button (click)="deleteFoodlist()" class="btn btn-danger">Delete</button> 
                                 </div>
-                            </form>
+                            <!-- </div> -->
                             <!-- Customer -->
-                        </div>
+                        <!-- </div> -->
                     </div>
                 </div>
         </div>

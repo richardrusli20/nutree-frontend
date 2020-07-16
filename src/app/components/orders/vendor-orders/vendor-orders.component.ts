@@ -1,29 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api.service';
-import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-orders',
-  templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.scss']
+  selector: 'app-vendor-orders',
+  templateUrl: './vendor-orders.component.html',
+  styleUrls: ['./vendor-orders.component.scss']
 })
-export class OrdersComponent implements OnInit {
+export class VendorOrdersComponent implements OnInit {
 
+  
   orders=[];
   order_id;
   foodlist= [];
   date;
 
-  constructor(private api:ApiService,private dp:DatePipe) {
+  constructor(private api:ApiService) {
     this.getOrders();
-   }
+  }
 
   getOrders = () => {
-    this.api.getCustomerOrder().subscribe(
+    this.api.getVendorOrder().subscribe(
       data=>{
-        console.log(data.order)
+        console.log(data)
         this.orders = data.order;
-        
       },
       error=>{
         console.log(error)

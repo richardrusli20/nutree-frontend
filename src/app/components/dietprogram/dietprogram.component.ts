@@ -22,7 +22,7 @@ export class DietprogramComponent implements OnInit {
     this.api.getAllDietProgram().subscribe(
       data => {
         this.dietprograms = data;
-        console.log("success get DietProgram Data" + this.dietprograms)
+        // console.log("success get DietProgram Data" + data.dietProgram_logo)
       },
       error => {
         console.log(error);

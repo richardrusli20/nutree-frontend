@@ -1,1 +1,40 @@
-<p>dashboard works!</p>
+<div class="container">
+    <h3>Orders</h3>
+    <div class="row order-head">
+        <div class="col order-summary"><p><strong>Total:</strong></p>{{total_order}}</div>
+        <div class="col order-summary"><p><strong>Completed:</strong></p>{{completed_order}}</div>
+        <div class="col order-summary"><p><strong>Uncompleted</strong></p>{{uncompleted_order}}</div>
+    </div>
+    <div class="row">
+        <h3>Today's Order</h3>
+        <div class="card-checkout" *ngFor="let order of todays_orders">
+            <div class="card-head">
+                <p class="alignleft">#{{order.order_date | date:'ddmmyyHHmms'}}</p>
+                <p class="alignright">{{order.order_date | date:'dd MMM yyyy'}}</p>
+                <div style="clear: both;"></div>
+            </div>
+        
+        <div *ngIf="order.is_delivered" class="btn btn-success" style="width:100%;">Completed</div>
+        <div *ngIf="!order.is_delivered" class="btn btn-warning" style="width:100%;">Delivering</div>
+    
+        <p>Delivery Date : {{order.delivery_date | date:'dd MMM yy'}}</p>
+        <p>Customer Name : {{order.customer.customer_name}}</p>
+        <p>Customer Address : {{order.customer.customer_address.street}}, {{order.customer.customer_address.city}}, {{order.customer.customer_address.province}}, {{order.customer.customer_address.postal_code}}</p>
+        <hr>
+        <h4>Foods</h4>
+            <div class="card-list" *ngFor = "let item of order.item" >
+                <img src="{{item.foodlist_photo}}"
+                class="img-checkout">
+                <div class="foodlist-info" >
+                <strong><p>{{item.foodlist_name}}</p></strong>
+                <p>Price : {{item.foodlist_price}}</p>
+                <p>Qty : {{item.quantity}} </p>
+                </div>
+            
+            </div>
+            <div class="price-wrap">
+                <h4 class="price">Rp {{order.grand_total}}</h4>
+                </div>
+            </div>
+    </div>
+</div>

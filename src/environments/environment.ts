@@ -12,7 +12,8 @@ export const environment = {
     storageBucket: "nutree-project.appspot.com",
     messagingSenderId: "193841049371",
     appId: "1:193841049371:web:84cb88e99f1a967f656dbe"
-  }
+  },
+  GOOGLE_MAPS_API_KEY : 'AIzaSyAvFE-mMu3F-eJEQWfAQBDL17jjrJ2J91s'
 };
 
 

@@ -1,20 +1,20 @@
 
 
-<div class="container" *ngIf="!(orders.length == 0) ; else emptyOrders">
+<div class="container">
     <div class="card-checkout" *ngFor="let order of orders">
-    <div class="card-head">
-        <p class="alignleft">#{{order.order_date | date:"ddMMyyHHmms"}}</p>
-        <p class="alignright">{{order.delivery_date | date: "dd MMM yyyy"}}</p>
-        <!-- <p class="alignright">{{order.order_date | date:'dd MMM yyyy'}}</p> -->
-        <div style="clear: both;"></div>
-    </div>
+        <div class="card-head">
+            <p class="alignleft">#{{order.order_date | date:'ddmmyyHHmms'}}</p>
+            <p class="alignright">{{order.order_date | date:'dd MMM yyyy'}}</p>
+            <div style="clear: both;"></div>
+        </div>
     
     <div *ngIf="order.is_delivered" class="btn btn-success" style="width:100%;">Completed</div>
     <div *ngIf="!order.is_delivered" class="btn btn-warning" style="width:100%;">Delivering</div>
-    
-    
+
+    <p>Delivery Date : {{order.delivery_date | date:'dd mm yy'}}</p>
+    <p>Customer Name : {{order.customer.customer_name}}</p>
+    <p>Customer Address : {{order.customer.customer_address.street}}, {{order.customer.customer_address.city}}, {{order.customer.customer_address.province}}, {{order.customer.customer_address.postal_code}}</p>
     <hr>
-    
     <h4>Foods</h4>
         <div class="card-list" *ngFor = "let item of order.item" >
             <img src="{{item.foodlist_photo}}"
@@ -22,16 +22,12 @@
             <div class="foodlist-info" >
             <strong><p>{{item.foodlist_name}}</p></strong>
             <p>Price : {{item.foodlist_price}}</p>
-            <p>Qty : {{item.quantity}}</p>
+            <p>Qty : {{item.quantity}} </p>
             </div>
+        
         </div>
         <div class="price-wrap">
             <h4 class="price">Rp {{order.grand_total}}</h4>
             </div>
         </div>
 </div>
-
-<ng-template #emptyOrders>
-    <p>Empty Orders</p>
-</ng-template>
-
