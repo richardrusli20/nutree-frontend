@@ -10,8 +10,6 @@
             formControlName="street" type="text" name="city" 
             matGoogleMapsAutocomplete
             value="{{customerAddress.street}}"
-            (onAutocompleteSelected)="onAutocompleteSelected($event)"
-            (onLocationSelected)="onLocationSelected($event)"
             (onGermanAddressMapped)="onGermanAddressMapped($event)">
         <h4>Kode Pos: </h4><input formControlName="postal_code" type="text" name="postal_code" maxlength="5" value= '{{customerAddress.postal_code}}' />
         <button class="btn btn-success" > Update Address </button>
