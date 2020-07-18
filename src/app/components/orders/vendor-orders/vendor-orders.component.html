@@ -21,13 +21,13 @@
             class="img-checkout">
             <div class="foodlist-info" >
             <strong><p>{{item.foodlist_name}}</p></strong>
-            <p>Price : {{item.foodlist_price}}</p>
+            <p>Price : {{item.foodlist_price |currency:"IDR":"symbol-narrow":"1.0-2"}}</p>
             <p>Qty : {{item.quantity}} </p>
             </div>
         
         </div>
         <div class="price-wrap">
-            <h4 class="price">Rp {{order.grand_total}}</h4>
+            <h4 class="price">{{order.grand_total |currency:"IDR":"symbol-narrow":"1.0-2"}}</h4>
             </div>
         </div>
 </div>

@@ -145,7 +145,7 @@ export class FoodlistDetailComponent implements OnInit {
     return this.dialog.open(MatSuccessAddtocartComponent,{
       width:'390px',
       panelClass: 'confirm-dialog-container',
-      disableClose:true
+      // disableClose:true
     });
   }
 

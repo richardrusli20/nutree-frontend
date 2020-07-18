@@ -82,7 +82,11 @@
 				<form [formGroup]="formAddress" (ngSubmit)="updateCustomerAddressAPI()">
 					<h4>Provinsi :  </h4> <input formControlName="province" type="text" name="province" value='{{customerAddress.province}}' />
 					<h4>Kota:  </h4> <input formControlName="city" type="text" name="city" value= '{{customerAddress.city}}' />
-					<h4>Jalan: </h4><input formControlName="street" type="text" name="street" value= '{{customerAddress.street}}' />
+					<h4>Jalan : </h4><input matInput
+						formControlName="street" type="text" name="city" 
+						matGoogleMapsAutocomplete
+						value="{{customerAddress.street}}"
+						(onGermanAddressMapped)="onGermanAddressMapped($event)">
 					<h4>Kode Pos: </h4><input formControlName="postal_code" type="text" name="postal_code" value= '{{customerAddress.postal_code}}' />
 					<button class="btn btn-success"> Update Address </button>
 				</form>

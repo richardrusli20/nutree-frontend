@@ -27,11 +27,11 @@ export class CheckoutComponent implements OnInit {
     cartItems.forEach(function(item){
       total_price = total_price + (item.quantity * item.foodlist.price);
       // console.log(total_price)
-      console.log("setTotalPrice");
-      console.log(total_price);
+      // console.log("setTotalPrice");
+      // console.log(total_price);
     });
     this.total_price = total_price;
-    console.log(this.total_price)
+    // console.log(this.total_price)
   }
 
     getCustomerBag = () => {
@@ -39,7 +39,7 @@ export class CheckoutComponent implements OnInit {
         data => {
           this.cartItems = data.customer_bag;
           // this.foodlist = data.foodlist;
-          console.log(this.cartItems);
+          // console.log(this.cartItems);
           this.setTotalPrice(this.cartItems,this.total_price)
           // console.log(data.customer_bag[0].foodlist);
         },

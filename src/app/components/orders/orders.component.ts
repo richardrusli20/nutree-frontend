@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api.service';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-orders',
@@ -14,7 +13,7 @@ export class OrdersComponent implements OnInit {
   foodlist= [];
   date;
 
-  constructor(private api:ApiService,private dp:DatePipe) {
+  constructor(private api:ApiService) {
     this.getOrders();
    }
 

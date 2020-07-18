@@ -13,7 +13,7 @@ import { MatDialogChangeaddressComponent } from './mat-dialog-change-address/mat
 })
 export class ShoppingCartComponent implements OnInit {
 
-  cartItems = [];
+  cartItems = [{quantity:0,foodlist:{id:0}}];
   foodlist = {};
   cartTotal = 0;
   matchQuantity={quantity:0};
@@ -37,7 +37,7 @@ export class ShoppingCartComponent implements OnInit {
       total_price = total_price + (item.quantity * item.foodlist.price);
     });
     this.total_price = total_price;
-    console.log(this.total_price)
+    // console.log(this.total_price)
   }
 
   getCustomerBag = () => {
@@ -46,6 +46,7 @@ export class ShoppingCartComponent implements OnInit {
         data => {
           console.log(data.customer_bag)
           this.cartItems = data.customer_bag;
+          this.total_price = 0;
           this.setTotalPrice(this.cartItems,this.total_price);
           this.dataLoaded = Promise.resolve(true);
 
@@ -72,8 +73,9 @@ export class ShoppingCartComponent implements OnInit {
           )
       }
       else{
-        console.log("deletefailed")
-        this.cartItems[index].quantity = this.cartItems[index].quantity + 1
+        // console.log("deletefailed")
+
+        this.cartItems[index].quantity = 1;
       }
     });
   }
@@ -99,10 +101,15 @@ export class ShoppingCartComponent implements OnInit {
     this.router.navigate(['/foodlist/detail/',foodlistid])
   }
 
-  changed(e,foodlistid){
-    console.log(e + "foodlist id = " + foodlistid)
-    this.foodlistQuantity=e.target.value;
-    this.addToCart(foodlistid,e.target.value)
+  changed(e,index){
+    console.log(e)
+    if(parseInt(e.target.value) <= 0 ){
+      // add popup box "Are you sure? confirm, no"
+      this.deleteCartItem(this.cartItems[index].foodlist.id,index)
+    }
+    this.cartItems[index].quantity = parseInt(e.target.value);
+    this.total_price = 0;
+    this.setTotalPrice(this.cartItems,this.total_price);
   }
 
   openConfirmDialog(){
@@ -140,6 +147,7 @@ export class ShoppingCartComponent implements OnInit {
           data=>{
             // console.log(data)
             this.cartItems = data.customer_bag;
+            this.total_price = 0;
             this.setTotalPrice(this.cartItems,this.total_price);
             this.dataLoaded = Promise.resolve(true);
           },
@@ -160,6 +168,7 @@ export class ShoppingCartComponent implements OnInit {
       // add popup box "Are you sure? confirm, no"
       this.deleteCartItem(this.cartItems[index].foodlist.id,index)
     }
+    this.total_price = 0;
     this.setTotalPrice(this.cartItems,this.total_price);
   }
 
@@ -170,9 +179,9 @@ export class ShoppingCartComponent implements OnInit {
   updateQuantityAPI(){
     // console.log("updateQuantityAPI")
     // console.log(this.cartItems[0])
-    // for(var i = 0; i <= this.cartItems.length ; i++){
-      // this.addToCart(this.cartItems[i].foodlist.id,this.cartItems[i].quantity)
-    // }
+    for(var i = 0; i <= this.cartItems.length ; i++){
+      this.addToCart(this.cartItems[i].foodlist.id,this.cartItems[i].quantity)
+    }
   }
 
 

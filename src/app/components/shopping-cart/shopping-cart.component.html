@@ -1,22 +1,13 @@
-<div class="container" *ngIf="cartItems.length > 0 && dataLoaded; else emptyCart" >
-    <!--Manual Breadcrumbs-->
-    <!-- <ul class='breadcrumb'>
-        <li><a href=""><i class="fa fa-home"></i></a></li>
-        <li>My Bag</li>
-    </ul> -->
-    <!--End of Manual Breadcrumbs-->
-    
+<div class="container" *ngIf="cartItems.length > 0 && dataLoaded; else emptyCart" >    
     <div class="row">
 
         <div class="col-md-6">
             <div class="card-checkout" >
-                    <!-- <div class="remove-btn">
-                        <a (click)="deleteCartItem(custBag.foodlist.id)" class="btn btn-outline-danger">×</a>
-                    </div>  -->
+
                 <h4>Cart</h4>
                 
                 <div class="card-list" *ngFor="let custBag of cartItems;let i = index" >
-                    <hr>
+                <hr>
                 <!-- <img style="height:30px;width:auto;"src="assets/img/grey-circle-noimage.png"/> -->
                 <!-- <span>{{custBag.foodlist.vendor.vendor_name}}</span> -->
                 <!-- <hr> -->
@@ -32,22 +23,21 @@
                     
                     <div class="minus-button"  (click)="minusToCart(i)">-</div>
                     
-                    <div (change)="changed($event,custBag.foodlist.id)" class="counter" ><input type="text" size="5" value="{{custBag.quantity}}"/></div>
+                    <div (change)="changed($event,i)" class="counter" ><input type="text" size="5" value="{{custBag.quantity}}"/></div>
                     <div class="add-button"  (click)="addButton(i)">+</div>
                     <span><mat-icon class="delete-btn" (click)="deleteCartItemIcon(custBag.foodlist.id,i)">delete</mat-icon></span>
             
-                    <p class="price">Rp {{custBag.foodlist.price * custBag.quantity}}</p>
+                    <p class="price">{{custBag.foodlist.price * custBag.quantity|currency:"IDR":"symbol-narrow":"1.0-2"}}</p>
     
                 </div>
                 </div>
-
-
-                    <!-- <div class="price-wrap"> -->
-                     <!-- <p class="price">Rp {{custBag.foodlist.price * custBag.quantity}}</p> -->
-                     <!-- </div> -->
                      
                 </div>
                 
+            </div>
+
+            <div class="update-cart">
+                <a class="btn btn-light btn-block" (click)="updateQuantityAPI()">Update Cart</a>
             </div>
             
         </div>
@@ -72,7 +62,7 @@
                     </dl>
                     <dl class="dlist-align">
                         <dt>Total price: </dt>
-                        <dd class="text-right">Rp {{total_price}} </dd>
+                        <dd class="text-right">{{total_price | currency:"IDR":"symbol-narrow":"1.0-2"}} </dd>
                     </dl>
                     <hr>
                     <a routerLink="/checkout" routerLinkActive="active" class="btn btn-success btn-block"> Checkout </a>

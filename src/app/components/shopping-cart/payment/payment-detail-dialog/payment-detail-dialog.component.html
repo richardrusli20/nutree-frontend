@@ -5,7 +5,7 @@
         <p class="content-span full-width" *ngFor="let item of cartItems">{{item.foodlist.foodlist_name}} x {{item.quantity}}</p>
         <hr>
         <h4>Shipping Method</h4>
-        <p>Total Price : {{total_price}}</p>
+        <p>Total Price : {{total_price |currency:"IDR":"symbol-narrow":"1.0-2"}}</p>
         <p></p>
     </div>
     <!-- <button mat-icon-button color="warn" mat-dialog-close="false" id="no-button">NO</button>

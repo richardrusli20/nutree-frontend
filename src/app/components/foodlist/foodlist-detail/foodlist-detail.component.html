@@ -35,7 +35,7 @@
                                 <div class="row add-to-cart" *ngIf="api.getRole()=='customer' || !api.getRole()">
                                     <div class="col foodlist-price">
                                         <p class="price-p"> Price:</p>
-                                        <h4 class="price-rp"> Rp  {{foodListDetail.price}}</h4>
+                                        <h4 class="price-rp">{{foodListDetail.price |currency:"IDR":"symbol-narrow":"1.0-2" }}</h4>
                                     </div>
     
                                     <div class="col button-plusminus">

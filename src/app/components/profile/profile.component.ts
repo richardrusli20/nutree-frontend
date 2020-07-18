@@ -8,7 +8,8 @@ import {
   FormControl,
   ValidatorFn,
   Validators,
-  Form} from '@angular/forms'
+  Form} from '@angular/forms';
+  import { GermanAddress} from '@angular-material-extensions/google-maps-autocomplete';
 
 @Component({
   selector: 'app-profile',
@@ -26,6 +27,7 @@ export class ProfileComponent implements OnInit {
   customerProfile={customer_name:"", customer_phone:""};
   customerAddress={city:"",postal_code:"",province:"",street:""}
   username = '';
+  public selectedAddress: GermanAddress;
 
   formVendor:FormGroup;
   formVendorPassword:FormGroup;
@@ -202,10 +204,22 @@ export class ProfileComponent implements OnInit {
     this.booleanVendorAddress = true;
   }
 
+
   updateCustomerAddressAPI(){
     console.log(this.formAddress.value);
-    this.updateCustomerAddress(this.formAddress.value);
-    this.booleanAddress=false;
+    if(this.selectedAddress.state.short == "Daerah Khusus Ibukota Jakarta" || this.selectedAddress.state.short == "Jakarta"){
+      this.updateCustomerAddress(this.formAddress.value);
+      this.booleanAddress=false;
+    }
+    else{
+      console.log('We have not support that area')
+    }
+  }
+
+  
+  onGermanAddressMapped($event: GermanAddress) {
+    console.log('onGermanAddressMapped', $event);
+    this.selectedAddress = $event;
   }
 
   updatePassword(){
