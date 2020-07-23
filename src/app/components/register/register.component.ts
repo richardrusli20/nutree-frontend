@@ -26,6 +26,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(private api: ApiService, private router: Router, private route:ActivatedRoute, private formBuilder:FormBuilder) {
     this.customer = {customer_created:false};
+    this.confirmed = {is_activated:false};
     // this.selectedCustomer = {customer_name: '', customer_email: '' , password: '', password2: '' };
     // console.log("------");
     // console.log(this.selectedCustomer);
@@ -59,9 +60,11 @@ export class RegisterComponent implements OnInit {
       this.userId = params['userid'];
       this.token = params['token'];
       console.log("user id" + this.userId + " token " + this.token);
-      this.confirmCustomer();
+      if(this.userId){
+        this.confirmCustomer();
+      }
+
     })
-    
   }
 
   confirmCustomer = () => {

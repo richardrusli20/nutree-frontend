@@ -28,6 +28,7 @@ export class ProfileComponent implements OnInit {
   customerAddress={city:"",postal_code:"",province:"",street:""}
   username = '';
   public selectedAddress: GermanAddress;
+  address = '';
 
   formVendor:FormGroup;
   formVendorPassword:FormGroup;
@@ -205,9 +206,10 @@ export class ProfileComponent implements OnInit {
   }
 
 
+
   updateCustomerAddressAPI(){
-    console.log(this.formAddress.value);
-    if(this.selectedAddress.state.short == "Daerah Khusus Ibukota Jakarta" || this.selectedAddress.state.short == "Jakarta"){
+    // console.log(this.formAddress.value.city)
+    if(this.formAddress.value.city == "Daerah Khusus Ibukota Jakarta" || this.formAddress.value.city == "Jakarta"){
       this.updateCustomerAddress(this.formAddress.value);
       this.booleanAddress=false;
     }
@@ -216,11 +218,43 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  
+  // updateCustomerAddressAPI(){
+  //   try{
+  //     this.address = this.selectedAddress.state.short;
+  //   }
+  //   catch (error){
+  //     console.log(error)
+  //   }
+    
+  //   if(this.address == "Daerah Khusus Ibukota Jakarta" || this.address == "Jakarta"){
+  //     this.updateCustomerAddress(this.formAddress.value);
+  //     this.booleanAddress=false;
+  //   }
+  //   else{
+  //     console.log('We have not support that area')
+  //   }
+  // }
+
   onGermanAddressMapped($event: GermanAddress) {
     console.log('onGermanAddressMapped', $event);
     this.selectedAddress = $event;
+
+    this.formAddress = this.formBuilder.group({
+      street:[this.selectedAddress.displayAddress,Validators.required],
+      postal_code: [this.selectedAddress.postalCode,Validators.required],
+      city: [this.selectedAddress.state.long,Validators.required],
+      province:[this.selectedAddress.state.short,Validators.required],
+    });
+
   }
+  
+  // onGermanAddressMapped($event: GermanAddress) {
+  //   console.log('onGermanAddressMapped', $event);
+  //   this.selectedAddress = $event;
+  //   console.log(this.selectedAddress)
+  // }
+
+
 
   updatePassword(){
     this.booleanPassword=true;

@@ -5,3 +5,30 @@
   outline:none;
   margin:10px;
 }
+.main-title{
+  text-align: center;
+}
+.main-desc{
+  text-align:center;
+}
+
+.left-img{
+  // float:left;
+  height:100px;
+  width:auto;
+  display:inline-block;
+}
+
+.rigth-text{
+  // float:right;
+  display:inline-block
+}
+.wrapper{
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-top: 1.5em;
+  width: 100%;
+}

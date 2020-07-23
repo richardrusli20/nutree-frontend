@@ -62,6 +62,10 @@ export class LoginComponent implements OnInit {
     
   }
 
+  signInWithGoogle(){
+    this.api.googleSignIn();
+  }
+
   ngOnInit(): void {
     if(this.api.loggedIn()){
       this.router.navigate(['']);

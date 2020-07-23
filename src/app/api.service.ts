@@ -1,10 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable,Subject, BehaviorSubject } from 'rxjs';
+import { Observable,Subject, BehaviorSubject,of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { AngularFireDatabase} from '@angular/fire/database';
+import { AngularFireAuth } from '@angular/fire/auth';
+
+import { 
+  AngularFirestore, 
+  AngularFirestoreDocument } from '@angular/fire/firestore';
+import { auth } from 'firebase/app';
+import { User } from './models/user';
+
 import * as firebase from 'firebase';
 import { Upload } from 'src/app/models/upload';
+
 
 
 
@@ -23,8 +33,78 @@ export class ApiService {
   baseurl = "http://127.0.0.1:8000";
   httpHeaders = new HttpHeaders({'Content-type' : 'application/json'});
   httpHeadersAuth = new HttpHeaders({'Content-type' : 'application/json','Authorization' : "token " + this.getToken()});
+  user$:Observable<any>;
+  logins;
 
-  constructor(private http: HttpClient, private router: Router,private db:AngularFireDatabase) { }
+  constructor(
+    private http: HttpClient, 
+    private router: Router,
+    private db:AngularFireDatabase,
+    private afAuth:AngularFireAuth,
+    private afs: AngularFirestore,) 
+    {
+      this.user$ =this.afAuth.authState.pipe(
+        switchMap(user =>{
+          if(user){
+            return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+          }
+          else{
+            return of(null);
+          }
+        })
+      )
+    }
+
+  async googleSignIn(){
+    const provider = new auth.GoogleAuthProvider();
+    const credential = await this.afAuth.signInWithPopup(provider);
+    return this.updateUserData(credential.user);
+  }
+
+  private updateUserData(user){
+    console.log(user)
+    const userRef:AngularFirestoreDocument<User> = this.afs.doc(`users/${user.id}`);
+    const login={login_success:false};
+    const data = {
+      uid : user.uid,
+      customer_email : user.email,
+      customer_name : user.displayName,
+      phoneNumber:user.phoneNumber,
+      photoURL:user.photoURL,
+      password:user.uid,
+      password2:user.uid,
+    }
+    const loginData = {
+      username:user.email,
+      password:user.uid,
+    }
+    console.log(data);
+    this.createCustomer(data).subscribe(
+      data => {
+        console.log(data)
+        this.login(loginData).subscribe(
+          data=>{
+            this.logins = JSON.stringify(data);
+            localStorage.setItem('data',this.logins);
+            window.location.href = '';
+          },
+          error=>{
+            console.log(error);
+          }
+        )
+      },
+      error => {
+        console.log(error)
+      }
+    );
+
+    // return userRef.set(data, {merge:true})
+  }
+
+  async signOut(){
+    await this.afAuth.signOut();
+    return this.router.navigate(['/']);
+  }
 
   // Get all diet Program
   getAllDietProgram():Observable<any>{
@@ -187,7 +267,7 @@ export class ApiService {
   }
 
   updateCustomerAddress(address):Observable<any>{
-    const body = { street:address.street.formatted_address,postal_code:address.postal_code,city:address.city,province:address.province}
+    const body = { street:address.street,postal_code:address.postal_code,city:address.city,province:address.province}
     return this.http.post(this.baseurl + '/api/customer/address/update/', body,
     {headers:this.httpHeadersAuth});
   }

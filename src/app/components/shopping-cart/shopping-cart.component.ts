@@ -3,7 +3,6 @@ import { ApiService } from 'src/app/api.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatConfirmDialogComponent } from 'src/app/components/shopping-cart/mat-confirm-dialog/mat-confirm-dialog.component'
-import { faOtter } from '@fortawesome/free-solid-svg-icons';
 import { MatDialogChangeaddressComponent } from './mat-dialog-change-address/mat-dialog-change-address.component';
 
 @Component({
@@ -13,8 +12,9 @@ import { MatDialogChangeaddressComponent } from './mat-dialog-change-address/mat
 })
 export class ShoppingCartComponent implements OnInit {
 
-  cartItems = [{quantity:0,foodlist:{id:0}}];
+  public cartItems = [{quantity:0,foodlist:{id:0}}];
   foodlist = {};
+  foodlistId = 0;
   cartTotal = 0;
   matchQuantity={quantity:0};
   changedFoodlist=[];
@@ -26,6 +26,7 @@ export class ShoppingCartComponent implements OnInit {
   // zeroQty=false;
   
   constructor(private api:ApiService, private router:Router,private dialog:MatDialog) { 
+    
     this.getCustomerBag();
     this.getCustomerProfile();
   
@@ -178,9 +179,18 @@ export class ShoppingCartComponent implements OnInit {
 
   updateQuantityAPI(){
     // console.log("updateQuantityAPI")
-    // console.log(this.cartItems[0])
+    // console.log(this.cartItems[0].foodlist)
+   
     for(var i = 0; i <= this.cartItems.length ; i++){
-      this.addToCart(this.cartItems[i].foodlist.id,this.cartItems[i].quantity)
+      try{
+        this.foodlistId = this.cartItems[i].foodlist.id;
+        this.foodlistQuantity = this.cartItems[i].quantity;
+      }
+      catch(error){
+        // console.log(error)
+      }
+      
+      this.addToCart(this.foodlistId,this.foodlistQuantity)
     }
   }
 

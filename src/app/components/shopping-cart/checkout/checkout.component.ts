@@ -13,7 +13,7 @@ export class CheckoutComponent implements OnInit {
   cartItems = [];
   foodlist = {};
   cartTotal = 0;
-  customerProfile;
+  customerProfile = {customer_name:'',customer_phone:'',street:'',province:'',postal_code:''};
   total_price = 0;
 
   constructor(private api:ApiService, private router:Router) { 

@@ -12,9 +12,20 @@
 
 
 <div class="container" *ngIf="!authService.getRole() || authService.getRole()=='customer'">
-    <div class="row"></div>
-    <h2 style="text-align: center;">Made with Hygiene, Delivered it safely</h2>
-    <p style="text-align: center;">We make sure the customer safety all the way possible with the hygiene checked for each of our staff member</p>
-    <img src="assets/img/delivery-vector-yellow.png" style="height:100px;width:auto;"/>
-    <span>Real time temperature checking for our delivery guy</span>    
+    <div class="row">
+            <h2 class="main-title">Made with Hygiene, Delivered it safely</h2>
+            <p class="main-desc">We make sure the customer safety all the way possible with the hygiene checked for each of our staff member</p>
+        <div class="wrapper">
+            <img class="left-img" src="assets/img/temperature-checking.png" />
+            <p class="right-text">Real time temperature checking for our delivery guy</p>    
+        </div>
+        <div class="wrapper">
+            <img class="left-img" src="assets/img/contactless-delivery.png" />
+            <p class="right-text">Contactless Delivery</p>
+        </div>
+        <div class="wrapper">
+            <img class="left-img" src="assets/img/masker-vector.png"/>
+            <p class="right-text">Full Protection for the Delivery and our Staff</p>
+        </div>
+    </div>
 </div>

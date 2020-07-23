@@ -1,6 +1,6 @@
 <div *ngIf="customer.user_created != true; else success" class="container">
 	<div class="sub-container">
-			 <form [formGroup]="form" class="login-form" method="POST" action="" (ngSubmit)="createCustomer()"> 
+			 <form [formGroup]="form" class="login-form" (ngSubmit)="createCustomer()"> 
 			 <!-- <div class="login-form"> -->
 				<div class="input-fields">
 					<label class="label">Full Name</label>

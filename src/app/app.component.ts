@@ -67,23 +67,23 @@ export class AppComponent {
   navigationInterceptor(event: RouterEvent): void {
     if (event instanceof NavigationStart) {
       // this.addToCart()
-      console.log("Navigation Start")
+      // console.log("Navigation Start")
       
       // this.loading = true
     }
     if (event instanceof NavigationEnd) {
-      console.log("Navigation End")
+      // console.log("Navigation End")
       this.getCustomerBag()
       // this.loading = false
     }
 
     // Set loading state to false in both of the below events to hide the spinner in case a request fails
     if (event instanceof NavigationCancel) {
-      console.log("Navigation Cancel")
+      // console.log("Navigation Cancel")
       // this.loading = false
     }
     if (event instanceof NavigationError) {
-      console.log("Navigation Error")
+      // console.log("Navigation Error")
       // this.loading = false
     }
   }

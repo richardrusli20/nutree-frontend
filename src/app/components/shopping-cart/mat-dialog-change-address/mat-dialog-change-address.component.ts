@@ -27,8 +27,10 @@ export class MatDialogChangeaddressComponent implements OnInit {
   public latitude: number;
   public longitude: number;
   public selectedAddress: GermanAddress;
+  address='';
 
   constructor(public api:ApiService, private formBuilder : FormBuilder, public dialogRef:MatDialogRef<MatDialogChangeaddressComponent>) { 
+
     this.formAddress = this.formBuilder.group({
       street:['',Validators.required],
       postal_code: ['',Validators.required],
@@ -74,8 +76,8 @@ export class MatDialogChangeaddressComponent implements OnInit {
   }
 
   updateCustomerAddressAPI(){
-    console.log(this.formAddress.value);
-    if(this.selectedAddress.state.short == "Daerah Khusus Ibukota Jakarta"){
+    console.log(this.formAddress.value.city)
+    if(this.formAddress.value.city == "Daerah Khusus Ibukota Jakarta" || this.formAddress.value.city == "Jakarta"){
       this.updateCustomerAddress(this.formAddress.value);
     }
     else{
@@ -97,6 +99,14 @@ export class MatDialogChangeaddressComponent implements OnInit {
   onGermanAddressMapped($event: GermanAddress) {
     console.log('onGermanAddressMapped', $event);
     this.selectedAddress = $event;
+
+    this.formAddress = this.formBuilder.group({
+      street:[this.selectedAddress.displayAddress,Validators.required],
+      postal_code: [this.selectedAddress.postalCode,Validators.required],
+      city: [this.selectedAddress.state.long,Validators.required],
+      province:[this.selectedAddress.state.short,Validators.required],
+    });
+
   }
 
 

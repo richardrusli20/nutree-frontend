@@ -34,8 +34,8 @@ export class PaymentComponent implements OnInit {
     cartItems.forEach(function(item){
       total_price = total_price + (item.quantity * item.foodlist.price);
       // console.log(total_price)
-      console.log("setTotalPrice");
-      console.log(total_price);
+      // console.log("setTotalPrice");
+      // console.log(total_price);
     });
     this.total_price = total_price;
     console.log(this.total_price)
@@ -47,7 +47,7 @@ export class PaymentComponent implements OnInit {
         this.cartItems = data.customer_bag;
         // this.foodlist = data.foodlist;
         this.setTotalPrice(this.cartItems,this.total_price)
-        console.log(this.cartItems);
+        // console.log(this.cartItems);
       },
       error => {
         console.log(error);

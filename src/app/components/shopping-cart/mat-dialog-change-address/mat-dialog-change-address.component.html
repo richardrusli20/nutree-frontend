@@ -3,8 +3,8 @@
         <strong class="d-inline-block mr-3">Address</strong>
     <div class="card-body">
     <form [formGroup]="formAddress" (ngSubmit)="updateCustomerAddressAPI()">
-        <h4>Provinsi :  </h4> <input formControlName="province" type="text" name="province" value='{{customerAddress.province}}' />
-        <h4>Kota:  </h4> <input formControlName="city" type="text" name="city" value= '{{customerAddress.city}}' />
+        <h4>Provinsi :  </h4> <input formControlName="province" type="text" name="province" value='{{customerAddress.province}}' disabled/>
+        <h4>Kota:  </h4> <input formControlName="city" type="text" name="city" value= '{{customerAddress.city}}' disabled/>
         <!-- <h4>Jalan: </h4><input formControlName="street" type="text" name="street" value= '{{customerAddress.street}}' /> -->
         <h4>Jalan : </h4><input matInput
             formControlName="street" type="text" name="city" 

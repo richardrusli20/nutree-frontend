@@ -58,6 +58,7 @@ import { WelcomeBottomComponent } from './components/welcome/welcome-bottom/welc
 import { MatSuccessAddtocartComponent } from './mat-success-addtocart/mat-success-addtocart.component';
 import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
 import { AgmCoreModule } from '@agm/core';
+import { FooterComponent } from './footer/footer.component';
 
 
 const googleMapsParams = {
@@ -98,6 +99,7 @@ const googleMapsParams = {
     WelcomeBottomComponent,
     MatSuccessAddtocartComponent,
     MatDialogChangeaddressComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
